@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf9f5;
+  --foreground: #1e293b;
+  --card-bg: #ffffff;
+  --gold-primary: #d97706;
+  --gold-hover: #b45309;
+  --gold-light: #fef3c7;
+  --gold-soft: #fffbeb;
+  --border-color: #f0e6d2;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card-bg: var(--card-bg);
+  --color-gold-primary: var(--gold-primary);
+  --color-gold-hover: var(--gold-hover);
+  --color-gold-light: var(--gold-light);
+  --color-gold-soft: var(--gold-soft);
+  --color-border-warm: var(--border-color);
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fbf9f5;
+  color: #1e293b;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Niche-style cozy card styling */
+.niche-card {
+  background-color: #ffffff;
+  border: 1px solid #ede4d3;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(180, 130, 50, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.niche-card:hover {
+  border-color: #d97706;
+  box-shadow: 0 6px 18px rgba(180, 130, 50, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Niche Grade Badge & Circular Seal */
+.niche-seal {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.28), inset 0 0 0 2px rgba(255, 255, 255, 0.45);
+  flex-shrink: 0;
+}
+
+.niche-seal-sm {
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 0.9rem;
+}
+
+/* Warm card hover lift & shadow */
+.warm-card-lift {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;
+}
+
+.warm-card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(180, 83, 9, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: #d97706;
+}
+
+/* Soft gradient-fade dividers */
+.warm-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, #ede4d3 20%, #ede4d3 80%, transparent 100%);
+}
+
+/* Friendly citation link */
+.citation-link {
+  font-size: 0.75rem;
+  color: #b45309;
+  background-color: #fffbeb;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.375rem;
+  border: 1px solid #fde68a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+}
+
+.citation-link:hover {
+  background-color: #fef3c7;
+  color: #78350f;
 }
