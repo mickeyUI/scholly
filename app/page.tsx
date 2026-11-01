@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Search,
   Award,
@@ -14,79 +14,104 @@ import {
   DollarSign,
   BookOpen,
   Calendar,
-} from 'lucide-react';
-import { SAMPLE_SCHOLARSHIPS, SAMPLE_UNIVERSITIES } from './data/sampleData';
-import ScholarshipCard from './components/ScholarshipCard';
-import UniversityCard from './components/UniversityCard';
+} from "lucide-react";
+import { SAMPLE_SCHOLARSHIPS, SAMPLE_UNIVERSITIES } from "./data/sampleData";
+import ScholarshipCard from "./components/ScholarshipCard";
+import UniversityCard from "./components/UniversityCard";
 
 const DEGREE_TABS = [
-  { label: 'All Levels', value: '' },
-  { label: "Bachelor's", value: 'Bachelor' },
-  { label: "Master's", value: 'Master' },
-  { label: 'Doctorate', value: 'PhD' },
+  { label: "All Levels", value: "" },
+  { label: "Bachelor's", value: "Bachelor" },
+  { label: "Master's", value: "Master" },
+  { label: "Doctorate", value: "PhD" },
 ];
 
 export default function HomePage() {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDegree, setSelectedDegree] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDegree, setSelectedDegree] = useState("");
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (searchQuery.trim()) params.set('q', searchQuery.trim());
-    if (selectedDegree) params.set('degree', selectedDegree);
-    router.push(`/scholarships${params.toString() ? `?${params.toString()}` : ''}`);
+    if (searchQuery.trim()) params.set("q", searchQuery.trim());
+    if (selectedDegree) params.set("degree", selectedDegree);
+    router.push(
+      `/scholarships${params.toString() ? `?${params.toString()}` : ""}`,
+    );
   };
 
   const categoryPillList = [
-    { label: 'Colleges & Universities', href: '/universities', icon: GraduationCap, count: '100+ Schools' },
-    { label: 'Full-Ride Scholarships', href: '/scholarships?funding=Fully+Funded', icon: Award, count: '100% Free' },
-    { label: 'Graduate Programs', href: '/scholarships?degree=Master', icon: BookOpen, count: "Master's & PhD" },
-    { label: 'No Application Fee', href: '/scholarships?fee=0', icon: DollarSign, count: '$0 Fee' },
-    { label: 'AI Study Advisor', href: '/assistant', icon: Sparkles, count: '24/7 Help' },
+    {
+      label: "Colleges & Universities",
+      href: "/universities",
+      icon: GraduationCap,
+      count: "100+ Schools",
+    },
+    {
+      label: "Full-Ride Scholarships",
+      href: "/scholarships?funding=Fully+Funded",
+      icon: Award,
+      count: "100% Free",
+    },
+    {
+      label: "Graduate Programs",
+      href: "/scholarships?degree=Master",
+      icon: BookOpen,
+      count: "Master's & PhD",
+    },
+    {
+      label: "No Application Fee",
+      href: "/scholarships?fee=0",
+      icon: DollarSign,
+      count: "$0 Fee",
+    },
+    {
+      label: "AI Study Advisor",
+      href: "/assistant",
+      icon: Sparkles,
+      count: "24/7 Help",
+    },
   ];
 
   const popularSearches = [
-    { label: 'Full Ride', href: '/scholarships?funding=Fully+Funded' },
-    { label: 'Germany', href: '/universities?country=Germany' },
-    { label: 'United Kingdom', href: '/universities?country=United+Kingdom' },
-    { label: 'No App Fee', href: '/scholarships?fee=0' },
-    { label: 'Undergraduate', href: '/scholarships?degree=Bachelor' },
-    { label: "Master's", href: '/scholarships?degree=Master' },
+    { label: "Full Ride", href: "/scholarships?funding=Fully+Funded" },
+    { label: "Germany", href: "/universities?country=Germany" },
+    { label: "United Kingdom", href: "/universities?country=United+Kingdom" },
+    { label: "No App Fee", href: "/scholarships?fee=0" },
+    { label: "Undergraduate", href: "/scholarships?degree=Bachelor" },
+    { label: "Master's", href: "/scholarships?degree=Master" },
   ];
 
   const trustStats = [
     {
-      stat: '8,400+',
+      stat: "8,400+",
       icon: FileCheck,
-      label: 'Verified Scholarships',
+      label: "Verified Scholarships",
       description:
-        'Every sensitive metric—TOEFL waivers, GPA floors, stipend amounts—links directly to the university or government portal.',
+        "Every sensitive metric—TOEFL waivers, GPA floors, stipend amounts—links directly to the university or government portal.",
     },
     {
-      stat: '150',
+      stat: "150",
       icon: Globe,
-      label: 'Countries Covered',
+      label: "Countries Covered",
       description:
-        'Whether applying from Africa, Asia, Europe, or the Americas, discover scholarships tailored to your citizenship.',
+        "Whether applying from Africa, Asia, Europe, or the Americas, discover scholarships tailored to your citizenship.",
     },
     {
-      stat: '$0',
+      stat: "$0",
       icon: ShieldCheck,
-      label: 'Hidden Fees',
+      label: "Hidden Fees",
       description:
-        'Track priority vs. regular deadlines, required recommendation letters, and standardized tests — all in one free tool.',
+        "Track priority vs. regular deadlines, required recommendation letters, and standardized tests — all in one free tool.",
     },
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FBF9F5]">
-
       {/* ── Hero ── */}
       <section className="relative pt-14 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FFFDF9] via-[#FAF6ED] to-[#FBF9F5]">
         <div className="max-w-4xl mx-auto text-center">
-
           {/* Badge */}
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FEF3C7] text-[#92400E] text-xs font-bold mb-5 border border-[#FDE68A] shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
@@ -98,7 +123,8 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-4 text-sm sm:text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed">
-            Search thousands of verified degree programs, compare true net tuition costs, and find funding you actually qualify for.
+            Search thousands of verified degree programs, compare true net
+            tuition costs, and find funding you actually qualify for.
           </p>
 
           {/* Degree Tabs */}
@@ -109,8 +135,8 @@ export default function HomePage() {
                 onClick={() => setSelectedDegree(tab.value)}
                 className={`px-4 py-1.5 rounded-full text-xs font-bold border transition-all ${
                   selectedDegree === tab.value
-                    ? 'bg-[#D97706] text-white border-[#D97706] shadow-sm'
-                    : 'bg-white/80 text-zinc-600 border-[#EDE4D3] hover:border-[#D97706] hover:text-[#D97706]'
+                    ? "bg-[#D97706] text-white border-[#D97706] shadow-sm"
+                    : "bg-white/80 text-zinc-600 border-[#EDE4D3] hover:border-[#D97706] hover:text-[#D97706]"
                 }`}
               >
                 {tab.label}
@@ -173,7 +199,9 @@ export default function HomePage() {
                 <h3 className="text-xs font-bold text-zinc-900 group-hover:text-[#D97706] transition-colors leading-tight">
                   {cat.label}
                 </h3>
-                <span className="text-[11px] text-zinc-500 font-medium mt-1">{cat.count}</span>
+                <span className="text-[11px] text-zinc-500 font-medium mt-1">
+                  {cat.count}
+                </span>
               </Link>
             );
           })}
@@ -195,7 +223,8 @@ export default function HomePage() {
               Top Scholarships for International Students
             </h2>
             <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-              Vetted funding awards covering tuition, living expenses, and airfare.
+              Vetted funding awards covering tuition, living expenses, and
+              airfare.
             </p>
           </div>
           <Link
@@ -208,7 +237,11 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SAMPLE_SCHOLARSHIPS.slice(0, 3).map((scholarship, i) => (
-            <ScholarshipCard key={scholarship.id} scholarship={scholarship} featured={i === 0} />
+            <ScholarshipCard
+              key={scholarship.id}
+              scholarship={scholarship}
+              featured={i === 0}
+            />
           ))}
         </div>
 
@@ -227,7 +260,9 @@ export default function HomePage() {
               Need personalized advice for your GPA &amp; budget?
             </h3>
             <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
-              Ask our AI advisor about English test waivers, eligibility matching for your nationality, and step-by-step document checklists backed by real admissions databases.
+              Ask our AI advisor about English test waivers, eligibility
+              matching for your nationality, and step-by-step document
+              checklists backed by real admissions databases.
             </p>
           </div>
           <Link
@@ -253,7 +288,8 @@ export default function HomePage() {
               Featured Global Colleges &amp; Universities
             </h2>
             <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-              Explore colleges by international student acceptance quotas and verified tuition waivers.
+              Explore colleges by international student acceptance quotas and
+              verified tuition waivers.
             </p>
           </div>
           <Link
@@ -279,27 +315,36 @@ export default function HomePage() {
               The Real Data You Need to Decide
             </h2>
             <p className="text-xs sm:text-sm text-zinc-500 mt-2">
-              Applying abroad is a huge milestone. We cut out marketing fluff with verified requirements and transparent funding facts.
+              Applying abroad is a huge milestone. We cut out marketing fluff
+              with verified requirements and transparent funding facts.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {trustStats.map(({ stat, icon: Icon, label, description }) => (
-              <div key={label} className="bg-[#FAF8F5] p-6 rounded-3xl border border-[#EDE4D3] space-y-3 warm-card-lift">
+              <div
+                key={label}
+                className="bg-[#FAF8F5] p-6 rounded-3xl border border-[#EDE4D3] space-y-3 warm-card-lift"
+              >
                 <div className="w-11 h-11 rounded-2xl bg-[#FEF3C7] flex items-center justify-center shadow-2xs">
                   <Icon className="w-5 h-5 text-[#D97706]" />
                 </div>
                 <div>
-                  <span className="font-serif block text-4xl font-extrabold text-zinc-900 tracking-tight">{stat}</span>
-                  <span className="block text-sm font-bold text-[#D97706] mt-0.5">{label}</span>
+                  <span className="font-serif block text-4xl font-extrabold text-zinc-900 tracking-tight">
+                    {stat}
+                  </span>
+                  <span className="block text-sm font-bold text-[#D97706] mt-0.5">
+                    {label}
+                  </span>
                 </div>
-                <p className="text-xs text-zinc-600 leading-relaxed">{description}</p>
+                <p className="text-xs text-zinc-600 leading-relaxed">
+                  {description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
     </div>
   );
 }

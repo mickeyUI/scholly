@@ -1,7 +1,17 @@
 "use client";
 
 import React from 'react';
-import { Filter, RotateCcw, Search, ChevronDown, Check } from 'lucide-react';
+import {
+  Filter,
+  RotateCcw,
+  Search,
+  ChevronDown,
+  Check,
+  ShieldCheck,
+  CheckCircle2,
+  Calendar,
+  Layers
+} from 'lucide-react';
 
 interface FilterSidebarProps {
   type: 'scholarships' | 'universities';
@@ -15,6 +25,15 @@ interface FilterSidebarProps {
   onFundingChange?: (value: string) => void;
   minGpa: number | '';
   onMinGpaChange: (value: number | '') => void;
+  // University specific filter props
+  selectedNeedBlind?: 'all' | 'need-blind' | 'need-aware' | '';
+  onNeedBlindChange?: (value: 'all' | 'need-blind' | 'need-aware' | '') => void;
+  selectedSatRequired?: 'all' | 'test-optional' | 'sat-required' | '';
+  onSatRequiredChange?: (value: 'all' | 'test-optional' | 'sat-required' | '') => void;
+  selectedDeadlineType?: string;
+  onDeadlineTypeChange?: (value: string) => void;
+  selectedPlatform?: string;
+  onPlatformChange?: (value: string) => void;
   onReset: () => void;
 }
 
@@ -46,6 +65,14 @@ export default function FilterSidebar({
   onFundingChange,
   minGpa,
   onMinGpaChange,
+  selectedNeedBlind,
+  onNeedBlindChange,
+  selectedSatRequired,
+  onSatRequiredChange,
+  selectedDeadlineType,
+  onDeadlineTypeChange,
+  selectedPlatform,
+  onPlatformChange,
   onReset
 }: FilterSidebarProps) {
   return (
@@ -127,6 +154,124 @@ export default function FilterSidebar({
           })}
         </div>
       </div>
+
+      {/* Need-Blind Policy Filter (Universities only) */}
+      {type === 'universities' && onNeedBlindChange && (
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#D97706]" />
+            <span>Need-Blind Policy</span>
+          </label>
+          <div className="grid grid-cols-3 gap-1">
+            {[
+              { label: 'All', value: '' },
+              { label: 'Need-Blind', value: 'need-blind' },
+              { label: 'Need-Aware', value: 'need-aware' }
+            ].map((opt) => {
+              const isSelected =
+                (selectedNeedBlind === opt.value) ||
+                ((!selectedNeedBlind || selectedNeedBlind === 'all') && opt.value === '');
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => onNeedBlindChange(opt.value as any)}
+                  className={`py-2 px-1 text-[11px] rounded-xl text-center font-bold transition-all ${
+                    isSelected
+                      ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] shadow-xs'
+                      : 'bg-[#FAF8F5] text-zinc-600 hover:text-zinc-900 hover:bg-[#F5F0E6] border border-[#EDE4D3]'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* SAT / Standardized Testing Requirement Filter (Universities only) */}
+      {type === 'universities' && onSatRequiredChange && (
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#D97706]" />
+            <span>Standardized Tests (SAT/ACT)</span>
+          </label>
+          <div className="grid grid-cols-3 gap-1">
+            {[
+              { label: 'All', value: '' },
+              { label: 'Test-Optional', value: 'test-optional' },
+              { label: 'Required', value: 'sat-required' }
+            ].map((opt) => {
+              const isSelected =
+                (selectedSatRequired === opt.value) ||
+                ((!selectedSatRequired || selectedSatRequired === 'all') && opt.value === '');
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => onSatRequiredChange(opt.value as any)}
+                  className={`py-2 px-1 text-[11px] rounded-xl text-center font-bold transition-all ${
+                    isSelected
+                      ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] shadow-xs'
+                      : 'bg-[#FAF8F5] text-zinc-600 hover:text-zinc-900 hover:bg-[#F5F0E6] border border-[#EDE4D3]'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Application Deadlines Filter (Universities only) */}
+      {type === 'universities' && onDeadlineTypeChange && (
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5 text-[#D97706]" />
+            <span>Deadlines Cycle</span>
+          </label>
+          <div className="relative">
+            <select
+              value={selectedDeadlineType || ''}
+              onChange={(e) => onDeadlineTypeChange(e.target.value)}
+              className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#FAF8F5] hover:bg-[#F5F0E6] text-zinc-800 font-medium border border-[#EDE4D3] rounded-2xl focus:outline-none focus:border-[#D97706] focus:ring-2 focus:ring-[#FEF3C7] transition-all cursor-pointer shadow-2xs"
+            >
+              <option value="">All Deadlines</option>
+              <option value="early">Early Action / Decision (EA/ED)</option>
+              <option value="regular">Regular Decision (RD)</option>
+              <option value="transfer">Transfer Application (TR)</option>
+              <option value="has-deadline">Recorded Deadlines Only</option>
+            </select>
+            <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-zinc-400 pointer-events-none" />
+          </div>
+        </div>
+      )}
+
+      {/* Application Platform Filter (Universities only) */}
+      {type === 'universities' && onPlatformChange && (
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
+            <Layers className="w-3.5 h-3.5 text-[#D97706]" />
+            <span>Application Platform</span>
+          </label>
+          <div className="relative">
+            <select
+              value={selectedPlatform || ''}
+              onChange={(e) => onPlatformChange(e.target.value)}
+              className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#FAF8F5] hover:bg-[#F5F0E6] text-zinc-800 font-medium border border-[#EDE4D3] rounded-2xl focus:outline-none focus:border-[#D97706] focus:ring-2 focus:ring-[#FEF3C7] transition-all cursor-pointer shadow-2xs"
+            >
+              <option value="">All Platforms</option>
+              <option value="common-app">Common App</option>
+              <option value="scoir">Coalition Application / Scoir</option>
+              <option value="questbridge">QuestBridge</option>
+              <option value="direct">Direct Portal / Institutional</option>
+            </select>
+            <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-zinc-400 pointer-events-none" />
+          </div>
+        </div>
+      )}
 
       {/* Funding Type (Scholarship only) - Segmented pills */}
       {type === 'scholarships' && onFundingChange && (

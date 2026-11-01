@@ -83,18 +83,68 @@ export async function getScholarshipById(id: string): Promise<Scholarship | null
 }
 
 /**
- * Fetch all universities
+ * Fetch all universities (Supabase live data first, fallback to sample data)
  */
 export async function getUniversities(): Promise<University[]> {
+  try {
+    const supabase = getSupabase();
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('universities')
+        .select('*, university_deadlines(*)');
+
+      if (!error && data && data.length > 0) {
+        return data as University[];
+      }
+    }
+  } catch (err) {
+    console.warn('Supabase fetch failed; falling back to sample universities.', err);
+  }
   return SAMPLE_UNIVERSITIES;
 }
 
 /**
- * Fetch a single university by ID
+ * Fetch a single university by ID or organization name
  */
 export async function getUniversityById(id: string): Promise<University | null> {
+  const decodedId = decodeURIComponent(id);
+  try {
+    const supabase = getSupabase();
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('universities')
+        .select('*, university_deadlines(*)')
+        .eq('id', decodedId)
+        .maybeSingle();
+
+      if (!error && data) {
+        return data as University;
+      }
+
+      // Also try matching by organization name
+      const { data: dataByName } = await supabase
+        .from('universities')
+        .select('*, university_deadlines(*)')
+        .ilike('organization', decodedId)
+        .maybeSingle();
+
+      if (dataByName) {
+        return dataByName as University;
+      }
+    }
+  } catch (err) {
+    console.warn('Supabase fetch failed; checking local set.', err);
+  }
   const all = await getUniversities();
-  return all.find((u) => u.id === id) || null;
+  const lower = decodedId.toLowerCase();
+  return (
+    all.find(
+      (u) =>
+        (u.id && u.id.toLowerCase() === lower) ||
+        (u.organization && u.organization.toLowerCase() === lower) ||
+        (u.name && u.name.toLowerCase() === lower)
+    ) || null
+  );
 }
 
 /**
@@ -111,11 +161,15 @@ export function calculateMatchScore(
 
   // Check nationality / destination
   if (profile.preferred_destinations && profile.preferred_destinations.length > 0) {
-    const targetCountry = 'country_located' in opportunity ? opportunity.country_located : opportunity.country;
-    const match = profile.preferred_destinations.some((d) => targetCountry.toLowerCase().includes(d.toLowerCase()));
-    if (match) {
-      score += 15;
-      reasons.push(`Matches your preferred destination: ${targetCountry}`);
+    const targetCountry = 'country_located' in opportunity
+      ? opportunity.country_located
+      : (opportunity as any).country || '';
+    if (targetCountry) {
+      const match = profile.preferred_destinations.some((d) => targetCountry.toLowerCase().includes(d.toLowerCase()));
+      if (match) {
+        score += 15;
+        reasons.push(`Matches your preferred destination: ${targetCountry}`);
+      }
     }
   }
 
@@ -132,13 +186,13 @@ export function calculateMatchScore(
 
   // Check Degree Level
   if (profile.target_degree_level) {
-    if ('education_levels' in opportunity) {
-      if (opportunity.education_levels.includes(profile.target_degree_level)) {
+    if ('education_levels' in opportunity && Array.isArray(opportunity.education_levels)) {
+      if (opportunity.education_levels.some((l) => l.toLowerCase().includes(profile.target_degree_level!.toLowerCase()))) {
         score += 15;
         reasons.push(`Offers your target degree level: ${profile.target_degree_level}`);
       }
-    } else if ('programs' in opportunity) {
-      if (opportunity.programs.some((p) => p.degree_level.toLowerCase() === profile.target_degree_level?.toLowerCase())) {
+    } else if ('programs' in opportunity && Array.isArray((opportunity as any).programs)) {
+      if ((opportunity as any).programs.some((p: any) => p.degree_level?.toLowerCase() === profile.target_degree_level?.toLowerCase())) {
         score += 15;
         reasons.push(`Provides accredited ${profile.target_degree_level} programs`);
       }

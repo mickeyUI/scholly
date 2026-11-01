@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import {
   FormData,
   getEmptyFormData,
-  formDataToSupabase,
-  fastAPIToFormData,
-  FastAPIScholarship,
+  formDataToSupabaseUniversity,
+  fastAPIUniversityToFormData,
+  FastAPIUniversity,
+  Deadline,
 } from "./types";
 
 export default function AdminPage() {
@@ -24,8 +25,8 @@ export default function AdminPage() {
         if (!response.ok) {
           throw new Error("Failed to fetch from FastAPI");
         }
-        const data: FastAPIScholarship = await response.json();
-        setFormData(fastAPIToFormData(data));
+        const data: FastAPIUniversity = await response.json();
+        setFormData(fastAPIUniversityToFormData(data));
         setHasFetchedData(true);
       } catch (err) {
         console.error("FastAPI fetch error:", err);
@@ -50,17 +51,21 @@ export default function AdminPage() {
     setError(null);
 
     try {
-      const supabaseData = formDataToSupabase(formData);
-      const response = await fetch("/api/scholarship", {
+      const supaUniversity = formDataToSupabaseUniversity(formData);
+      const supaDeadline: Deadline[] = formData.deadline;
+      const response = await fetch("/api/universities", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(supabaseData),
+        body: JSON.stringify({
+          supaUni: supaUniversity,
+          supaDline: supaDeadline,
+        }),
       });
 
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error || "Failed to save scholarship");
+        throw new Error(result.error || "Failed to save university");
       }
 
       setSuccess(true);
@@ -81,7 +86,7 @@ export default function AdminPage() {
   };
 
   const inputClass =
-    "w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors";
+    "w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors";
   const labelClass =
     "block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1";
   const sectionClass =
@@ -94,7 +99,7 @@ export default function AdminPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent mx-auto"></div>
           <p className="mt-4 text-zinc-600 dark:text-zinc-400">
-            Loading scholarship data from FastAPI...
+            Loading university data from FastAPI...
           </p>
         </div>
       </div>
@@ -103,18 +108,18 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
               {hasFetchedData
-                ? "Edit Scholarship Opportunity"
-                : "Add Scholarship Opportunity"}
+                ? "Edit University Profile"
+                : "Add University Record"}
             </h1>
             <p className="mt-2 text-zinc-600 dark:text-zinc-400">
               {hasFetchedData
-                ? "Review and modify the data fetched from FastAPI, then save to Supabase."
-                : "Fill in the details below to create a new scholarship entry in the database."}
+                ? "Review and modify the university data fetched from FastAPI, then save to Supabase."
+                : "Fill in the details below to create a new university entry in the database."}
             </p>
           </div>
           {hasFetchedData && (
@@ -131,7 +136,7 @@ export default function AdminPage() {
         {success && (
           <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
             <p className="text-green-800 dark:text-green-300">
-              Scholarship saved successfully!
+              University saved successfully!
             </p>
           </div>
         )}
@@ -220,6 +225,54 @@ export default function AdminPage() {
                   placeholder="e.g., On-campus, Online, Hybrid"
                 />
               </div>
+              <div>
+                <label htmlFor="notable_accolades" className={labelClass}>
+                  Notable Accolades (comma-separated)
+                </label>
+                <input
+                  type="text"
+                  id="notable_accolades"
+                  className={inputClass}
+                  value={formData.notable_accolades}
+                  onChange={(e) =>
+                    handleChange("notable_accolades", e.target.value)
+                  }
+                  placeholder="e.g., Nobel Laureates, Top 10 Ranking"
+                />
+              </div>
+              <div>
+                <label htmlFor="campus_locations" className={labelClass}>
+                  Campus Locations (comma-separated)
+                </label>
+                <input
+                  type="text"
+                  id="campus_locations"
+                  className={inputClass}
+                  value={formData.campus_locations}
+                  onChange={(e) =>
+                    handleChange("campus_locations", e.target.value)
+                  }
+                  placeholder="e.g., Main Campus, Downtown Campus, Online"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="school_year_starting_date"
+                  className={labelClass}
+                >
+                  School Year Starting Date
+                </label>
+                <input
+                  type="text"
+                  id="school_year_starting_date"
+                  className={inputClass}
+                  value={formData.school_year_starting_date}
+                  onChange={(e) =>
+                    handleChange("school_year_starting_date", e.target.value)
+                  }
+                  placeholder="e.g., September 2024"
+                />
+              </div>
             </div>
           </fieldset>
 
@@ -295,21 +348,27 @@ export default function AdminPage() {
               </div>
               <div>
                 <label
-                  htmlFor="english_proficency_required"
+                  htmlFor="english_proficiency_required"
                   className={labelClass}
                 >
-                  English Proficiency Required (comma-separated)
+                  English Proficiency Required
                 </label>
-                <input
-                  type="text"
-                  id="english_proficency_required"
-                  className={inputClass}
-                  value={formData.english_proficency_required}
-                  onChange={(e) =>
-                    handleChange("english_proficency_required", e.target.value)
-                  }
-                  placeholder="e.g., TOEFL, IELTS, Duolingo"
-                />
+                {formData.english_proficiency_required == null ? (
+                  <h2 className="text-white/40">not found</h2>
+                ) : (
+                  <input
+                    type="checkbox"
+                    id="english_proficiency_required"
+                    className={""}
+                    checked={formData.english_proficiency_required}
+                    onChange={(e) =>
+                      handleChange(
+                        "english_proficiency_required",
+                        e.target.checked,
+                      )
+                    }
+                  />
+                )}
               </div>
             </div>
           </fieldset>
@@ -363,28 +422,6 @@ export default function AdminPage() {
                   placeholder="e.g., No restrictions, Under 30"
                 />
               </div>
-              <div>
-                <label
-                  htmlFor="international_student_population"
-                  className={labelClass}
-                >
-                  International Student Population
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  id="international_student_population"
-                  className={inputClass}
-                  value={formData.international_student_population}
-                  onChange={(e) =>
-                    handleChange(
-                      "international_student_population",
-                      e.target.value,
-                    )
-                  }
-                  placeholder="e.g., 5000"
-                />
-              </div>
             </div>
           </fieldset>
 
@@ -424,16 +461,27 @@ export default function AdminPage() {
               </div>
               <div>
                 <label htmlFor="deadline" className={labelClass}>
-                  Deadline(s) (comma-separated)
+                  Deadlines
                 </label>
-                <input
-                  type="text"
-                  id="deadline"
-                  className={inputClass}
-                  value={formData.deadline}
-                  onChange={(e) => handleChange("deadline", e.target.value)}
-                  placeholder="e.g., 2024-12-31, 2025-03-15"
-                />
+                {formData.deadline.map((deadline: Deadline, index) => {
+                  return (
+                    <div
+                      key={`${deadline.deadline_type}-${deadline.date}-${index}`}
+                      className="text-white/80 flex"
+                    >
+                      <h1>{deadline.deadline_type}: </h1>
+                      <input
+                        type="text"
+                        id="deadline"
+                        value={deadline.date}
+                        onChange={(e) =>
+                          handleChange("deadline", e.target.value)
+                        }
+                        placeholder="e.g., 2024-12-31, 2025-03-15"
+                      />
+                    </div>
+                  );
+                })}
               </div>
               <div>
                 <label htmlFor="required_documents" className={labelClass}>
@@ -475,9 +523,7 @@ export default function AdminPage() {
                   Application Fee
                 </label>
                 <input
-                  type="number"
-                  step="0.01"
-                  min="0"
+                  type="string"
                   id="application_fee"
                   className={inputClass}
                   value={formData.application_fee}
@@ -495,7 +541,7 @@ export default function AdminPage() {
                   Number of Recommendation Letters Required
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   min="0"
                   id="number_of_recommendation_letters_required"
                   className={inputClass}
@@ -542,6 +588,47 @@ export default function AdminPage() {
                 >
                   Essays Required
                 </label>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="accepted_english_proficiency_tests"
+                    className={labelClass}
+                  >
+                    Accepted English Proficiency Tests (comma-separated)
+                  </label>
+                  <input
+                    type="text"
+                    id="accepted_english_proficiency_tests"
+                    className={inputClass}
+                    value={formData.accepted_english_proficiency_tests}
+                    onChange={(e) =>
+                      handleChange(
+                        "accepted_english_proficiency_tests",
+                        e.target.value,
+                      )
+                    }
+                    placeholder="e.g., United States, Canada, United Kingdom"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="sat_required" className={labelClass}>
+                    SAT requred
+                  </label>
+                  {formData.sat_required == null ? (
+                    <h2 className="text-white/40">not found</h2>
+                  ) : (
+                    <input
+                      type="checkbox"
+                      id="sat_required"
+                      className={""}
+                      checked={formData.sat_required}
+                      onChange={(e) =>
+                        handleChange("sat_required", e.target.checked)
+                      }
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </fieldset>
@@ -608,6 +695,24 @@ export default function AdminPage() {
                   placeholder="e.g., 30000"
                 />
               </div>
+              <div>
+                <label htmlFor="need_blind" className={labelClass}>
+                  need blind
+                </label>
+                {formData.need_blind == null ? (
+                  <h2 className="text-white/40">not found</h2>
+                ) : (
+                  <input
+                    type="checkbox"
+                    id="need_blind"
+                    className={""}
+                    checked={formData.need_blind}
+                    onChange={(e) =>
+                      handleChange("need_blind", e.target.checked)
+                    }
+                  />
+                )}
+              </div>
             </div>
           </fieldset>
 
@@ -615,56 +720,7 @@ export default function AdminPage() {
             <legend className="text-lg font-semibold text-zinc-900 dark:text-white mb-4">
               Additional Information
             </legend>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="notable_accolades" className={labelClass}>
-                  Notable Accolades (comma-separated)
-                </label>
-                <input
-                  type="text"
-                  id="notable_accolades"
-                  className={inputClass}
-                  value={formData.notable_accolades}
-                  onChange={(e) =>
-                    handleChange("notable_accolades", e.target.value)
-                  }
-                  placeholder="e.g., Nobel Laureates, Top 10 Ranking"
-                />
-              </div>
-              <div>
-                <label htmlFor="campus_locations" className={labelClass}>
-                  Campus Locations (comma-separated)
-                </label>
-                <input
-                  type="text"
-                  id="campus_locations"
-                  className={inputClass}
-                  value={formData.campus_locations}
-                  onChange={(e) =>
-                    handleChange("campus_locations", e.target.value)
-                  }
-                  placeholder="e.g., Main Campus, Downtown Campus, Online"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="school_year_starting_date"
-                  className={labelClass}
-                >
-                  School Year Starting Date
-                </label>
-                <input
-                  type="text"
-                  id="school_year_starting_date"
-                  className={inputClass}
-                  value={formData.school_year_starting_date}
-                  onChange={(e) =>
-                    handleChange("school_year_starting_date", e.target.value)
-                  }
-                  placeholder="e.g., September 2024"
-                />
-              </div>
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
           </fieldset>
 
           <div className="flex justify-end gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-700">

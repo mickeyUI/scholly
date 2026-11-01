@@ -28,6 +28,8 @@ export default function AuthModal() {
         if (!res.success) {
           setError(res.error || 'Failed to sign in. Please verify your email and password.');
         } else {
+          setEmail('');
+          setPassword('');
           closeAuthModal();
         }
       } else {
@@ -40,8 +42,10 @@ export default function AuthModal() {
         if (!res.success) {
           setError(res.error || 'Registration failed');
         } else {
-          setSuccessMessage('Account created! Please sign in or check your email to confirm.');
-          setMode('signin');
+          setEmail('');
+          setPassword('');
+          setFullName('');
+          closeAuthModal();
         }
       }
     } catch (err: any) {

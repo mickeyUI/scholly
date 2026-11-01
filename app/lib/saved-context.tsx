@@ -81,29 +81,45 @@ export function SavedProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    if (isSaved(item.id)) {
-      const filtered = savedItems.filter((i) => i.target_id !== item.id);
+    const targetId = item.id || ('organization' in item ? item.organization : 'saved-item');
+
+    if (isSaved(targetId)) {
+      const filtered = savedItems.filter((i) => i.target_id !== targetId);
       saveToStorage(filtered);
     } else {
       let deadlineDate = 'Rolling';
-      if (item.deadlines && item.deadlines.length > 0) {
-        deadlineDate = item.deadlines[0].date || 'Rolling';
+      if ('deadlines' in item && Array.isArray((item as any).deadlines) && (item as any).deadlines.length > 0) {
+        deadlineDate = (item as any).deadlines[0].date || 'Rolling';
+      } else if ('university_deadlines' in item && Array.isArray(item.university_deadlines) && item.university_deadlines.length > 0) {
+        deadlineDate = item.university_deadlines[0].deadline_date || 'Rolling';
       }
 
       let fundingOrTuition = 'Funding available';
-      if ('funding_type' in item) {
+      if ('funding_type' in item && item.funding_type) {
         fundingOrTuition = item.funding_type;
-      } else if ('programs' in item && item.programs.length > 0) {
-        fundingOrTuition = `$${item.programs[0].tuition_per_year_usd.toLocaleString()}/yr`;
+      } else if ('programs' in item && Array.isArray((item as any).programs) && (item as any).programs.length > 0) {
+        fundingOrTuition = `$${(item as any).programs[0].tuition_per_year_usd?.toLocaleString()}/yr`;
       }
+
+      const title = 'title' in item
+        ? (item as any).title
+        : item.organization || (item as any).name || 'Opportunity';
+
+      const country = 'country_located' in item
+        ? item.country_located
+        : (item as any).country || 'Global';
+
+      const institution = 'organization' in item
+        ? item.organization
+        : (item as any).name || (item as any).country || 'Institution';
 
       const newItem: SavedItem = {
         id: `saved-${Date.now()}`,
         type,
-        target_id: item.id,
-        title: 'title' in item ? item.title : item.name,
-        institution_or_org: 'organization' in item ? item.organization : item.country,
-        country: 'country_located' in item ? item.country_located : item.country,
+        target_id: targetId,
+        title,
+        institution_or_org: institution,
+        country,
         deadline: deadlineDate,
         funding_or_tuition: fundingOrTuition,
         saved_at: new Date().toISOString(),

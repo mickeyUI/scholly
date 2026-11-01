@@ -1,8 +1,8 @@
-type Deadline = {
+export type Deadline = {
   deadline_type: string;
   date: string;
 };
-export type FastAPIScholarship = {
+export type FastAPIUniversity = {
   organization: string | null;
   eligible_countries: string[];
   notable_accolades: string[];
@@ -10,7 +10,7 @@ export type FastAPIScholarship = {
   fields: string[];
   minimum_gpa: number | null;
   max_age: number | null;
-  english_proficency_required: string[];
+  english_proficency_required: boolean;
   deadline: Deadline[];
   required_documents: string[];
   application_url: string | null;
@@ -20,11 +20,10 @@ export type FastAPIScholarship = {
   financial_aid_policy: string | null;
   tuition_waiver_threshold: number | null;
   accepted_application_platform: string[];
-  application_fee: number | null;
+  application_fee: string | null;
   country_located: string | null;
   campus_locations: string[];
   university_type: string | null;
-  international_student_population: number | null;
   minimum_standardized_test_scores: string[];
   school_year_starting_date: string | null;
   funding_type: string | null;
@@ -32,9 +31,15 @@ export type FastAPIScholarship = {
   age_restrictions: string | null;
   recommendation_letter_types: string | null;
   program_delivery_mode: string | null;
+  need_blind: boolean | null;
+  sat_required: boolean | null;
+  english_proficiency_required: boolean | null;
+  accepted_english_proficiency_tests: string[];
 };
 
-export type SupabaseScholarship = {
+export type FastAPIScholarship = FastAPIUniversity;
+
+export type SupabaseUniversity = {
   organization: string;
   eligible_countries: string[];
   notable_accolades: string[];
@@ -42,8 +47,6 @@ export type SupabaseScholarship = {
   fields: string[];
   minimum_gpa: number | null;
   max_age: number | null;
-  english_proficency_required: string[];
-  deadline: string[];
   required_documents: string[];
   application_url: string;
   application_process: string;
@@ -52,11 +55,10 @@ export type SupabaseScholarship = {
   financial_aid_policy: string;
   tuition_waiver_threshold: number | null;
   accepted_application_platform: string[];
-  application_fee: number | null;
+  application_fee: string | null;
   country_located: string;
   campus_locations: string[];
   university_type: string;
-  international_student_population: number | null;
   minimum_standardized_test_scores: string[];
   school_year_starting_date: string | null;
   funding_type: string;
@@ -64,7 +66,13 @@ export type SupabaseScholarship = {
   age_restrictions: string;
   recommendation_letter_types: string;
   program_delivery_mode: string;
+  need_blind: boolean | null;
+  sat_required: boolean | null;
+  english_proficiency_required: boolean | null;
+  accepted_english_proficiency_tests: string[];
 };
+
+export type SupabaseScholarship = SupabaseUniversity;
 
 export type FormData = {
   organization: string;
@@ -74,8 +82,7 @@ export type FormData = {
   fields: string;
   minimum_gpa: string;
   max_age: string;
-  english_proficency_required: string;
-  deadline: string;
+  deadline: Deadline[];
   required_documents: string;
   application_url: string;
   application_process: string;
@@ -88,7 +95,6 @@ export type FormData = {
   country_located: string;
   campus_locations: string;
   university_type: string;
-  international_student_population: string;
   minimum_standardized_test_scores: string;
   school_year_starting_date: string;
   funding_type: string;
@@ -96,7 +102,28 @@ export type FormData = {
   age_restrictions: string;
   recommendation_letter_types: string;
   program_delivery_mode: string;
+  need_blind: boolean | null;
+  sat_required: boolean | null;
+  english_proficiency_required: boolean | null;
+  accepted_english_proficiency_tests: string;
 };
+
+function strToBool(val: string | boolean | null) {
+  if (val == null) {
+    return null;
+  }
+  if (typeof val === "boolean") {
+    return val;
+  } else {
+    if (val.toLowerCase() == "true") {
+      return true;
+    }
+    if (val.toLowerCase() == "false") {
+      return false;
+    }
+  }
+  return null;
+}
 
 function parseArray(value: string): string[] {
   return value
@@ -115,7 +142,7 @@ function parseIntOrNull(value: string): number | null {
   return isNaN(parsed) ? null : parsed;
 }
 
-export function formDataToSupabase(form: FormData): SupabaseScholarship {
+export function formDataToSupabaseUniversity(form: FormData): SupabaseUniversity {
   return {
     organization: form.organization || "",
     eligible_countries: parseArray(form.eligible_countries),
@@ -124,8 +151,6 @@ export function formDataToSupabase(form: FormData): SupabaseScholarship {
     fields: parseArray(form.fields),
     minimum_gpa: parseNumber(form.minimum_gpa),
     max_age: parseIntOrNull(form.max_age),
-    english_proficency_required: parseArray(form.english_proficency_required),
-    deadline: parseArray(form.deadline),
     required_documents: parseArray(form.required_documents),
     application_url: form.application_url || "",
     application_process: form.application_process || "",
@@ -138,13 +163,10 @@ export function formDataToSupabase(form: FormData): SupabaseScholarship {
     accepted_application_platform: parseArray(
       form.accepted_application_platform,
     ),
-    application_fee: parseNumber(form.application_fee),
+    application_fee: form.application_fee,
     country_located: form.country_located || "",
     campus_locations: parseArray(form.campus_locations),
     university_type: form.university_type || "",
-    international_student_population: parseIntOrNull(
-      form.international_student_population,
-    ),
     minimum_standardized_test_scores: parseArray(
       form.minimum_standardized_test_scores,
     ),
@@ -156,10 +178,18 @@ export function formDataToSupabase(form: FormData): SupabaseScholarship {
     age_restrictions: form.age_restrictions || "",
     recommendation_letter_types: form.recommendation_letter_types || "",
     program_delivery_mode: form.program_delivery_mode || "",
+    need_blind: form.need_blind,
+    sat_required: form.sat_required,
+    english_proficiency_required: form.english_proficiency_required,
+    accepted_english_proficiency_tests: parseArray(
+      form.accepted_english_proficiency_tests,
+    ),
   };
 }
 
-export function fastAPIToFormData(api: FastAPIScholarship): FormData {
+export const formDataToSupabase = formDataToSupabaseUniversity;
+
+export function fastAPIUniversityToFormData(api: FastAPIUniversity): FormData {
   return {
     organization: api.organization || "",
     eligible_countries: api.eligible_countries.join(", "),
@@ -168,10 +198,7 @@ export function fastAPIToFormData(api: FastAPIScholarship): FormData {
     fields: api.fields.join(", "),
     minimum_gpa: api.minimum_gpa !== null ? String(api.minimum_gpa) : "",
     max_age: api.max_age !== null ? String(api.max_age) : "",
-    english_proficency_required: api.english_proficency_required.join(", "),
-    deadline: api.deadline
-      .map((dline) => `${dline.deadline_type}: ${dline.date}`)
-      .join(", "),
+    deadline: api.deadline,
     required_documents: api.required_documents.join(", "),
     application_url: api.application_url || "",
     application_process: api["application process"] || "",
@@ -191,10 +218,6 @@ export function fastAPIToFormData(api: FastAPIScholarship): FormData {
     country_located: api.country_located || "",
     campus_locations: api.campus_locations.join(", "),
     university_type: api.university_type || "",
-    international_student_population:
-      api.international_student_population !== null
-        ? String(api.international_student_population)
-        : "",
     minimum_standardized_test_scores:
       api.minimum_standardized_test_scores.join(", "),
     school_year_starting_date: api.school_year_starting_date || "",
@@ -206,8 +229,15 @@ export function fastAPIToFormData(api: FastAPIScholarship): FormData {
     age_restrictions: api.age_restrictions || "",
     recommendation_letter_types: api.recommendation_letter_types || "",
     program_delivery_mode: api.program_delivery_mode || "",
+    need_blind: strToBool(api.need_blind),
+    sat_required: strToBool(api.sat_required),
+    english_proficiency_required: strToBool(api.english_proficiency_required),
+    accepted_english_proficiency_tests:
+      api.accepted_english_proficiency_tests.join(", ") || "",
   };
 }
+
+export const fastAPIToFormData = fastAPIUniversityToFormData;
 
 export function getEmptyFormData(): FormData {
   return {
@@ -218,8 +248,7 @@ export function getEmptyFormData(): FormData {
     fields: "",
     minimum_gpa: "",
     max_age: "",
-    english_proficency_required: "",
-    deadline: "",
+    deadline: [{ deadline_type: "", date: "" }],
     required_documents: "",
     application_url: "",
     application_process: "",
@@ -232,7 +261,6 @@ export function getEmptyFormData(): FormData {
     country_located: "",
     campus_locations: "",
     university_type: "",
-    international_student_population: "",
     minimum_standardized_test_scores: "",
     school_year_starting_date: "",
     funding_type: "",
@@ -240,5 +268,9 @@ export function getEmptyFormData(): FormData {
     age_restrictions: "",
     recommendation_letter_types: "",
     program_delivery_mode: "",
+    need_blind: null,
+    sat_required: null,
+    english_proficiency_required: null,
+    accepted_english_proficiency_tests: "",
   };
 }

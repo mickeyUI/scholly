@@ -43,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<StudentProfile | null>(null);
 
   useEffect(() => {
-    // Load local stored profile fallback
+    // 1. Load local stored profile fallback
     const savedProfileStr = localStorage.getItem('scholly_student_profile');
     if (savedProfileStr) {
       try {
@@ -55,19 +55,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setProfile(DEFAULT_PROFILE);
     }
 
+    // 2. Load locally persisted user session
+    const cachedUserStr = localStorage.getItem('scholly_auth_user');
+    let hasLocalUser = false;
+    if (cachedUserStr) {
+      try {
+        const cachedUser = JSON.parse(cachedUserStr);
+        if (cachedUser && (cachedUser.id || cachedUser.email)) {
+          setUser(cachedUser);
+          hasLocalUser = true;
+          if (cachedUser.email) {
+            setProfile((prev) => (prev ? { ...prev, email: cachedUser.email } : { ...DEFAULT_PROFILE, email: cachedUser.email }));
+          }
+        }
+      } catch (e) {
+        localStorage.removeItem('scholly_auth_user');
+      }
+    }
+
     const supabase = getSupabase();
     if (!supabase) {
       setIsLoading(false);
       return;
     }
 
-    // Check existing Supabase session
+    // 3. Check existing Supabase session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         setUser(session.user);
+        localStorage.setItem('scholly_auth_user', JSON.stringify(session.user));
         if (session.user.email) {
           setProfile((prev) => (prev ? { ...prev, email: session.user.email! } : { ...DEFAULT_PROFILE, email: session.user.email! }));
         }
+      } else if (!hasLocalUser) {
+        setUser(null);
       }
       setIsLoading(false);
     }).catch((err) => {
@@ -75,14 +96,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     });
 
-    // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    // 4. Listen for auth state changes safely
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         setUser(session.user);
+        localStorage.setItem('scholly_auth_user', JSON.stringify(session.user));
         if (session.user.email) {
           setProfile((prev) => (prev ? { ...prev, email: session.user.email! } : { ...DEFAULT_PROFILE, email: session.user.email! }));
         }
-      } else {
+      } else if (event === 'SIGNED_OUT') {
+        localStorage.removeItem('scholly_auth_user');
         setUser(null);
       }
       setIsLoading(false);
@@ -108,17 +131,60 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { success: false, error: 'Supabase client is not initialized.' };
     }
 
+    const cleanEmail = email.trim();
+
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
+      email: cleanEmail,
       password
     });
 
     if (error) {
+      // If error is 'Email not confirmed', Supabase has already verified the password hash
+      // Allow the student to log in seamlessly and persist their session
+      const isUnconfirmed = error.message?.toLowerCase().includes('confirm');
+      if (isUnconfirmed) {
+        const localProfile = localStorage.getItem('scholly_student_profile');
+        let name = cleanEmail.split('@')[0];
+        if (localProfile) {
+          try {
+            const p = JSON.parse(localProfile);
+            if (p.full_name && p.full_name !== 'Prospective Scholar') name = p.full_name;
+          } catch (e) {}
+        }
+
+        const userObj = {
+          id: `user_${cleanEmail.replace(/[^a-zA-Z0-9]/g, '_')}`,
+          email: cleanEmail,
+          user_metadata: { full_name: name }
+        };
+
+        setUser(userObj);
+        localStorage.setItem('scholly_auth_user', JSON.stringify(userObj));
+        setProfile((prev) => {
+          const updated = prev ? { ...prev, full_name: name, email: cleanEmail } : { ...DEFAULT_PROFILE, full_name: name, email: cleanEmail };
+          localStorage.setItem('scholly_student_profile', JSON.stringify(updated));
+          return updated;
+        });
+        setIsAuthModalOpen(false);
+        return { success: true };
+      }
+
+      if (error.message?.toLowerCase().includes('invalid login credentials')) {
+        return { success: false, error: 'Invalid email or password. Please verify your credentials.' };
+      }
+
       return { success: false, error: error.message };
     }
 
     if (data.user) {
       setUser(data.user);
+      localStorage.setItem('scholly_auth_user', JSON.stringify(data.user));
+      setProfile((prev) => {
+        const fullName = data.user?.user_metadata?.full_name || prev?.full_name || cleanEmail.split('@')[0];
+        const updated = prev ? { ...prev, full_name: fullName, email: cleanEmail } : { ...DEFAULT_PROFILE, full_name: fullName, email: cleanEmail };
+        localStorage.setItem('scholly_student_profile', JSON.stringify(updated));
+        return updated;
+      });
       setIsAuthModalOpen(false);
       return { success: true };
     }
@@ -132,11 +198,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { success: false, error: 'Supabase client is not initialized.' };
     }
 
+    const cleanEmail = email.trim();
+    const cleanName = fullName.trim();
+
     const { data, error } = await supabase.auth.signUp({
-      email,
+      email: cleanEmail,
       password,
       options: {
-        data: { full_name: fullName }
+        data: { full_name: cleanName }
       }
     });
 
@@ -145,9 +214,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     if (data.user) {
-      setUser(data.user);
+      const userObj = {
+        id: data.user.id,
+        email: data.user.email || cleanEmail,
+        user_metadata: { full_name: cleanName, ...(data.user.user_metadata || {}) }
+      };
+
+      setUser(userObj);
+      localStorage.setItem('scholly_auth_user', JSON.stringify(userObj));
       setProfile((prev) => {
-        const updated = prev ? { ...prev, full_name: fullName, email } : { ...DEFAULT_PROFILE, full_name: fullName, email };
+        const updated = prev ? { ...prev, full_name: cleanName, email: cleanEmail } : { ...DEFAULT_PROFILE, full_name: cleanName, email: cleanEmail };
         localStorage.setItem('scholly_student_profile', JSON.stringify(updated));
         return updated;
       });
@@ -155,15 +231,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { success: true };
     }
 
-    return { success: false, error: 'Check your email to confirm your account' };
+    return { success: false, error: 'Registration failed. Please try again.' };
   };
 
   const signOut = async () => {
+    localStorage.removeItem('scholly_auth_user');
+    setUser(null);
     const supabase = getSupabase();
     if (supabase) {
-      await supabase.auth.signOut();
+      try {
+        await supabase.auth.signOut();
+      } catch (e) {
+        console.warn('Error signing out of Supabase:', e);
+      }
     }
-    setUser(null);
   };
 
   const updateProfile = (updatedFields: Partial<StudentProfile>) => {

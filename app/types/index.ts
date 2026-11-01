@@ -48,7 +48,67 @@ export interface UniversityProgram {
   language: string;
 }
 
-export interface University {
+export type SupabaseUniversity = {
+  id?: string;
+  organization: string;
+  eligible_countries: string[];
+  notable_accolades: string[];
+  education_levels: string[];
+  fields: string[];
+  minimum_gpa: number | null;
+  max_age: number | null;
+  required_documents: string[];
+  application_url: string;
+  application_process: string;
+  number_of_recommendation_letters_required: number | string | null;
+  essays_required: string;
+  financial_aid_policy: string;
+  tuition_waiver_threshold: number | null;
+  accepted_application_platform: string[];
+  application_fee: string | null;
+  country_located: string;
+  campus_locations: string[];
+  university_type: string;
+  minimum_standardized_test_scores: string[];
+  school_year_starting_date: string | null;
+  funding_type: string;
+  annual_tuitioin_coveratge_cost: number | null;
+  age_restrictions: string;
+  recommendation_letter_types: string;
+  program_delivery_mode: string;
+  need_blind: boolean | null;
+  sat_required: boolean | null;
+  english_proficiency_required: boolean | null;
+  accepted_english_proficiency_tests: string[];
+  university_deadlines?: {
+    id?: string;
+    deadline_type: string;
+    deadline_date: string;
+    university_id?: string;
+  }[];
+  // Backward compatibility fields
+  name?: string;
+  country?: string;
+  city?: string;
+  world_ranking?: number;
+  international_student_population?: number;
+  acceptance_rate_percent?: number;
+  standardized_tests?: string[];
+  website_url?: string;
+  admissions_url?: string;
+  programs?: UniversityProgram[];
+  deadlines?: DeadlineInfo[];
+  scholarship_opportunities_count?: number;
+  source_name?: string;
+  source_url?: string;
+  verification_date?: string;
+  is_verified?: boolean;
+};
+
+export type University = SupabaseUniversity;
+export type SupabaseScholarship = SupabaseUniversity;
+
+export interface LegacyUniversity {
   id: string;
   name: string;
   country: string;

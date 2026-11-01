@@ -13,7 +13,7 @@ export default function UniversitiesPage() {
     <Suspense
       fallback={
         <div className="py-20 text-center">
-          <div className="w-8 h-8 border-2 border-[#C5A059] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <div className="w-8 h-8 border-2 border-[#D97706] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           <p className="text-xs font-mono text-zinc-500">Loading university discovery...</p>
         </div>
       }
@@ -36,7 +36,14 @@ function UniversitiesContent() {
   const [selectedCountry, setSelectedCountry] = useState(initialCountry);
   const [selectedDegree, setSelectedDegree] = useState('');
   const [minGpa, setMinGpa] = useState<number | ''>('');
-  const [sortBy, setSortBy] = useState<'ranking' | 'tuition' | 'name'>('ranking');
+  
+  // New University-specific filters
+  const [selectedNeedBlind, setSelectedNeedBlind] = useState<'all' | 'need-blind' | 'need-aware' | ''>('');
+  const [selectedSatRequired, setSelectedSatRequired] = useState<'all' | 'test-optional' | 'sat-required' | ''>('');
+  const [selectedDeadlineType, setSelectedDeadlineType] = useState<string>('');
+  const [selectedPlatform, setSelectedPlatform] = useState<string>('');
+
+  const [sortBy, setSortBy] = useState<'name' | 'aid' | 'gpa'>('name');
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   useEffect(() => {
@@ -47,63 +54,215 @@ function UniversitiesContent() {
   }, []);
 
   const filteredUniversities = useMemo(() => {
-    return universities.filter((uni) => {
-      // Keyword match
-      if (searchTerm.trim()) {
-        const query = searchTerm.toLowerCase();
-        const matchesName = uni.name.toLowerCase().includes(query);
-        const matchesCountry = uni.country.toLowerCase().includes(query);
-        const matchesCity = uni.city.toLowerCase().includes(query);
-        const matchesPrograms = uni.programs.some((p) => p.name.toLowerCase().includes(query));
-        if (!matchesName && !matchesCountry && !matchesCity && !matchesPrograms) {
-          return false;
+    return universities
+      .filter((uni) => {
+        const uniName = (uni.organization || uni.name || '').toLowerCase();
+        const uniCountry = (uni.country_located || uni.country || '').toLowerCase();
+        const uniCampuses = Array.isArray(uni.campus_locations)
+          ? uni.campus_locations.join(' ').toLowerCase()
+          : '';
+        const uniFields = Array.isArray(uni.fields)
+          ? uni.fields.join(' ').toLowerCase()
+          : '';
+        const uniLevels = Array.isArray(uni.education_levels)
+          ? uni.education_levels.join(' ').toLowerCase()
+          : '';
+
+        // Keyword match
+        if (searchTerm.trim()) {
+          const query = searchTerm.toLowerCase();
+          const matchesName = uniName.includes(query);
+          const matchesCountry = uniCountry.includes(query);
+          const matchesCampus = uniCampuses.includes(query);
+          const matchesFields = uniFields.includes(query);
+          const matchesLevels = uniLevels.includes(query);
+
+          if (!matchesName && !matchesCountry && !matchesCampus && !matchesFields && !matchesLevels) {
+            return false;
+          }
         }
-      }
 
-      // Country filter
-      if (selectedCountry && !uni.country.toLowerCase().includes(selectedCountry.toLowerCase())) {
-        return false;
-      }
-
-      // Degree filter
-      if (selectedDegree) {
-        const hasDegree = uni.programs.some(
-          (p) => p.degree_level.toLowerCase() === selectedDegree.toLowerCase()
-        );
-        if (!hasDegree) return false;
-      }
-
-      // Minimum GPA filter (show universities requiring <= student's GPA)
-      if (minGpa !== '') {
-        if (uni.minimum_gpa && uni.minimum_gpa > Number(minGpa)) {
-          return false;
+        // Country filter
+        if (selectedCountry) {
+          if (!uniCountry.includes(selectedCountry.toLowerCase())) {
+            return false;
+          }
         }
-      }
 
-      return true;
-    }).sort((a, b) => {
-      if (sortBy === 'ranking') {
-        return (a.world_ranking || 999) - (b.world_ranking || 999);
-      }
-      if (sortBy === 'tuition') {
-        const tuitionA = a.programs[0]?.tuition_per_year_usd || 0;
-        const tuitionB = b.programs[0]?.tuition_per_year_usd || 0;
-        return tuitionA - tuitionB;
-      }
-      return a.name.localeCompare(b.name);
-    });
-  }, [universities, searchTerm, selectedCountry, selectedDegree, minGpa, sortBy]);
+        // Degree filter (maps to education_levels: undergraduate/bachelor, graduate/master, doctoral/phd)
+        if (selectedDegree) {
+          const targetDeg = selectedDegree.toLowerCase();
+          const hasLevel =
+            Array.isArray(uni.education_levels) &&
+            uni.education_levels.some((lvl) => {
+              const l = lvl.toLowerCase();
+              if (
+                targetDeg === 'bachelor' &&
+                (l.includes('bachelor') || l.includes('undergrad') || l.includes('first-year'))
+              ) {
+                return true;
+              }
+              if (
+                targetDeg === 'master' &&
+                (l.includes('master') || l.includes('grad') || l.includes('postgrad'))
+              ) {
+                return true;
+              }
+              if (
+                targetDeg === 'phd' &&
+                (l.includes('phd') || l.includes('doctor'))
+              ) {
+                return true;
+              }
+              return l.includes(targetDeg);
+            });
+
+          const hasLegacyProg =
+            Array.isArray(uni.programs) &&
+            uni.programs.some((p) => p.degree_level.toLowerCase().includes(targetDeg));
+
+          if (!hasLevel && !hasLegacyProg) return false;
+        }
+
+        // Minimum GPA filter (show universities requiring <= student's GPA)
+        if (minGpa !== '') {
+          if (
+            uni.minimum_gpa !== null &&
+            uni.minimum_gpa !== undefined &&
+            uni.minimum_gpa > Number(minGpa)
+          ) {
+            return false;
+          }
+        }
+
+        // Need-Blind Filter
+        if (selectedNeedBlind === 'need-blind') {
+          if (uni.need_blind !== true) return false;
+        } else if (selectedNeedBlind === 'need-aware') {
+          if (uni.need_blind !== false) return false;
+        }
+
+        // SAT / Standardized Testing Requirement Filter
+        if (selectedSatRequired === 'test-optional') {
+          if (uni.sat_required !== false) return false;
+        } else if (selectedSatRequired === 'sat-required') {
+          if (uni.sat_required !== true) return false;
+        }
+
+        // Deadlines Filter
+        if (selectedDeadlineType) {
+          const deadlines = Array.isArray(uni.university_deadlines) && uni.university_deadlines.length > 0
+            ? uni.university_deadlines
+            : Array.isArray((uni as any).deadlines)
+            ? (uni as any).deadlines
+            : [];
+
+          if (selectedDeadlineType === 'has-deadline') {
+            if (deadlines.length === 0) return false;
+          } else if (selectedDeadlineType === 'early') {
+            const hasEarly = deadlines.some((d: any) => {
+              const t = (d.deadline_type || d.type || '').toUpperCase();
+              return t.includes('EA') || t.includes('ED') || t.includes('EARLY');
+            });
+            if (!hasEarly) return false;
+          } else if (selectedDeadlineType === 'regular') {
+            const hasRegular = deadlines.some((d: any) => {
+              const t = (d.deadline_type || d.type || '').toUpperCase();
+              return t.includes('RD') || t.includes('REGULAR');
+            });
+            if (!hasRegular) return false;
+          } else if (selectedDeadlineType === 'transfer') {
+            const hasTransfer = deadlines.some((d: any) => {
+              const t = (d.deadline_type || d.type || '').toUpperCase();
+              return t.includes('TR') || t.includes('TRANSFER');
+            });
+            if (!hasTransfer) return false;
+          }
+        }
+
+        // Application Platform Filter
+        if (selectedPlatform) {
+          const platforms = Array.isArray(uni.accepted_application_platform)
+            ? uni.accepted_application_platform
+            : [];
+          const target = selectedPlatform.toLowerCase();
+          const matchesPlatform = platforms.some((p) => {
+            const pl = p.toLowerCase();
+            if (target === 'common-app') return pl.includes('common');
+            if (target === 'scoir') return pl.includes('scoir') || pl.includes('coalition');
+            if (target === 'questbridge') return pl.includes('questbridge');
+            if (target === 'direct') {
+              return (
+                pl.includes('direct') ||
+                pl.includes('portal') ||
+                pl.includes('ucas') ||
+                pl.includes('tumonline') ||
+                pl.includes('eapply')
+              );
+            }
+            return pl.includes(target);
+          });
+          if (!matchesPlatform) return false;
+        }
+
+        return true;
+      })
+      .sort((a, b) => {
+        const nameA = a.organization || a.name || '';
+        const nameB = b.organization || b.name || '';
+
+        if (sortBy === 'aid') {
+          const aidA = a.annual_tuitioin_coveratge_cost ?? 0;
+          const aidB = b.annual_tuitioin_coveratge_cost ?? 0;
+          if (aidA !== aidB) return aidB - aidA;
+          return nameA.localeCompare(nameB);
+        }
+
+        if (sortBy === 'gpa') {
+          const gpaA = a.minimum_gpa ?? 99;
+          const gpaB = b.minimum_gpa ?? 99;
+          if (gpaA !== gpaB) return gpaA - gpaB;
+          return nameA.localeCompare(nameB);
+        }
+
+        return nameA.localeCompare(nameB);
+      });
+  }, [
+    universities,
+    searchTerm,
+    selectedCountry,
+    selectedDegree,
+    minGpa,
+    selectedNeedBlind,
+    selectedSatRequired,
+    selectedDeadlineType,
+    selectedPlatform,
+    sortBy
+  ]);
 
   const handleReset = () => {
     setSearchTerm('');
     setSelectedCountry('');
     setSelectedDegree('');
     setMinGpa('');
+    setSelectedNeedBlind('');
+    setSelectedSatRequired('');
+    setSelectedDeadlineType('');
+    setSelectedPlatform('');
   };
+
+  const isFiltered = Boolean(
+    selectedCountry ||
+    selectedDegree ||
+    minGpa !== '' ||
+    (selectedNeedBlind && selectedNeedBlind !== 'all') ||
+    (selectedSatRequired && selectedSatRequired !== 'all') ||
+    selectedDeadlineType ||
+    selectedPlatform
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
-      
       {/* Header Banner */}
       <div className="mb-8 pb-6 border-b border-[#EDE4D3]">
         <div className="flex items-center gap-1.5 text-xs font-bold text-[#D97706] uppercase tracking-wider mb-1">
@@ -114,13 +273,12 @@ function UniversitiesContent() {
           Explore Global Universities
         </h1>
         <p className="text-xs sm:text-sm text-zinc-500 mt-1 max-w-2xl">
-          Search accredited colleges worldwide. Compare international admissions selectivity, net tuition costs, and verified scholarship support.
+          Search accredited colleges worldwide. Filter by need-blind policies, standardized testing rules, application deadlines, and platforms.
         </p>
       </div>
 
       {/* Main Grid: Filter Sidebar + Listings */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        
         {/* Desktop Sidebar */}
         <div className="hidden lg:block lg:col-span-1">
           <FilterSidebar
@@ -133,6 +291,14 @@ function UniversitiesContent() {
             onDegreeChange={setSelectedDegree}
             minGpa={minGpa}
             onMinGpaChange={setMinGpa}
+            selectedNeedBlind={selectedNeedBlind}
+            onNeedBlindChange={setSelectedNeedBlind}
+            selectedSatRequired={selectedSatRequired}
+            onSatRequiredChange={setSelectedSatRequired}
+            selectedDeadlineType={selectedDeadlineType}
+            onDeadlineTypeChange={setSelectedDeadlineType}
+            selectedPlatform={selectedPlatform}
+            onPlatformChange={setSelectedPlatform}
             onReset={handleReset}
           />
         </div>
@@ -143,7 +309,7 @@ function UniversitiesContent() {
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
             className="flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg bg-white border border-zinc-300 text-zinc-800 shadow-sm"
           >
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#C5A059]" />
+            <SlidersHorizontal className="w-3.5 h-3.5 text-[#D97706]" />
             <span>{mobileFilterOpen ? 'Hide Filters' : 'Filter Universities'}</span>
           </button>
         </div>
@@ -160,6 +326,14 @@ function UniversitiesContent() {
               onDegreeChange={setSelectedDegree}
               minGpa={minGpa}
               onMinGpaChange={setMinGpa}
+              selectedNeedBlind={selectedNeedBlind}
+              onNeedBlindChange={setSelectedNeedBlind}
+              selectedSatRequired={selectedSatRequired}
+              onSatRequiredChange={setSelectedSatRequired}
+              selectedDeadlineType={selectedDeadlineType}
+              onDeadlineTypeChange={setSelectedDeadlineType}
+              selectedPlatform={selectedPlatform}
+              onPlatformChange={setSelectedPlatform}
               onReset={handleReset}
             />
           </div>
@@ -167,15 +341,14 @@ function UniversitiesContent() {
 
         {/* Results Column */}
         <div className="lg:col-span-3 space-y-6">
-          
           {/* Results Summary & Sorting Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-100 text-xs">
-            <div className="flex items-center gap-2 text-zinc-600">
+            <div className="flex items-center gap-2 text-zinc-600 flex-wrap">
               <span className="font-semibold text-zinc-900">{filteredUniversities.length}</span>
-              <span>universities discovered</span>
-              {(selectedCountry || selectedDegree || minGpa !== '') && (
-                <span className="text-[#957328] font-mono text-[11px]">
-                  (Filtered)
+              <span>colleges found</span>
+              {isFiltered && (
+                <span className="text-[#92400E] font-medium text-[11px] bg-[#FEF3C7] px-2 py-0.5 rounded-full border border-[#FDE68A]">
+                  Active Filters
                 </span>
               )}
             </div>
@@ -186,11 +359,11 @@ function UniversitiesContent() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-white border border-zinc-200 text-zinc-700 rounded-md px-2 py-1 focus:outline-none focus:border-[#C5A059]"
+                className="bg-white border border-zinc-200 text-zinc-700 rounded-md px-2 py-1 focus:outline-none focus:border-[#D97706]"
               >
-                <option value="ranking">World Ranking (Best First)</option>
-                <option value="tuition">Tuition (Lowest First)</option>
                 <option value="name">Institution Name (A-Z)</option>
+                <option value="aid">Aid Coverage (Highest First)</option>
+                <option value="gpa">Minimum GPA (Lowest First)</option>
               </select>
             </div>
           </div>
@@ -198,7 +371,7 @@ function UniversitiesContent() {
           {/* Cards Grid or Loading */}
           {isLoading ? (
             <div className="py-20 text-center">
-              <div className="w-8 h-8 border-2 border-[#C5A059] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-[#D97706] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
               <p className="text-xs font-mono text-zinc-500">Querying university registry...</p>
             </div>
           ) : filteredUniversities.length === 0 ? (
@@ -207,7 +380,7 @@ function UniversitiesContent() {
                 No universities matched your selected filters.
               </p>
               <p className="text-xs text-zinc-500 mb-4">
-                Try widening your search terms or resetting destination filters.
+                Try clearing some criteria or resetting testing and deadline filters.
               </p>
               <button
                 onClick={handleReset}
@@ -219,11 +392,13 @@ function UniversitiesContent() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredUniversities.map((uni) => (
-                <UniversityCard key={uni.id} university={uni} />
+                <UniversityCard
+                  key={uni.id || uni.organization}
+                  university={uni}
+                />
               ))}
             </div>
           )}
-
         </div>
       </div>
     </div>
