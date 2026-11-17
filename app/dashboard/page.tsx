@@ -3,19 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  Bookmark,
   Calendar,
-  Clock,
   CheckCircle2,
-  AlertCircle,
   Award,
   GraduationCap,
   Trash2,
   Edit3,
-  ExternalLink,
   ArrowRight,
   Heart,
-  AlertTriangle,
 } from 'lucide-react';
 import AuthGate from '../components/AuthGate';
 import { useAuth } from '../lib/auth-context';
@@ -45,23 +40,23 @@ function getDaysRemaining(raw: string): number | null {
 
 function DeadlineChip({ days }: { days: number | null }) {
   if (days === null)
-    return <span className="text-xs font-bold text-zinc-500">Rolling</span>;
+    return <span className="text-xs font-bold text-[#778da9]">Rolling</span>;
   if (days < 0)
-    return <span className="text-xs font-bold text-zinc-400 line-through">Closed</span>;
+    return <span className="text-xs font-bold text-[#778da9] line-through">Closed</span>;
   if (days <= 30)
     return (
-      <span className="px-2 py-0.5 text-[11px] font-extrabold rounded-full bg-red-100 text-red-700 border border-red-200">
+      <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-red-100 text-red-800 border border-red-200">
         {days}d left
       </span>
     );
   if (days <= 90)
     return (
-      <span className="px-2 py-0.5 text-[11px] font-extrabold rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+      <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-[rgba(65,90,119,0.15)] text-[#1b263b] border border-[rgba(119,141,169,0.4)]">
         {days}d left
       </span>
     );
   return (
-    <span className="px-2 py-0.5 text-[11px] font-extrabold rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+    <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-[rgba(65,90,119,0.08)] text-[#0d1b2a] border border-[rgba(119,141,169,0.35)]">
       {days}d left
     </span>
   );
@@ -71,7 +66,7 @@ export default function DashboardPage() {
   return (
     <AuthGate
       featureName="My Saved List & Deadlines"
-      description="Keep track of colleges you love, track upcoming application deadlines, and record your preparation notes in your personal workspace."
+      description="Keep track of institutions you love, monitor critical admissions deadlines, and record personal preparation notes in your private student workspace."
       icon="dashboard"
     >
       <DashboardContent />
@@ -109,19 +104,19 @@ function DashboardContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
       
       {/* Top Welcome Banner */}
-      <div className="bg-white border border-[#EDE4D3] rounded-3xl p-6 sm:p-8 shadow-sm mb-8 relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#B45309]" />
+      <div className="bg-white border border-[rgba(119,141,169,0.3)] rounded-2xl p-6 sm:p-8 shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08),0_2px_6px_-1px_rgba(13,27,42,0.04)] mb-8 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0d1b2a] via-[#1b263b] to-[#415a77]" />
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#D97706] uppercase tracking-wider mb-1">
-              <Heart className="w-4 h-4 fill-current text-[#D97706]" />
-              <span>My College & Scholarship List</span>
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#415a77] uppercase tracking-[0.05em] mb-1">
+              <Heart className="w-4 h-4 fill-current text-[#1b263b]" />
+              <span>My Collegiate &amp; Scholarship Portfolio</span>
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
-              Welcome back, {profile?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'Student'}!
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#0d1b2a] tracking-tight">
+              Welcome back, {profile?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'Student'}
             </h1>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+            <p className="text-xs sm:text-sm text-[#415a77] mt-1">
               Track deadlines, monitor your application progress, and organize your saved opportunities.
             </p>
           </div>
@@ -129,13 +124,13 @@ function DashboardContent() {
           <div className="flex items-center gap-2 flex-wrap">
             <Link
               href="/profile"
-              className="px-4 py-2 text-xs font-bold rounded-full bg-[#FAF8F5] hover:bg-zinc-100 text-zinc-800 border border-zinc-200 transition-colors"
+              className="px-4 py-2 text-xs font-bold rounded-full bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] border border-[rgba(119,141,169,0.35)] transition-colors"
             >
               My Preferences
             </Link>
             <Link
               href="/assistant"
-              className="px-5 py-2 text-xs font-bold rounded-full bg-[#D97706] text-white hover:bg-[#B45309] shadow-xs transition-colors"
+              className="px-5 py-2 text-xs font-bold rounded-full bg-[#1b263b] text-white hover:bg-[#0d1b2a] shadow-xs transition-colors"
             >
               Ask AI Advisor
             </Link>
@@ -143,25 +138,25 @@ function DashboardContent() {
         </div>
 
         {/* Metric Cards Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-zinc-100 text-xs">
-          <div className="p-3.5 bg-[#FAF8F5] rounded-2xl border border-zinc-100">
-            <span className="text-[11px] font-bold text-zinc-400 uppercase block">Total Saved</span>
-            <span className="text-2xl font-extrabold text-zinc-900 mt-0.5 block">{totalSaved}</span>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-[rgba(119,141,169,0.2)] text-xs">
+          <div className="p-3.5 bg-[#f3f4f0] rounded-xl border border-[rgba(119,141,169,0.25)]">
+            <span className="text-[11px] font-bold text-[#415a77] uppercase tracking-[0.05em] block">Total Saved</span>
+            <span className="text-2xl font-serif font-bold text-[#0d1b2a] mt-0.5 block">{totalSaved}</span>
           </div>
 
-          <div className="p-3.5 bg-[#FFFBEB] rounded-2xl border border-[#FDE68A]">
-            <span className="text-[11px] font-bold text-[#92400E] uppercase block">In Progress</span>
-            <span className="text-2xl font-extrabold text-[#D97706] mt-0.5 block">{inProgressCount}</span>
+          <div className="p-3.5 bg-[rgba(65,90,119,0.08)] rounded-xl border border-[rgba(119,141,169,0.35)]">
+            <span className="text-[11px] font-bold text-[#1b263b] uppercase tracking-[0.05em] block">In Progress</span>
+            <span className="text-2xl font-serif font-bold text-[#1b263b] mt-0.5 block">{inProgressCount}</span>
           </div>
 
-          <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200">
-            <span className="text-[11px] font-bold text-emerald-700 uppercase block">Submitted</span>
-            <span className="text-2xl font-extrabold text-emerald-800 mt-0.5 block">{submittedCount}</span>
+          <div className="p-3.5 bg-[#f3f4f0] rounded-xl border border-[rgba(119,141,169,0.25)]">
+            <span className="text-[11px] font-bold text-[#415a77] uppercase tracking-[0.05em] block">Submitted</span>
+            <span className="text-2xl font-serif font-bold text-[#0d1b2a] mt-0.5 block">{submittedCount}</span>
           </div>
 
-          <div className="p-3.5 bg-[#FAF8F5] rounded-2xl border border-zinc-100">
-            <span className="text-[11px] font-bold text-zinc-400 uppercase block">Target Degree</span>
-            <span className="text-base font-extrabold text-zinc-800 mt-0.5 block truncate">
+          <div className="p-3.5 bg-[#f3f4f0] rounded-xl border border-[rgba(119,141,169,0.25)]">
+            <span className="text-[11px] font-bold text-[#415a77] uppercase tracking-[0.05em] block">Target Degree</span>
+            <span className="text-base font-serif font-bold text-[#0d1b2a] mt-1 block truncate">
               {profile?.target_degree_level || 'Master’s'}
             </span>
           </div>
@@ -174,39 +169,39 @@ function DashboardContent() {
         {/* Left Column: Bookmarked Opportunities */}
         <div className="lg:col-span-2 space-y-6">
           
-          <div className="flex items-center justify-between pb-3 border-b border-[#EDE4D3]">
-            <h2 className="text-lg font-bold text-zinc-900">
-              My Saved Opportunities
+          <div className="flex items-center justify-between pb-3 border-b border-[rgba(119,141,169,0.25)]">
+            <h2 className="text-lg font-serif font-bold text-[#0d1b2a]">
+              Saved Opportunities
             </h2>
 
             {/* Filter Tabs */}
-            <div className="flex items-center gap-1 bg-[#FAF8F5] p-1 rounded-full text-xs border border-zinc-200">
+            <div className="flex items-center gap-1 bg-[#f3f4f0] p-1 rounded-full text-xs border border-[rgba(119,141,169,0.35)]">
               <button
                 onClick={() => setFilterType('all')}
-                className={`px-3 py-1 rounded-full font-bold transition-all ${
+                className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer ${
                   filterType === 'all'
-                    ? 'bg-white text-zinc-900 shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-800'
+                    ? 'bg-[#1b263b] text-white shadow-xs'
+                    : 'text-[#415a77] hover:text-[#0d1b2a]'
                 }`}
               >
                 All ({savedItems.length})
               </button>
               <button
                 onClick={() => setFilterType('scholarship')}
-                className={`px-3 py-1 rounded-full font-bold transition-all ${
+                className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer ${
                   filterType === 'scholarship'
-                    ? 'bg-white text-zinc-900 shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-800'
+                    ? 'bg-[#1b263b] text-white shadow-xs'
+                    : 'text-[#415a77] hover:text-[#0d1b2a]'
                 }`}
               >
                 Scholarships
               </button>
               <button
                 onClick={() => setFilterType('university')}
-                className={`px-3 py-1 rounded-full font-bold transition-all ${
+                className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer ${
                   filterType === 'university'
-                    ? 'bg-white text-zinc-900 shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-800'
+                    ? 'bg-[#1b263b] text-white shadow-xs'
+                    : 'text-[#415a77] hover:text-[#0d1b2a]'
                 }`}
               >
                 Colleges
@@ -215,24 +210,24 @@ function DashboardContent() {
           </div>
 
           {filteredItems.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-3xl border border-dashed border-[#EDE4D3]">
-              <Heart className="w-10 h-10 text-zinc-300 mx-auto mb-3" />
-              <h3 className="text-base font-bold text-zinc-800 mb-1">
+            <div className="p-12 text-center bg-white rounded-2xl border border-dashed border-[rgba(119,141,169,0.35)]">
+              <Heart className="w-10 h-10 text-[#778da9] mx-auto mb-3" />
+              <h3 className="text-base font-serif font-bold text-[#0d1b2a] mb-1">
                 Your saved list is empty.
               </h3>
-              <p className="text-xs text-zinc-500 mb-5 max-w-sm mx-auto">
-                Explore colleges and scholarships and click the heart icon on any card to save them here.
+              <p className="text-xs text-[#415a77] mb-5 max-w-sm mx-auto">
+                Explore colleges and scholarships and click the bookmark icon on any card to save them here.
               </p>
               <div className="flex items-center justify-center gap-2">
                 <Link
                   href="/scholarships"
-                  className="px-5 py-2.5 bg-[#D97706] text-white text-xs font-bold rounded-full shadow-xs"
+                  className="px-5 py-2.5 bg-[#1b263b] hover:bg-[#0d1b2a] text-white text-xs font-bold rounded-full shadow-xs transition-colors"
                 >
                   Discover Scholarships
                 </Link>
                 <Link
                   href="/universities"
-                  className="px-5 py-2.5 bg-[#FAF8F5] text-zinc-800 text-xs font-bold rounded-full border border-zinc-200"
+                  className="px-5 py-2.5 bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] text-xs font-bold rounded-full border border-[rgba(119,141,169,0.35)] transition-colors"
                 >
                   Explore Universities
                 </Link>
@@ -243,51 +238,51 @@ function DashboardContent() {
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white border border-[#EDE4D3] hover:border-[#D97706] rounded-2xl p-5 shadow-xs transition-all space-y-3"
+                  className="bg-white border border-[rgba(119,141,169,0.3)] hover:border-[#1b263b] rounded-2xl p-5 shadow-[0_10px_30px_-4px_rgba(13,27,42,0.06)] transition-all space-y-3"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FEF3C7] text-[#92400E] uppercase">
+                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[rgba(65,90,119,0.08)] border border-[rgba(119,141,169,0.35)] text-[#0d1b2a] uppercase tracking-wider">
                           {item.type}
                         </span>
-                        <span className="text-xs text-zinc-500 font-medium">{item.country}</span>
+                        <span className="text-xs text-[#415a77] font-medium">{item.country}</span>
                       </div>
-                      <h3 className="text-base font-bold text-zinc-900">
+                      <h3 className="text-base font-serif font-bold text-[#0d1b2a]">
                         <Link
                           href={item.type === 'scholarship' ? `/scholarships/${item.target_id}` : `/universities/${item.target_id}`}
-                          className="hover:text-[#D97706] transition-colors"
+                          className="hover:text-[#1b263b] transition-colors"
                         >
                           {item.title}
                         </Link>
                       </h3>
-                      <p className="text-xs text-zinc-500">{item.institution_or_org}</p>
+                      <p className="text-xs text-[#778da9]">{item.institution_or_org}</p>
                     </div>
 
                     <button
                       onClick={() => removeItem(item.id)}
                       title="Remove bookmark"
-                      className="p-1.5 text-zinc-300 hover:text-red-500 rounded-full transition-colors"
+                      className="p-1.5 text-[#778da9] hover:text-red-600 rounded-full transition-colors cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
 
                   {/* Status Selector & Value Bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 py-2 border-y border-zinc-100 text-xs">
+                  <div className="flex flex-wrap items-center justify-between gap-3 py-2 border-y border-[rgba(119,141,169,0.15)] text-xs">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-zinc-700">Status:</span>
+                      <span className="font-bold text-[#415a77]">Status:</span>
                       <select
                         value={item.status}
                         onChange={(e) => updateItemStatus(item.id, e.target.value as any, item.notes)}
-                        className={`text-xs font-bold rounded-full px-3 py-1 border focus:outline-none ${
+                        className={`text-xs font-bold rounded-full px-3 py-1 border focus:outline-none cursor-pointer ${
                           item.status === 'Accepted'
-                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                            ? 'bg-[rgba(65,90,119,0.15)] text-[#0d1b2a] border-[rgba(119,141,169,0.4)]'
                             : item.status === 'Submitted'
-                            ? 'bg-blue-50 text-blue-800 border-blue-300'
+                            ? 'bg-[#1b263b] text-white border-[#1b263b]'
                             : item.status === 'In Progress'
-                            ? 'bg-amber-50 text-amber-800 border-amber-300'
-                            : 'bg-zinc-50 text-zinc-700 border-zinc-200'
+                            ? 'bg-[rgba(65,90,119,0.08)] text-[#1b263b] border-[rgba(119,141,169,0.35)]'
+                            : 'bg-[#f3f4f0] text-[#415a77] border-[rgba(119,141,169,0.3)]'
                         }`}
                       >
                         <option value="Saved">Saved</option>
@@ -297,9 +292,9 @@ function DashboardContent() {
                       </select>
                     </div>
 
-                    <div className="flex items-center gap-3 text-zinc-600 text-xs">
-                      <span>Value: <strong>{item.funding_or_tuition}</strong></span>
-                      <span>Deadline: <strong>{item.deadline}</strong></span>
+                    <div className="flex items-center gap-3 text-[#415a77] text-xs">
+                      <span>Value: <strong className="text-[#0d1b2a]">{item.funding_or_tuition}</strong></span>
+                      <span>Deadline: <strong className="text-[#0d1b2a]">{item.deadline}</strong></span>
                     </div>
                   </div>
 
@@ -312,31 +307,31 @@ function DashboardContent() {
                           value={notesInput}
                           onChange={(e) => setNotesInput(e.target.value)}
                           placeholder="Add private notes: essays drafted, reference letters requested..."
-                          className="w-full p-2.5 bg-[#FAF8F5] border border-zinc-300 rounded-xl text-xs text-zinc-800 focus:outline-none focus:border-[#D97706]"
+                          className="w-full p-2.5 bg-[#f3f4f0] border border-[rgba(119,141,169,0.35)] rounded-xl text-xs text-[#0d1b2a] focus:outline-none focus:border-[#1b263b]"
                         />
                         <div className="flex items-center gap-2 justify-end">
                           <button
                             onClick={() => setEditingNotesId(null)}
-                            className="px-3 py-1 text-xs text-zinc-500 hover:text-zinc-800 font-medium"
+                            className="px-3 py-1 text-xs text-[#415a77] hover:text-[#0d1b2a] font-medium cursor-pointer"
                           >
                             Cancel
                           </button>
                           <button
                             onClick={() => handleSaveNotes(item.id, item.status)}
-                            className="px-4 py-1.5 bg-[#D97706] text-white text-xs font-bold rounded-full shadow-xs"
+                            className="px-4 py-1.5 bg-[#1b263b] text-white text-xs font-bold rounded-full shadow-xs hover:bg-[#0d1b2a] cursor-pointer"
                           >
                             Save Note
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-between text-zinc-600 bg-[#FAF8F5] p-2.5 rounded-xl border border-zinc-100">
+                      <div className="flex items-center justify-between text-[#415a77] bg-[#f3f4f0] p-2.5 rounded-xl border border-[rgba(119,141,169,0.25)]">
                         <span className="text-xs italic">
                           {item.notes ? `Note: "${item.notes}"` : 'No application notes added yet.'}
                         </span>
                         <button
                           onClick={() => handleStartEditNotes(item)}
-                          className="text-xs font-bold text-[#D97706] hover:underline flex items-center gap-1"
+                          className="text-xs font-bold text-[#1b263b] hover:text-[#0d1b2a] flex items-center gap-1 cursor-pointer"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
                           <span>{item.notes ? 'Edit' : 'Add Note'}</span>
@@ -349,7 +344,7 @@ function DashboardContent() {
                   <div className="pt-1 flex items-center justify-end">
                     <Link
                       href={item.type === 'scholarship' ? `/scholarships/${item.target_id}` : `/universities/${item.target_id}`}
-                      className="text-xs font-bold text-[#D97706] hover:underline inline-flex items-center gap-1"
+                      className="text-xs font-bold text-[#1b263b] hover:text-[#0d1b2a] inline-flex items-center gap-1"
                     >
                       <span>View Full Profile</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -365,17 +360,17 @@ function DashboardContent() {
         {/* Right Column: Deadlines Schedule */}
         <div className="space-y-6">
           
-          <div className="bg-white border border-[#EDE4D3] rounded-3xl p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2 pb-3 border-b border-zinc-100">
-              <Calendar className="w-5 h-5 text-[#D97706]" />
-              <h3 className="text-base font-bold text-zinc-900">
+          <div className="bg-white border border-[rgba(119,141,169,0.3)] rounded-2xl p-6 shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08)] space-y-4">
+            <div className="flex items-center gap-2 pb-3 border-b border-[rgba(119,141,169,0.2)]">
+              <Calendar className="w-5 h-5 text-[#415a77]" />
+              <h3 className="text-base font-serif font-bold text-[#0d1b2a]">
                 Upcoming Deadlines
               </h3>
             </div>
 
             {savedItems.length === 0 ? (
-              <p className="text-xs text-zinc-500 py-4 text-center">
-                Save scholarships or universities to build your deadline timeline.
+              <p className="text-xs text-[#778da9] py-4 text-center">
+                Save opportunities to build your personal deadline timeline.
               </p>
             ) : (
               <div className="space-y-3">
@@ -393,15 +388,15 @@ function DashboardContent() {
                     return (
                       <div
                         key={item.id}
-                        className="p-3.5 bg-[#FAF8F5] border border-zinc-200/70 rounded-2xl space-y-1 text-xs"
+                        className="p-3.5 bg-[#f3f4f0] border border-[rgba(119,141,169,0.25)] rounded-xl space-y-1 text-xs"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-bold text-zinc-400 uppercase">{item.type}</span>
+                          <span className="text-[10px] font-bold text-[#415a77] uppercase tracking-wider">{item.type}</span>
                           <DeadlineChip days={days} />
                         </div>
-                        <h4 className="font-bold text-zinc-800 truncate">{item.title}</h4>
-                        <div className="flex items-center gap-1 text-zinc-500 text-[11px]">
-                          <Calendar className="w-3.5 h-3.5 text-[#D97706]" />
+                        <h4 className="font-serif font-bold text-[#0d1b2a] truncate">{item.title}</h4>
+                        <div className="flex items-center gap-1.5 text-[#778da9] text-[11px]">
+                          <Calendar className="w-3.5 h-3.5 text-[#415a77]" />
                           <span>{item.deadline}</span>
                         </div>
                       </div>
@@ -412,13 +407,13 @@ function DashboardContent() {
           </div>
 
           {/* Quick Tip Box */}
-          <div className="bg-[#FFFBEB] border border-[#FDE68A] rounded-3xl p-6 text-xs space-y-2">
-            <h4 className="font-bold text-[#92400E] flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
-              <span>Niche Advisor Tip</span>
+          <div className="bg-[#f3f4f0] border border-[rgba(119,141,169,0.35)] rounded-2xl p-6 text-xs space-y-2">
+            <h4 className="font-bold text-[#1b263b] uppercase tracking-[0.05em] flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-[#1b263b]" />
+              <span>Collegiate Admissions Insight</span>
             </h4>
-            <p className="text-zinc-700 leading-relaxed">
-              Applying to 3–5 well-matched scholarships with tailored personal statements significantly boosts your probability of securing full funding.
+            <p className="text-[#415a77] leading-relaxed">
+              Applying to 3–5 well-matched institutions with tailored statement of purpose letters significantly raises your admissions and funding rate.
             </p>
           </div>
 

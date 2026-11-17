@@ -39,14 +39,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#FBF9F5] text-zinc-900 selection:bg-[#FEF3C7] selection:text-[#92400E]">
+      <body className="min-h-full flex flex-col bg-[#f9faf5] text-[#0d1b2a] selection:bg-[#1b263b] selection:text-white">
         <AuthProvider>
           <SavedProvider>
-            <Suspense fallback={<header className="h-16 bg-white border-b border-[#EDE4D3]" />}>
+            <Suspense fallback={<header className="h-16 bg-white border-b border-[rgba(119,141,169,0.25)]" />}>
               <Navbar />
             </Suspense>
             <main className="flex-1 flex flex-col">
-              <Suspense fallback={<div className="flex-1 flex items-center justify-center p-8"><div className="w-8 h-8 border-3 border-[#D97706] border-t-transparent rounded-full animate-spin" /></div>}>
+              <Suspense fallback={<div className="flex-1 flex items-center justify-center p-8"><div className="w-8 h-8 border-3 border-[#1b263b] border-t-transparent rounded-full animate-spin" /></div>}>
                 {children}
               </Suspense>
             </main>

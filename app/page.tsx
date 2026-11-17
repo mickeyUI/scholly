@@ -13,7 +13,6 @@ import {
   FileCheck,
   DollarSign,
   BookOpen,
-  Calendar,
 } from "lucide-react";
 import { SAMPLE_SCHOLARSHIPS, SAMPLE_UNIVERSITIES } from "./data/sampleData";
 import ScholarshipCard from "./components/ScholarshipCard";
@@ -108,21 +107,21 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FBF9F5]">
+    <div className="flex flex-col min-h-screen bg-transparent">
       {/* ── Hero ── */}
-      <section className="relative pt-14 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FFFDF9] via-[#FAF6ED] to-[#FBF9F5]">
+      <section className="relative pt-14 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FEF3C7] text-[#92400E] text-xs font-bold mb-5 border border-[#FDE68A] shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
-            <span>Source-backed student intelligence from 150 countries</span>
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[rgba(65,90,119,0.08)] text-[#1b263b] text-xs font-bold mb-5 border border-[rgba(119,141,169,0.35)] shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#1b263b]" />
+            <span>Source-backed collegiate intelligence from 150 countries</span>
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 leading-[1.12]">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0d1b2a] leading-[1.12]">
             Find the right college and scholarship for you
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-sm sm:text-base text-[#415a77] max-w-2xl mx-auto leading-relaxed">
             Search thousands of verified degree programs, compare true net
             tuition costs, and find funding you actually qualify for.
           </p>
@@ -133,10 +132,10 @@ export default function HomePage() {
               <button
                 key={tab.value}
                 onClick={() => setSelectedDegree(tab.value)}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold border transition-all ${
+                className={`px-4 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
                   selectedDegree === tab.value
-                    ? "bg-[#D97706] text-white border-[#D97706] shadow-sm"
-                    : "bg-white/80 text-zinc-600 border-[#EDE4D3] hover:border-[#D97706] hover:text-[#D97706]"
+                    ? "bg-[#1b263b] text-white border-[#1b263b] shadow-sm"
+                    : "bg-white/90 text-[#415a77] border-[rgba(119,141,169,0.35)] hover:border-[#1b263b] hover:text-[#0d1b2a]"
                 }`}
               >
                 {tab.label}
@@ -146,22 +145,22 @@ export default function HomePage() {
 
           {/* Elevated Floating Dock Hero Search Bar */}
           <div className="relative mt-5 max-w-3xl mx-auto">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-200/40 via-amber-100/50 to-amber-200/40 rounded-full blur-md opacity-80 pointer-events-none" />
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-[rgba(65,90,119,0.15)] via-[rgba(27,38,59,0.1)] to-[rgba(65,90,119,0.15)] rounded-full blur-md opacity-80 pointer-events-none" />
             <form
               onSubmit={handleSearchSubmit}
-              className="relative bg-white/95 backdrop-blur-md rounded-full border border-[#EDE4D3] shadow-xl shadow-amber-950/5 hover:border-[#D97706] focus-within:ring-4 focus-within:ring-[#FEF3C7] focus-within:border-[#D97706] transition-all flex items-center gap-2 px-3 py-2"
+              className="relative bg-white rounded-full border border-[rgba(119,141,169,0.35)] shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08),0_2px_6px_-1px_rgba(13,27,42,0.04)] hover:border-[#1b263b] focus-within:ring-4 focus-within:ring-[rgba(65,90,119,0.15)] focus-within:border-[#1b263b] transition-all flex items-center gap-2 px-3 py-2"
             >
-              <Search className="w-5 h-5 text-zinc-400 ml-2.5 flex-shrink-0" />
+              <Search className="w-5 h-5 text-[#778da9] ml-2.5 flex-shrink-0" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by school, scholarship, field, or country…"
-                className="flex-1 min-w-0 px-2 py-2 bg-transparent text-sm text-zinc-800 placeholder:text-zinc-400 focus:outline-none font-medium"
+                className="flex-1 min-w-0 px-2 py-2 bg-transparent text-sm text-[#0d1b2a] placeholder:text-[#778da9] focus:outline-none font-medium"
               />
               <button
                 type="submit"
-                className="px-7 py-3 bg-[#D97706] hover:bg-[#B45309] text-white font-bold text-sm rounded-full shadow-sm hover:shadow-md transition-all whitespace-nowrap flex-shrink-0"
+                className="px-7 py-3 bg-[#1b263b] hover:bg-[#0d1b2a] text-white font-bold text-sm rounded-full shadow-sm hover:shadow transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
               >
                 Search
               </button>
@@ -170,12 +169,12 @@ export default function HomePage() {
 
           {/* Popular tags */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs">
-            <span className="text-zinc-400 font-medium">Popular:</span>
+            <span className="text-[#415a77] font-medium">Popular:</span>
             {popularSearches.map((p) => (
               <Link
                 key={p.label}
                 href={p.href}
-                className="px-2.5 py-1 rounded-full bg-white/90 hover:bg-[#FEF3C7] text-zinc-600 hover:text-[#92400E] border border-[#EDE4D3] transition-colors font-medium shadow-2xs"
+                className="px-3 py-1 rounded-full bg-white/90 hover:bg-[#1b263b] text-[#415a77] hover:text-white border border-[rgba(119,141,169,0.35)] transition-colors font-medium shadow-2xs"
               >
                 {p.label}
               </Link>
@@ -183,7 +182,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Category Cards — elevated with warm-card-lift */}
+        {/* Category Cards */}
         <div className="max-w-6xl mx-auto mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {categoryPillList.map((cat) => {
             const Icon = cat.icon;
@@ -191,15 +190,15 @@ export default function HomePage() {
               <Link
                 key={cat.label}
                 href={cat.href}
-                className="bg-white hover:bg-[#FFFBEB] p-5 rounded-3xl border border-[#EDE4D3] hover:border-[#D97706] shadow-xs warm-card-lift text-center flex flex-col items-center justify-center group"
+                className="bg-white hover:bg-[#f3f4f0] p-5 rounded-2xl border border-[rgba(119,141,169,0.3)] hover:border-[#1b263b] shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08),0_2px_6px_-1px_rgba(13,27,42,0.04)] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-6px_rgba(13,27,42,0.12),0_4px_10px_-2px_rgba(13,27,42,0.06)] text-center flex flex-col items-center justify-center group transition-all duration-200"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#FEF3C7] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-2xs">
-                  <Icon className="w-7 h-7 text-[#D97706]" />
+                <div className="w-14 h-14 rounded-2xl bg-[rgba(65,90,119,0.08)] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-2xs">
+                  <Icon className="w-7 h-7 text-[#1b263b]" />
                 </div>
-                <h3 className="text-xs font-bold text-zinc-900 group-hover:text-[#D97706] transition-colors leading-tight">
+                <h3 className="text-xs font-bold text-[#0d1b2a] group-hover:text-[#1b263b] transition-colors leading-tight">
                   {cat.label}
                 </h3>
-                <span className="text-[11px] text-zinc-500 font-medium mt-1">
+                <span className="text-[11px] text-[#778da9] font-medium mt-1">
                   {cat.count}
                 </span>
               </Link>
@@ -207,31 +206,29 @@ export default function HomePage() {
           })}
         </div>
 
-        {/* Gradient-fade section divider */}
-        <div className="max-w-6xl mx-auto mt-16 warm-divider" />
+        <div className="max-w-6xl mx-auto mt-16 scholastic-divider" />
       </section>
 
       {/* ── Featured Scholarships ── */}
       <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#D97706] uppercase tracking-wider mb-1">
-              <Award className="w-4 h-4" />
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#415a77] uppercase tracking-[0.05em] mb-1">
+              <Award className="w-4 h-4 text-[#415a77]" />
               <span>Full &amp; Partial Funding</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0d1b2a] tracking-tight">
               Top Scholarships for International Students
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-              Vetted funding awards covering tuition, living expenses, and
-              airfare.
+            <p className="text-xs sm:text-sm text-[#415a77] mt-1">
+              Vetted funding awards covering tuition, living expenses, and airfare.
             </p>
           </div>
           <Link
             href="/scholarships"
-            className="text-xs font-bold text-[#D97706] hover:text-[#B45309] transition-colors whitespace-nowrap"
+            className="text-xs font-bold text-[#1b263b] hover:text-[#0d1b2a] transition-colors whitespace-nowrap"
           >
-            Browse all scholarships
+            Browse all scholarships →
           </Link>
         </div>
 
@@ -245,21 +242,21 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="mt-14 warm-divider" />
+        <div className="mt-14 scholastic-divider" />
       </section>
 
       {/* ── AI Advisor Callout ── */}
       <section className="py-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="bg-gradient-to-r from-[#FEF3C7] via-[#FFFBEB] to-[#FEF3C7] border border-[#FDE68A] rounded-3xl p-6 sm:p-10 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-[#1b263b] text-white border border-[rgba(119,141,169,0.35)] rounded-2xl p-6 sm:p-10 shadow-[0_10px_30px_-4px_rgba(13,27,42,0.12)] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#92400E] text-xs font-bold border border-[#FDE68A] shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
-              <span>Meet Your 24/7 College Advisor</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#e0e1dd] text-xs font-bold border border-white/20 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+              <span>Meet Your 24/7 Collegiate Advisor</span>
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-white">
               Need personalized advice for your GPA &amp; budget?
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#e0e1dd]/80 leading-relaxed">
               Ask our AI advisor about English test waivers, eligibility
               matching for your nationality, and step-by-step document
               checklists backed by real admissions databases.
@@ -267,36 +264,36 @@ export default function HomePage() {
           </div>
           <Link
             href="/assistant"
-            className="px-7 py-3.5 bg-[#D97706] hover:bg-[#B45309] text-white font-bold text-sm rounded-full transition-all shadow-sm hover:shadow whitespace-nowrap flex-shrink-0"
+            className="px-7 py-3.5 bg-white text-[#1b263b] hover:bg-[#e0e1dd] font-bold text-sm rounded-full transition-all shadow-sm hover:shadow whitespace-nowrap flex-shrink-0"
           >
             Chat with AI Advisor
           </Link>
         </div>
 
-        <div className="mt-14 warm-divider" />
+        <div className="mt-14 scholastic-divider" />
       </section>
 
       {/* ── Featured Universities ── */}
       <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#D97706] uppercase tracking-wider mb-1">
-              <GraduationCap className="w-4 h-4" />
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#415a77] uppercase tracking-[0.05em] mb-1">
+              <GraduationCap className="w-4 h-4 text-[#415a77]" />
               <span>Higher Education</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0d1b2a] tracking-tight">
               Featured Global Colleges &amp; Universities
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+            <p className="text-xs sm:text-sm text-[#415a77] mt-1">
               Explore colleges by international student acceptance quotas and
               verified tuition waivers.
             </p>
           </div>
           <Link
             href="/universities"
-            className="text-xs font-bold text-[#D97706] hover:text-[#B45309] transition-colors whitespace-nowrap"
+            className="text-xs font-bold text-[#1b263b] hover:text-[#0d1b2a] transition-colors whitespace-nowrap"
           >
-            Browse all universities
+            Browse all universities →
           </Link>
         </div>
 
@@ -308,13 +305,13 @@ export default function HomePage() {
       </section>
 
       {/* ── Trust Stats ── */}
-      <section className="bg-white border-t border-[#EDE4D3]/70 py-16 px-4 sm:px-6 lg:px-8">
+      <section className="bg-white border-t border-[rgba(119,141,169,0.25)] py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0d1b2a] tracking-tight">
               The Real Data You Need to Decide
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-2">
+            <p className="text-xs sm:text-sm text-[#415a77] mt-2">
               Applying abroad is a huge milestone. We cut out marketing fluff
               with verified requirements and transparent funding facts.
             </p>
@@ -324,20 +321,20 @@ export default function HomePage() {
             {trustStats.map(({ stat, icon: Icon, label, description }) => (
               <div
                 key={label}
-                className="bg-[#FAF8F5] p-6 rounded-3xl border border-[#EDE4D3] space-y-3 warm-card-lift"
+                className="bg-[#f3f4f0] p-6 rounded-2xl border border-[rgba(119,141,169,0.25)] space-y-3 shadow-xs hover:-translate-y-0.5 transition-all duration-200"
               >
-                <div className="w-11 h-11 rounded-2xl bg-[#FEF3C7] flex items-center justify-center shadow-2xs">
-                  <Icon className="w-5 h-5 text-[#D97706]" />
+                <div className="w-11 h-11 rounded-xl bg-[rgba(65,90,119,0.08)] border border-[rgba(119,141,169,0.35)] flex items-center justify-center shadow-2xs">
+                  <Icon className="w-5 h-5 text-[#1b263b]" />
                 </div>
                 <div>
-                  <span className="font-serif block text-4xl font-extrabold text-zinc-900 tracking-tight">
+                  <span className="font-serif block text-4xl font-bold text-[#0d1b2a] tracking-tight">
                     {stat}
                   </span>
-                  <span className="block text-sm font-bold text-[#D97706] mt-0.5">
+                  <span className="block text-xs font-bold uppercase tracking-[0.05em] text-[#415a77] mt-1">
                     {label}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-600 leading-relaxed">
+                <p className="text-xs text-[#415a77] leading-relaxed">
                   {description}
                 </p>
               </div>

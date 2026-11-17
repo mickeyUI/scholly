@@ -1,0 +1,741 @@
+[
+  {
+    "organization": "University of Mauritius (UoM)",
+    "eligible_countries": [
+      "All nationalities (Prime beneficiary of Mauritius-Africa Scholarship Scheme for African Union citizens)"
+    ],
+    "notable_accolades": [
+      "Flagship national public research university of Mauritius (founded 1965)",
+      "Ranked #1 higher education institution in Mauritius (Times Higher Education)",
+      "Recognized by the Association of Commonwealth Universities (ACU) and AU"
+    ],
+    "education_levels": [
+      "undergraduate",
+      "postgraduate (Master)",
+      "doctoral (PhD)"
+    ],
+    "fields": [
+      "Sustainable Agricultural Technologies",
+      "Computer Science & Software Engineering",
+      "Civil Engineering",
+      "Law (LLB)",
+      "Banking & Finance",
+      "Applied Marine Science"
+    ],
+    "minimum_gpa": 2.8,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "Mauritius-Africa Scholarship Scheme (MASS) Deadline",
+        "date": "2026-04-15"
+      },
+      {
+        "deadline_type": "Direct International Applications (August Intake)",
+        "date": "2026-06-30"
+      }
+    ],
+    "required_documents": [
+      "Cambridge Higher School Certificate (HSC) / GCE A-Levels / International Baccalaureate or National Equivalent",
+      "Certified copies of educational certificates and transcripts",
+      "Copy of valid International Passport",
+      "Medical clearance report (free of Hepatitis B, HIV, Chest X-Ray)",
+      "MASS Nomination Form (if applying under the African Union scholarship)"
+    ],
+    "application_url": "https://www.uom.ac.mu/index.php/study-at-uom",
+    "application_process": "Apply via UoM Online Application Portal. African applicants applying via MASS must submit dossiers through their home country's Ministry of Education/Foreign Affairs.",
+    "number_of_recommendation_letters_required": "1 letter from school head",
+    "essays_required": "Statement of Motivation.",
+    "financial_aid_policy": "Mauritius-Africa Scholarship Scheme (MASS): Funded by the Government of Mauritius exclusively for African Union member state nationals. Covers 100% tuition fee waiver, monthly living allowance of 14,400 Mauritian Rupees (~US $320), and airfare concession.",
+    "tuition_waiver_threshold": "100% tuition waiver under MASS scheme for AU residents.",
+    "accepted_application_platform": [
+      "UoM Online Application Portal",
+      "MASS Bilateral Government Portal"
+    ],
+    "application_fee": "US $50 (approx. MUR 2,200)",
+    "country_located": "Mauritius",
+    "campus_locations": ["Réduit, Moka 80837, Mauritius"],
+    "university_type": "Public",
+    "minimum_standardized_test_scores": [
+      "A-Levels (minimum 2 to 3 relevant principal passes)"
+    ],
+    "school_year_starting_date": "2026-08-24",
+    "funding_type": "Mauritius-Africa Scholarship Scheme (MASS) / Low State Tuition",
+    "annual_tuitioin_coveratge_cost": 3200,
+    "recommendation_letter_types": "Academic",
+    "program_delivery_mode": "On Campus (Full-time)",
+    "need_blind": true,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "Credit in English Language at Cambridge GCE O-Level",
+      "IELTS (6.0+)",
+      "TOEFL iBT (75+)",
+      "Medium of Instruction Certificate in English"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit allows international graduates to work up to 3 years",
+    "awarding_body_parent_institution": "University of Mauritius",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "African Leadership University (ALU Mauritius)",
+    "eligible_countries": [
+      "All African countries (Pan-African student body representing over 45 African nations)"
+    ],
+    "notable_accolades": [
+      "Founded by visionary educator Fred Swaniker; named by Fast Company as one of the most innovative companies in Africa",
+      "Innovative entrepreneurial leadership curriculum designed specifically to solve 7 African Grand Challenges",
+      "Over 95% Pan-African student population with global career placements"
+    ],
+    "education_levels": ["undergraduate"],
+    "fields": [
+      "Software Engineering",
+      "Entrepreneurial Leadership",
+      "Global Challenges",
+      "Business Management"
+    ],
+    "minimum_gpa": 2.8,
+    "max_age": 28,
+    "deadline": [
+      {
+        "deadline_type": "Early Decision Intake",
+        "date": "2026-02-15"
+      },
+      {
+        "deadline_type": "Regular Decision Intake (September Entry)",
+        "date": "2026-05-30"
+      },
+      {
+        "deadline_type": "Winter Intake (January Entry)",
+        "date": "2026-10-31"
+      }
+    ],
+    "required_documents": [
+      "National High School Certificate (WAEC, KCSE, Baccalauréat, GCE A-Levels, etc.)",
+      "Leadership & Community Impact Portfolio",
+      "Recorded Video Introduction",
+      "Valid Passport copy",
+      "Financial aid assessment application"
+    ],
+    "application_url": "https://www.alueducation.com",
+    "application_process": "Holistic online admissions process at ALU application portal. Focuses on leadership potential, resilience, and problem-solving rather than rote memorization.",
+    "number_of_recommendation_letters_required": "1 recommendation letter from educator or community mentor",
+    "essays_required": "Essay on addressing a Grand Challenge facing the African continent and personal leadership trajectory.",
+    "financial_aid_policy": "Need-based scholarships, Mastercard Foundation Partner grants, and income-sharing agreements (ISA) covering up to 100% of tuition and living expenses for qualified African youth.",
+    "tuition_waiver_threshold": "Full scholarship available for high-need, high-potential African leaders.",
+    "accepted_application_platform": ["ALU Admissions Portal"],
+    "application_fee": "Free ($0)",
+    "country_located": "Mauritius",
+    "campus_locations": [
+      "Beau Plan Smart City, Pamplemousses 21001, Mauritius"
+    ],
+    "university_type": "Private (Pan-African Higher Education Institution)",
+    "minimum_standardized_test_scores": [
+      "Internal ALU Cognitive & English Diagnostic Assessment"
+    ],
+    "school_year_starting_date": "2026-09-07",
+    "funding_type": "Mastercard Foundation Scholars / ALU Need-Based Grants",
+    "annual_tuitioin_coveratge_cost": 3000,
+    "recommendation_letter_types": "Mentor, principal, or community organization leader",
+    "program_delivery_mode": "On Campus (Flipped classroom with self-directed learning & peer collaboration)",
+    "need_blind": true,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "ALU Internal English Assessment",
+      "IELTS (6.0+)",
+      "Duolingo (100+)",
+      "High school English credit"
+    ],
+    "mass_scholarship_eligible": false,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "African Leadership College / Accredited by HEC Mauritius",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "University of Technology, Mauritius (UTM)",
+    "eligible_countries": [
+      "All nationalities (Major recipient of students from SADC and COMESA regions)"
+    ],
+    "notable_accolades": [
+      "Leading public university established to drive technological and managerial innovation",
+      "State-of-the-art School of Innovative Technologies and Communications (SITE)",
+      "Accredited under the Higher Education Commission (HEC) Mauritius"
+    ],
+    "education_levels": [
+      "undergraduate",
+      "postgraduate (Master)",
+      "doctoral (PhD)"
+    ],
+    "fields": [
+      "Computer Science & Network Security",
+      "Software Engineering",
+      "Business Information Systems",
+      "Public Sector Governance",
+      "Sustainable Tourism",
+      "Financial Technology"
+    ],
+    "minimum_gpa": 2.7,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "MASS AU Scholarship Application",
+        "date": "2026-04-15"
+      },
+      {
+        "deadline_type": "General International Admissions",
+        "date": "2026-06-30"
+      }
+    ],
+    "required_documents": [
+      "High School certificates (Cambridge HSC / Baccalauréat / GCE)",
+      "Academic transcripts",
+      "Copy of valid passport",
+      "Health clearance certificate",
+      "Letter of sponsorship"
+    ],
+    "application_url": "https://www.utm.ac.mu",
+    "application_process": "Submit application online via UTM admissions portal or through the Mauritius-Africa Scholarship Scheme.",
+    "number_of_recommendation_letters_required": "1 recommendation letter",
+    "essays_required": "Statement of Interest.",
+    "financial_aid_policy": "Full tuition waiver and monthly living allowance for African students nominated under the Mauritius-Africa Scholarship Scheme (MASS). Subsidized public tuition fees.",
+    "tuition_waiver_threshold": "100% tuition covered under MASS.",
+    "accepted_application_platform": ["UTM Portal", "MASS Government Scheme"],
+    "application_fee": "US $40",
+    "country_located": "Mauritius",
+    "campus_locations": ["La Tour Koenig, Pointe aux Sables 11134, Mauritius"],
+    "university_type": "Public",
+    "minimum_standardized_test_scores": [
+      "A-Levels or equivalent high school diploma"
+    ],
+    "school_year_starting_date": "2026-08-20",
+    "funding_type": "MASS African Union Scheme / Subsidized State Rates",
+    "annual_tuitioin_coveratge_cost": 2800,
+    "recommendation_letter_types": "Academic",
+    "program_delivery_mode": "On Campus (Full-time)",
+    "need_blind": true,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "Credit in O-Level English",
+      "IELTS (6.0+)",
+      "MOI Certificate"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "University of Technology, Mauritius",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "Middlesex University Mauritius",
+    "eligible_countries": [
+      "All nationalities (Vibrant international community from East, West, and Southern Africa)"
+    ],
+    "notable_accolades": [
+      "Direct overseas branch campus of Middlesex University London (UK)",
+      "Students graduate with an authentic, internationally recognized British degree",
+      "Campus audited by UK Quality Assurance Agency (QAA) and HEC Mauritius"
+    ],
+    "education_levels": ["undergraduate", "postgraduate (Master)"],
+    "fields": [
+      "Computer Science (BSc)",
+      "Information Technology",
+      "Law (LLB British Qualifying)",
+      "Cyber Security & Digital Forensics",
+      "Business Management",
+      "Psychology"
+    ],
+    "minimum_gpa": 2.8,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "October Intake Final Deadline",
+        "date": "2026-08-31"
+      },
+      {
+        "deadline_type": "January Intake Final Deadline",
+        "date": "2026-12-05"
+      }
+    ],
+    "required_documents": [
+      "Official high school transcripts and certificates (WAEC, KCSE, GCE, A-Levels)",
+      "Statement of Purpose (500 words)",
+      "One Academic Reference Letter",
+      "Valid International Passport copy",
+      "Proof of English proficiency"
+    ],
+    "application_url": "https://www.middlesex.mu",
+    "application_process": "Direct online application through Middlesex University Mauritius portal. Seamless transfer options to London campus available.",
+    "number_of_recommendation_letters_required": "1 academic reference letter",
+    "essays_required": "Personal Statement explaining academic journey, passion for course, and why Mauritius.",
+    "financial_aid_policy": "Regional African Student Bursaries: Automatically awards £1,000 to £2,000 annual fee reductions for students from African countries. Eligible for Mauritius-Africa Scholarship Scheme (MASS) partner waivers.",
+    "tuition_waiver_threshold": "Tuition reductions up to 40% for academic merit; full coverage via MASS scheme.",
+    "accepted_application_platform": [
+      "Middlesex Mauritius Online Portal",
+      "MASS AU Scheme"
+    ],
+    "application_fee": "Free ($0)",
+    "country_located": "Mauritius",
+    "campus_locations": [
+      "Coastal Road, Flic-en-Flac 90501, Black River District, Mauritius"
+    ],
+    "university_type": "Private (UK International Branch Campus)",
+    "minimum_standardized_test_scores": [
+      "GCE A-Levels / WAEC with B grades / IB (26 points)"
+    ],
+    "school_year_starting_date": "2026-10-05",
+    "funding_type": "Middlesex Regional Africa Bursary / MASS Scheme",
+    "annual_tuitioin_coveratge_cost": 7500,
+    "recommendation_letter_types": "High school teacher or counselor",
+    "program_delivery_mode": "On Campus (Full-time)",
+    "need_blind": false,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "IELTS (6.0+ with min 5.5 in each component)",
+      "WAEC C6 or better in English",
+      "Pearson PTE (51+)",
+      "Duolingo (105+)"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Middlesex University London (United Kingdom)",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "Curtin Mauritius (Charles Telfair Campus)",
+    "eligible_countries": [
+      "All nationalities (Leading higher education destination in the Indian Ocean)"
+    ],
+    "notable_accolades": [
+      "Official branch campus of Curtin University, Australia (Top 1% of universities globally)",
+      "Graduates earn the identical Australian Curtin University degree at roughly one-third of Australian tuition fees",
+      "Located in the modern Moka Smart City with cutting-edge academic facilities"
+    ],
+    "education_levels": ["undergraduate", "postgraduate (Master)"],
+    "fields": [
+      "Software Engineering",
+      "Business Information Technology",
+      "Marketing & Finance",
+      "Graphic Design & Creative Advertising",
+      "Mass Communication",
+      "Psychology"
+    ],
+    "minimum_gpa": 2.8,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "Semester 1 (February Intake)",
+        "date": "2026-01-15"
+      },
+      {
+        "deadline_type": "Semester 2 (July Intake)",
+        "date": "2026-06-15"
+      }
+    ],
+    "required_documents": [
+      "Official high school completion certificate and transcripts",
+      "Copy of passport",
+      "Proof of English competency",
+      "One Reference Letter",
+      "Statement of Purpose"
+    ],
+    "application_url": "https://curtinmauritius.ac.mu",
+    "application_process": "Online application via Curtin Mauritius portal. Direct Australian degree pathway with option to transfer to Curtin Perth.",
+    "number_of_recommendation_letters_required": "1 letter of recommendation",
+    "essays_required": "Personal Statement.",
+    "financial_aid_policy": "Curtin Mauritius Academic Excellence Scholarship: awards up to 25% to 50% tuition fee discounts. Eligible for Government of Mauritius MASS bilateral awards.",
+    "tuition_waiver_threshold": "Up to 50% tuition reduction for top academic applicants; 100% via MASS.",
+    "accepted_application_platform": [
+      "Curtin Mauritius Portal",
+      "MASS Government Scheme"
+    ],
+    "application_fee": "Free ($0)",
+    "country_located": "Mauritius",
+    "campus_locations": [
+      "Charles Telfair Campus, Telfair, Moka 80835, Mauritius"
+    ],
+    "university_type": "Private (Australian International Branch Campus)",
+    "minimum_standardized_test_scores": [
+      "A-Levels / Australian ATAR equivalent (minimum 65+)"
+    ],
+    "school_year_starting_date": "2026-02-23",
+    "funding_type": "Curtin Merit Scholarships / MASS Scholarships",
+    "annual_tuitioin_coveratge_cost": 7200,
+    "recommendation_letter_types": "Academic",
+    "program_delivery_mode": "On Campus (Full-time)",
+    "need_blind": false,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "IELTS (6.0+ overall)",
+      "TOEFL iBT (79+)",
+      "Credit in Cambridge O-Level English"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Curtin University (Perth, Australia)",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "Université des Mascareignes (UdM)",
+    "eligible_countries": [
+      "All nationalities (Bilingual African students; partnership with France)"
+    ],
+    "notable_accolades": [
+      "Public university in Mauritius developed in direct partnership with Université de Limoges (France)",
+      "Graduates receive dual degree diplomas: Mauritian national degree + accredited French degree",
+      "Bilingual education model bridging Anglophone and Francophone Africa"
+    ],
+    "education_levels": ["undergraduate", "postgraduate (Master)"],
+    "fields": [
+      "Civil Engineering",
+      "Electrical Engineering & Industrial Computing",
+      "Applied Computer Science",
+      "Human Resource Management",
+      "Banking & Financial Engineering"
+    ],
+    "minimum_gpa": 2.7,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "MASS AU Scholarship Intake",
+        "date": "2026-04-15"
+      },
+      {
+        "deadline_type": "Direct Application Window",
+        "date": "2026-06-30"
+      }
+    ],
+    "required_documents": [
+      "Secondary school diploma (Baccalauréat / Cambridge HSC / GCE)",
+      "Academic transcripts",
+      "Passport copy",
+      "Medical certificate",
+      "Language proficiency proof (English or French)"
+    ],
+    "application_url": "https://udm.ac.mu",
+    "application_process": "Register on UdM Admissions Portal. French and English tracks available.",
+    "number_of_recommendation_letters_required": "1 letter of recommendation",
+    "essays_required": "Motivation Letter.",
+    "financial_aid_policy": "Full coverage under the Mauritius-Africa Scholarship Scheme (MASS). Affordable public tuition subsidized by the Mauritian government.",
+    "tuition_waiver_threshold": "100% tuition waiver via MASS scheme.",
+    "accepted_application_platform": ["UdM Portal", "MASS Bilateral Portal"],
+    "application_fee": "US $35",
+    "country_located": "Mauritius",
+    "campus_locations": [
+      "Rose-Hill Campus, Rue de la Concorde, Roches Brunes, Rose-Hill 71367, Mauritius",
+      "Swami Dayanand Campus, Pamplemousses 21001, Mauritius"
+    ],
+    "university_type": "Public",
+    "minimum_standardized_test_scores": ["Baccalauréat / A-Levels"],
+    "school_year_starting_date": "2026-09-01",
+    "funding_type": "MASS African Union Awards / State Subsidies",
+    "annual_tuitioin_coveratge_cost": 2600,
+    "recommendation_letter_types": "Academic",
+    "program_delivery_mode": "On Campus (Full-time)",
+    "need_blind": true,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "Credit in English or DELF/DALF B2 for French modules"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Université de Limoges (France) & Université des Mascareignes",
+    "language_of_instruction": "Bilingual (English & French)"
+  },
+  {
+    "organization": "Université Paris-Panthéon-Assas Mauritius Campus",
+    "eligible_countries": ["All nationalities"],
+    "notable_accolades": [
+      "Official Indian Ocean campus of France's premier Law school (Université Paris-Panthéon-Assas)",
+      "Offers top-tier French and International LL.B. and LL.M. law degrees in English",
+      "Located in the Uniciti Education Hub in Pierrefonds"
+    ],
+    "education_levels": ["undergraduate (LL.B.)", "postgraduate (LL.M.)"],
+    "fields": [
+      "International Business Law (LL.B. & LL.M.)",
+      "International Arbitration",
+      "Corporate Law",
+      "Financial Regulation"
+    ],
+    "minimum_gpa": 3.0,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "Early Application Round",
+        "date": "2026-04-30"
+      },
+      {
+        "deadline_type": "Final Admissions Intake",
+        "date": "2026-07-31"
+      }
+    ],
+    "required_documents": [
+      "High School diploma (A-Levels, IB, Baccalauréat) or Bachelor's in Law/Economics",
+      "Detailed academic transcripts",
+      "Curriculum Vitae",
+      "Motivation Statement",
+      "Two Letters of Recommendation",
+      "Passport copy"
+    ],
+    "application_url": "https://www.u-paris2.fr/en/campus/mauritius-campus",
+    "application_process": "Apply online through the Paris-Panthéon-Assas Mauritius admissions portal. Admission based on file evaluation and interview with the Dean.",
+    "number_of_recommendation_letters_required": "2 academic recommendation letters",
+    "essays_required": "Statement of Purpose outlining legal career ambitions.",
+    "financial_aid_policy": "Merit-based scholarships offering up to 25% tuition reduction for top-performing international law students.",
+    "tuition_waiver_threshold": "Up to 25% tuition discount.",
+    "accepted_application_platform": [
+      "Paris-Assas Mauritius Admissions Portal"
+    ],
+    "application_fee": "€50",
+    "country_located": "Mauritius",
+    "campus_locations": ["Uniciti Education Hub, Pierrefonds 72448, Mauritius"],
+    "university_type": "Private (French International Branch Campus)",
+    "minimum_standardized_test_scores": [
+      "A-Levels / IB Diploma (minimum 30 points)"
+    ],
+    "school_year_starting_date": "2026-10-01",
+    "funding_type": "Assas Merit Bursary",
+    "annual_tuitioin_coveratge_cost": 8500,
+    "recommendation_letter_types": "Academic or legal professional",
+    "program_delivery_mode": "On Campus (Full-time)",
+    "need_blind": false,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "IELTS (6.5+)",
+      "TOEFL iBT (85+)",
+      "C1 Advanced"
+    ],
+    "mass_scholarship_eligible": false,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Université Paris-Panthéon-Assas (France)",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "Open University of Mauritius (OUM)",
+    "eligible_countries": [
+      "All nationalities (Flexible distance and blended learning across Africa)"
+    ],
+    "notable_accolades": [
+      "National public open university delivering accessible higher education",
+      "Member of the Commonwealth of Learning and African Council for Distance Education",
+      "ISO 9001 certified for quality digital education"
+    ],
+    "education_levels": [
+      "undergraduate",
+      "postgraduate (Master)",
+      "doctoral (DBA / PhD)"
+    ],
+    "fields": [
+      "Business Administration (MBA)",
+      "Educational Leadership",
+      "Applied Data Science",
+      "Public Health Management",
+      "Sustainable Development"
+    ],
+    "minimum_gpa": 2.5,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "August Intake Window",
+        "date": "2026-07-15"
+      },
+      {
+        "deadline_type": "January Intake Window",
+        "date": "2026-11-30"
+      }
+    ],
+    "required_documents": [
+      "High School certificates or Bachelor's degree documents",
+      "Work experience verification letter (for MBA/DBA)",
+      "Valid Passport copy",
+      "Passport-size photo"
+    ],
+    "application_url": "https://www.open.ac.mu",
+    "application_process": "Submit application online via OUM portal. Blended and digital access allows continuous learning.",
+    "number_of_recommendation_letters_required": "1 letter for postgraduate applicants",
+    "essays_required": "Brief Statement of Purpose.",
+    "financial_aid_policy": "Extremely affordable public tuition fees (~$1,500 to $2,500/year). Eligible for MASS scheme for residential programs.",
+    "tuition_waiver_threshold": "Subsidized public education model.",
+    "accepted_application_platform": ["OUM Online Portal"],
+    "application_fee": "US $30",
+    "country_located": "Mauritius",
+    "campus_locations": ["Réduit 80837, Mauritius"],
+    "university_type": "Public",
+    "minimum_standardized_test_scores": [],
+    "school_year_starting_date": "2026-08-15",
+    "funding_type": "Subsidized Public Distance & Blended Fees",
+    "annual_tuitioin_coveratge_cost": 2000,
+    "recommendation_letter_types": "Professional or academic",
+    "program_delivery_mode": "Blended / Hybrid & On Campus",
+    "need_blind": true,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "Credit in O-Level English",
+      "Medium of Instruction Certificate"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Open University of Mauritius",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "Polytechnics Mauritius",
+    "eligible_countries": ["All nationalities"],
+    "notable_accolades": [
+      "Government-established institution transforming technical and vocational higher education",
+      "Industry-driven curriculum co-designed with global tech companies and hospital networks",
+      "Pathways directly into employment and degree completion"
+    ],
+    "education_levels": [
+      "diploma (Higher National Diploma)",
+      "undergraduate (Top-up Degree)"
+    ],
+    "fields": [
+      "Cybersecurity & Cloud Computing",
+      "Big Data Analytics",
+      "Nursing & Allied Health",
+      "Hotel & Hospitality Management",
+      "Interactive Digital Media"
+    ],
+    "minimum_gpa": 2.5,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "September Intake Application Window",
+        "date": "2026-07-31"
+      }
+    ],
+    "required_documents": [
+      "Secondary school completion certificates (O-Levels / WAEC / A-Levels)",
+      "Transcripts of grades",
+      "Passport copy",
+      "Medical fitness certificate"
+    ],
+    "application_url": "https://www.poly.ac.mu",
+    "application_process": "Apply online at Polytechnics Mauritius admissions portal. Practical aptitude assessment conducted.",
+    "number_of_recommendation_letters_required": "1 letter from school or employer",
+    "essays_required": "None.",
+    "financial_aid_policy": "Subsidized fee structure. Eligible under select technical tracks of the Mauritius-Africa Scholarship Scheme (MASS).",
+    "tuition_waiver_threshold": "100% waiver via MASS scheme.",
+    "accepted_application_platform": [
+      "Polytechnics Mauritius Portal",
+      "MASS Government Scheme"
+    ],
+    "application_fee": "US $25",
+    "country_located": "Mauritius",
+    "campus_locations": [
+      "Reduit Campus (ICT & Emerging Tech), Reduit 80837, Mauritius",
+      "Pamplemousses Campus (Health Sciences), Pamplemousses 21001, Mauritius",
+      "Montagne Blanche Campus (Tourism), Montagne Blanche, Mauritius"
+    ],
+    "university_type": "Public (Tertiary Vocational & Technical Institution)",
+    "minimum_standardized_test_scores": [
+      "O-Levels / A-Levels or technical vocational certificate"
+    ],
+    "school_year_starting_date": "2026-09-14",
+    "funding_type": "MASS Government Scholarship / Subsidized Public Fees",
+    "annual_tuitioin_coveratge_cost": 2200,
+    "recommendation_letter_types": "Academic or employer",
+    "program_delivery_mode": "On Campus (Hands-on labs & clinical/industry internships)",
+    "need_blind": true,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "Credit in O-Level English",
+      "High school MOI in English"
+    ],
+    "mass_scholarship_eligible": true,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Polytechnics Mauritius / HEC Accredited",
+    "language_of_instruction": "100% English"
+  },
+  {
+    "organization": "Texila American University Mauritius",
+    "eligible_countries": [
+      "All nationalities (Popular destination for African medical students)"
+    ],
+    "notable_accolades": [
+      "Accredited by Higher Education Commission (HEC) Mauritius and WHO/FAIMER registered",
+      "Recognized by Medical Council of India (NMC), African Medical Councils, and ECFMG (USA)",
+      "State-of-the-art anatomy labs, simulation clinics, and hospital rotations"
+    ],
+    "education_levels": [
+      "undergraduate",
+      "postgraduate (Doctor of Medicine - MD / MBBS)"
+    ],
+    "fields": [
+      "Doctor of Medicine (MBBS / MD - 5-year program)",
+      "Bachelor of Pharmacy (B.Pharm)",
+      "Public Health (MPH)",
+      "Nursing"
+    ],
+    "minimum_gpa": 3.0,
+    "max_age": null,
+    "deadline": [
+      {
+        "deadline_type": "Fall Medical Intake (September)",
+        "date": "2026-07-31"
+      },
+      {
+        "deadline_type": "Spring Medical Intake (March)",
+        "date": "2026-01-31"
+      }
+    ],
+    "required_documents": [
+      "High School certificates with credits in Physics, Chemistry, Biology, and Math",
+      "Official academic transcripts",
+      "Valid International Passport copy",
+      "Police Clearance Certificate",
+      "Yellow fever vaccination and medical clearance certificate",
+      "Financial sponsorship declaration"
+    ],
+    "application_url": "https://mu.tauedu.org",
+    "application_process": "Apply via Texila International Portal. Entrance assessment interview conducted via video link with medical faculty.",
+    "number_of_recommendation_letters_required": "2 letters from science teachers",
+    "essays_required": "Personal Statement explaining dedication to the medical profession.",
+    "financial_aid_policy": "Texila International Medical Scholarship awards 15% to 30% tuition fee reduction for high-achieving science applicants.",
+    "tuition_waiver_threshold": "Up to 30% merit tuition waiver.",
+    "accepted_application_platform": ["Texila Mauritius Portal"],
+    "application_fee": "US $100",
+    "country_located": "Mauritius",
+    "campus_locations": [
+      "Royal Road, Beau Champ 40901, Flacq District, Mauritius"
+    ],
+    "university_type": "Private",
+    "minimum_standardized_test_scores": [
+      "NEET score accepted for Indian students; GCE A-Levels (min BBC with Chemistry/Biology)"
+    ],
+    "school_year_starting_date": "2026-09-01",
+    "funding_type": "Texila Merit Medical Waiver",
+    "annual_tuitioin_coveratge_cost": 10500,
+    "recommendation_letter_types": "Biology or Chemistry teachers",
+    "program_delivery_mode": "On Campus (Full-time medical training)",
+    "need_blind": false,
+    "sat_required": false,
+    "english_proficiency_required": true,
+    "accepted_english_proficiency_tests": [
+      "IELTS (6.0+)",
+      "TOEFL iBT (75+)",
+      "Credit in English at High School"
+    ],
+    "mass_scholarship_eligible": false,
+    "hec_accredited": true,
+    "ypop_stay_back_eligible": "Young Professional Occupational Permit up to 3 years",
+    "awarding_body_parent_institution": "Texila American University Mauritius",
+    "language_of_instruction": "100% English"
+  }
+]

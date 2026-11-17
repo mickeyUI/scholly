@@ -48,6 +48,102 @@ export interface UniversityProgram {
   language: string;
 }
 
+export interface ChinaPolicies {
+  c9_league_member?: boolean;
+  csc_agency_number?: string;
+  csc_scholarship_supported?: boolean;
+  double_first_class?: boolean;
+  english_taught_degrees_offered?: boolean;
+  hsk_score_required_for_chinese_tracks?: string;
+  jw202_visa_form_provided?: boolean;
+}
+
+export interface IndiaPolicies {
+  aicte_ugc_approval?: string;
+  frro_registration_required?: boolean;
+  iccr_scholarship_eligible?: boolean;
+  medium_of_instruction_certificate_accepted?: boolean;
+  study_in_india_code?: string;
+}
+
+export interface ItalyPolicies {
+  cimea_or_dov_required?: boolean;
+  dsu_regional_scholarship_board?: string;
+  isee_parificato_eligible?: boolean;
+  post_study_work_stay_back_months?: number;
+  tolc_or_imat_exam_accepted?: boolean;
+  universitaly_pre_enrollment_required?: boolean;
+}
+
+export interface JapanPolicies {
+  coe_visa_sponsorship?: boolean;
+  jica_abe_initiative_partner?: boolean;
+  mext_scholarship_recommendations?: boolean;
+  part_time_work_hours_per_week?: number;
+  post_study_work_visa?: string;
+  sgu_top_global_status?: boolean;
+}
+
+export interface RomaniaPolicies {
+  eu_recognized_medical_degree?: boolean;
+  mae_romanian_mfa_scholarship_eligible?: boolean;
+  ministry_acceptance_letter_mandatory?: boolean;
+  post_study_stay_back_months?: number;
+  preparatory_year_romanian_offered?: boolean;
+  work_rights_during_studies?: string;
+}
+
+export interface SaudiArabiaPolicies {
+  campus_housing_provided?: boolean;
+  flight_tickets_provided?: boolean;
+  gender_campus_policy?: string;
+  royal_scholarship_stipend_monthly?: string | number;
+  student_visa_iqama_sponsorship?: boolean;
+  study_in_saudi_portal_listed?: boolean;
+}
+
+export interface SouthKoreaPolicies {
+  d10_job_seeker_stay_back_duration?: string;
+  gks_kgsp_eligible?: boolean;
+  ieqas_certification_status?: boolean;
+  korean_language_institute_available?: boolean;
+  topik_requirement_or_prep?: string;
+}
+
+export interface TurkiyePolicies {
+  denklik_diploma_equivalency_required?: boolean;
+  language_of_instruction_ratio?: string;
+  tomer_turkish_prep_year_offered?: boolean;
+  turkiye_burslari_ytb_eligible?: boolean;
+  yos_or_tr_yos_accepted?: boolean;
+}
+
+export interface UnitedStatesPolicies {
+  need_blind?: boolean;
+  sat_required?: boolean;
+}
+
+export interface MauritiusPolicies {
+  mass_scholarship_eligible?: boolean;
+  hec_accredited?: boolean;
+  ypop_stay_back_eligible?: boolean;
+  awarding_body_parent_institution?: string;
+  language_of_instruction?: string;
+}
+
+export type UniversityPolicies =
+  | (ChinaPolicies &
+      IndiaPolicies &
+      ItalyPolicies &
+      JapanPolicies &
+      RomaniaPolicies &
+      SaudiArabiaPolicies &
+      SouthKoreaPolicies &
+      TurkiyePolicies &
+      UnitedStatesPolicies &
+      MauritiusPolicies)
+  | Record<string, any>;
+
 export type SupabaseUniversity = {
   id?: string;
   organization: string;
@@ -76,10 +172,13 @@ export type SupabaseUniversity = {
   age_restrictions: string;
   recommendation_letter_types: string;
   program_delivery_mode: string;
-  need_blind: boolean | null;
-  sat_required: boolean | null;
   english_proficiency_required: boolean | null;
   accepted_english_proficiency_tests: string[];
+  university_policies?: UniversityPolicies;
+  logo_url?: string | null;
+  // Backwards compatibility with previous schema
+  need_blind?: boolean | null;
+  sat_required?: boolean | null;
   university_deadlines?: {
     id?: string;
     deadline_type: string;

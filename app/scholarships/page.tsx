@@ -116,15 +116,15 @@ function ScholarshipsContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
       
       {/* Header Banner */}
-      <div className="mb-8 pb-6 border-b border-[#EDE4D3]">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-[#D97706] uppercase tracking-wider mb-1">
-          <Award className="w-4 h-4" />
-          <span>Financial Aid & Grants</span>
+      <div className="mb-8 pb-6 border-b border-[rgba(119,141,169,0.25)]">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-[#415a77] uppercase tracking-[0.05em] mb-1">
+          <Award className="w-4 h-4 text-[#415a77]" />
+          <span>Financial Aid &amp; Grants</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight">
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0d1b2a] tracking-tight">
           Explore Scholarships
         </h1>
-        <p className="text-xs sm:text-sm text-zinc-500 mt-1 max-w-2xl">
+        <p className="text-xs sm:text-sm text-[#415a77] mt-1 max-w-2xl">
           Discover verified international scholarships, full-ride government awards, and tuition waivers. Filter by your target degree, nationality, and funding level.
         </p>
       </div>
@@ -154,9 +154,9 @@ function ScholarshipsContent() {
         <div className="lg:hidden flex items-center justify-between mb-2">
           <button
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-            className="flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg bg-white border border-zinc-300 text-zinc-800 shadow-sm"
+            className="flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg bg-white border border-[rgba(119,141,169,0.35)] text-[#0d1b2a] shadow-sm"
           >
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#C5A059]" />
+            <SlidersHorizontal className="w-3.5 h-3.5 text-[#1b263b]" />
             <span>{mobileFilterOpen ? 'Hide Filters' : 'Filter Scholarships'}</span>
           </button>
         </div>
@@ -197,11 +197,11 @@ function ScholarshipsContent() {
 
             <div className="flex items-center gap-2 self-end sm:self-auto">
               <ArrowUpDown className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="text-zinc-500">Sort:</span>
+              <span className="text-[#415a77]">Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-white border border-zinc-200 text-zinc-700 rounded-md px-2 py-1 focus:outline-none focus:border-[#C5A059]"
+                className="bg-white border border-[rgba(119,141,169,0.35)] text-[#0d1b2a] rounded-lg px-2.5 py-1 focus:outline-none focus:border-[#1b263b]"
               >
                 <option value="deadline">Upcoming Deadline</option>
                 <option value="coverage">Award Value (Highest First)</option>
@@ -213,20 +213,20 @@ function ScholarshipsContent() {
           {/* Cards Grid or Loading */}
           {isLoading ? (
             <div className="py-20 text-center">
-              <div className="w-8 h-8 border-2 border-[#C5A059] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-              <p className="text-xs font-mono text-zinc-500">Querying scholarship database...</p>
+              <div className="w-8 h-8 border-2 border-[#1b263b] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              <p className="text-xs font-mono text-[#415a77]">Querying scholarship database...</p>
             </div>
           ) : filteredScholarships.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-xl border border-dashed border-zinc-300">
-              <p className="text-sm font-serif font-semibold text-zinc-800 mb-1">
+            <div className="p-12 text-center bg-white rounded-2xl border border-[rgba(119,141,169,0.35)] shadow-xs">
+              <p className="text-sm font-serif font-bold text-[#0d1b2a] mb-1">
                 No scholarships match your selected filter criteria.
               </p>
-              <p className="text-xs text-zinc-500 mb-4">
+              <p className="text-xs text-[#415a77] mb-4">
                 Try removing degree or funding constraints to see more results.
               </p>
               <button
                 onClick={handleReset}
-                className="px-5 py-2.5 bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold rounded-full transition-colors"
+                className="px-5 py-2.5 bg-[#1b263b] hover:bg-[#0d1b2a] text-white text-xs font-bold rounded-full transition-colors cursor-pointer"
               >
                 Reset All Filters
               </button>

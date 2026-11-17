@@ -18,8 +18,8 @@ export default function AuthGate({ featureName, description, icon = 'assistant',
     return (
       <div className="flex-1 flex items-center justify-center py-24">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-[#D97706] border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs font-semibold text-zinc-500">Checking your student account...</p>
+          <div className="w-8 h-8 border-3 border-[#1b263b] border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs font-semibold text-[#415a77]">Verifying institutional session...</p>
         </div>
       </div>
     );
@@ -31,32 +31,32 @@ export default function AuthGate({ featureName, description, icon = 'assistant',
 
   return (
     <div className="flex-1 max-w-3xl mx-auto px-4 py-16 sm:py-24 w-full">
-      <div className="bg-white border border-[#EDE4D3] rounded-3xl shadow-sm p-8 sm:p-12 text-center overflow-hidden relative">
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#B45309]" />
+      <div className="bg-white border border-[rgba(119,141,169,0.3)] rounded-2xl shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08),0_2px_6px_-1px_rgba(13,27,42,0.04)] p-8 sm:p-12 text-center overflow-hidden relative">
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0d1b2a] via-[#1b263b] to-[#415a77]" />
 
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] mb-5 shadow-xs">
-          {icon === 'assistant' && <Sparkles className="w-8 h-8 text-[#D97706]" />}
-          {icon === 'dashboard' && <Heart className="w-8 h-8 fill-current text-[#D97706]" />}
-          {icon === 'profile' && <UserCheck className="w-8 h-8 text-[#D97706]" />}
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#1b263b] text-white border border-[rgba(119,141,169,0.25)] mb-5 shadow-xs">
+          {icon === 'assistant' && <Sparkles className="w-8 h-8 text-white" />}
+          {icon === 'dashboard' && <Heart className="w-8 h-8 fill-current text-white" />}
+          {icon === 'profile' && <UserCheck className="w-8 h-8 text-white" />}
         </div>
 
-        <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] font-bold text-xs mb-3">
-          <Lock className="w-3.5 h-3.5" />
-          <span>Free Student Account Required</span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[rgba(65,90,119,0.08)] text-[#0d1b2a] border border-[rgba(119,141,169,0.35)] font-bold text-xs mb-3">
+          <Lock className="w-3.5 h-3.5 text-[#1b263b]" />
+          <span>Student Account Required</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight mb-3">
+        <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#0d1b2a] tracking-tight mb-3">
           Unlock your {featureName}
         </h1>
 
-        <p className="text-sm text-zinc-600 max-w-md mx-auto leading-relaxed mb-8">
+        <p className="text-sm text-[#415a77] max-w-md mx-auto leading-relaxed mb-8">
           {description}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             onClick={() => openAuthModal(`Log in to access your ${featureName}`)}
-            className="w-full sm:w-auto px-8 py-3 bg-[#D97706] hover:bg-[#B45309] text-white font-bold text-sm rounded-full transition-all shadow-sm hover:shadow flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-3 bg-[#1b263b] hover:bg-[#0d1b2a] text-white font-bold text-sm rounded-full transition-all shadow-sm hover:shadow flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Log In to Access</span>
             <ArrowRight className="w-4 h-4" />
@@ -64,24 +64,24 @@ export default function AuthGate({ featureName, description, icon = 'assistant',
           
           <button
             onClick={() => openAuthModal(`Create an account to access ${featureName}`)}
-            className="w-full sm:w-auto px-8 py-3 bg-[#FAF8F5] hover:bg-zinc-100 text-zinc-800 font-bold text-sm rounded-full transition-colors border border-zinc-200"
+            className="w-full sm:w-auto px-8 py-3 bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] font-bold text-sm rounded-full transition-colors border border-[rgba(119,141,169,0.35)] cursor-pointer"
           >
             Sign Up Free
           </button>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-zinc-100 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-          <div className="p-3.5 bg-[#FAF8F5] rounded-2xl border border-zinc-100">
-            <h4 className="text-xs font-bold text-zinc-900 mb-0.5">Free to Browse</h4>
-            <p className="text-xs text-zinc-500">Explore colleges and scholarships worldwide without an account.</p>
+        <div className="mt-10 pt-6 border-t border-[rgba(119,141,169,0.2)] grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+          <div className="p-3.5 bg-[#f3f4f0] rounded-xl border border-[rgba(119,141,169,0.25)]">
+            <h4 className="text-xs font-bold text-[#0d1b2a] mb-0.5 font-serif">Free Discovery</h4>
+            <p className="text-xs text-[#415a77]">Explore accredited universities and verified scholarships worldwide.</p>
           </div>
-          <div className="p-3.5 bg-[#FAF8F5] rounded-2xl border border-zinc-100">
-            <h4 className="text-xs font-bold text-zinc-900 mb-0.5">Personal AI Advisor</h4>
-            <p className="text-xs text-zinc-500">Ask tailored questions with verified admission facts.</p>
+          <div className="p-3.5 bg-[#f3f4f0] rounded-xl border border-[rgba(119,141,169,0.25)]">
+            <h4 className="text-xs font-bold text-[#0d1b2a] mb-0.5 font-serif">Collegiate AI Advisor</h4>
+            <p className="text-xs text-[#415a77]">Inquire with queries grounded in official admission facts.</p>
           </div>
-          <div className="p-3.5 bg-[#FAF8F5] rounded-2xl border border-zinc-100">
-            <h4 className="text-xs font-bold text-zinc-900 mb-0.5">Deadline Tracker</h4>
-            <p className="text-xs text-zinc-500">Save opportunities and never miss an application deadline.</p>
+          <div className="p-3.5 bg-[#f3f4f0] rounded-xl border border-[rgba(119,141,169,0.25)]">
+            <h4 className="text-xs font-bold text-[#0d1b2a] mb-0.5 font-serif">Deadlines &amp; Portfolio</h4>
+            <p className="text-xs text-[#415a77]">Save target opportunities and organize application milestones.</p>
           </div>
         </div>
       </div>

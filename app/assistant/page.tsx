@@ -11,7 +11,6 @@ import {
   GraduationCap,
   Globe,
   DollarSign,
-  FileSearch,
 } from 'lucide-react';
 import AuthGate from '../components/AuthGate';
 import InlineCitation from '../components/InlineCitation';
@@ -22,7 +21,7 @@ export default function AssistantPage() {
   return (
     <AuthGate
       featureName="AI Study Advisor"
-      description="Chat 1-on-1 with your personal admissions advisor. Ask questions regarding GPA eligibility, language waivers, and full-ride funding with official source citations."
+      description="Chat 1-on-1 with your personal collegiate advisor. Inquire about GPA eligibility, testing policies, fee waivers, and full-ride funding backed by official university records."
       icon="assistant"
     >
       <AssistantChatInterface />
@@ -36,7 +35,7 @@ function AssistantChatInterface() {
     {
       id: 'welcome',
       sender: 'assistant',
-      content: `Hi there! I’m your Scholly AI Advisor. I’m here to help you navigate international admissions and scholarship opportunities around the world.\n\nYou can ask me about minimum GPA requirements, language test waivers, application fee discounts, or full-ride scholarships. How can I help you today?`,
+      content: `Greetings! I am your Scholly AI Collegiate Advisor. I am here to assist your exploration of global admissions policies and international scholarship opportunities.\n\nYou can ask about minimum GPA requirements, language test waivers, application fee structures, or full-ride grants. How may I assist your academic journey today?`,
       timestamp: 'Just now',
       citations: [
         { label: 'DAAD Germany', url: 'https://www.daad.de', fact: 'Comprehensive German master’s funding' },
@@ -61,22 +60,22 @@ function AssistantChatInterface() {
     {
       icon: Award,
       label: 'Full-Ride Funding',
-      description: 'Which scholarships offer 100% full funding plus monthly stipends?',
+      description: 'Which scholarships offer 100% full tuition coverage plus monthly living stipends?',
     },
     {
       icon: Globe,
       label: 'Study in Germany',
-      description: "Find low-tuition master's programs in Germany with no application fee.",
+      description: "Find low-tuition master's programs in Germany with no institutional application fees.",
     },
     {
       icon: GraduationCap,
-      label: 'GPA Requirements',
-      description: 'Can I apply to UK or Canadian universities with a 3.2 GPA?',
+      label: 'GPA Benchmarks',
+      description: 'Can I apply to selective UK or Canadian universities with a 3.2 GPA?',
     },
     {
       icon: DollarSign,
-      label: 'Developing Countries',
-      description: 'What scholarships are open to students from developing countries?',
+      label: 'International Grants',
+      description: 'What institutional fellowships are open to international applicants worldwide?',
     },
   ];
 
@@ -95,7 +94,6 @@ function AssistantChatInterface() {
     setInput('');
     setIsTyping(true);
 
-    // Modular response engine connected to local database, ready for your custom backend API
     setTimeout(() => {
       const lower = text.toLowerCase();
       let responseText = '';
@@ -103,10 +101,10 @@ function AssistantChatInterface() {
       let suggestedOpportunities: ChatMessage['suggestedOpportunities'] = [];
 
       if (lower.includes('germany') || lower.includes('daad') || lower.includes('tum')) {
-        responseText = `Public universities in Germany offer world-class degrees with minimal or no standard tuition fees for international students!
+        responseText = `Public research universities across Germany offer high-caliber academic degrees with minimal or no general tuition fees for international scholars!
 
-• The **DAAD Helmut-Schmidt-Programme** provides 100% full funding, including a €934/month living stipend, full health insurance, and round-trip airfare for master’s courses in Public Policy and Economics.
-• The **Technical University of Munich (TUM)** offers top-ranked engineering and computer science programs with low semester fees and $0 application fee.`;
+• The **DAAD Helmut-Schmidt-Programme** provides 100% full funding, including a €934/month living stipend, health insurance coverage, and round-trip airfare for master's programs in Public Policy and Economics.
+• The **Technical University of Munich (TUM)** offers top-ranked engineering and computer science curricula with low semester dues and verified application pathways.`;
         citations = [
           { label: 'DAAD Official Portal', url: 'https://www.daad.de', fact: '€934/mo stipend confirmed' },
           { label: 'TUM International Bureau', url: 'https://www.tum.de', fact: '$0 application fee confirmed' }
@@ -128,11 +126,11 @@ function AssistantChatInterface() {
           }
         ];
       } else if (lower.includes('gpa') || lower.includes('3.2') || lower.includes('3.0')) {
-        responseText = `A GPA of 3.0 to 3.2 opens up several prestigious international funding programs:
+        responseText = `A cumulative GPA between 3.0 and 3.2 unlocks multiple prestigious international funding avenues:
 
-1. **Chevening UK Government Scholarship**: Requires a minimum 3.0 GPA (equivalent to a UK 2:1 honours). Covers 100% tuition plus monthly living allowance and airfare.
-2. **Mastercard Foundation Scholars Program**: Takes a holistic view focusing on leadership potential and academic dedication with full cost coverage.
-3. **MEXT Japanese Government Scholarship**: Requires roughly 3.2 GPA and offers full tuition plus 144,000 JPY monthly allowance.`;
+1. **Chevening UK Government Scholarship**: Minimum 3.0 GPA benchmark (equivalent to a UK 2:1 honours). Covers 100% tuition, monthly stipend, and travel.
+2. **Mastercard Foundation Scholars Program**: Comprehensive holistic admissions focusing on leadership, service, and academic resilience.
+3. **MEXT Japanese Government Scholarship**: Requires ~3.2 GPA floor and provides full tuition plus 144,000 JPY monthly living allowance.`;
         citations = [
           { label: 'Chevening UK Portal', url: 'https://www.chevening.org', fact: '2:1 honours requirement' },
           { label: 'Mastercard Foundation', url: 'https://mastercardfdn.org', fact: 'Comprehensive support' }
@@ -154,9 +152,9 @@ function AssistantChatInterface() {
           }
         ];
       } else {
-        responseText = `I searched our verified registry for "${text}". There are several programs offering full tuition waivers and living allowances that match international students.
+        responseText = `I queried our institutional registry regarding "${text}". Several opportunities offering tuition coverage, fee exemptions, and living allowances match your profile.
 
-Be sure to request your 2 academic recommendation letters at least 6 weeks before published deadlines!`;
+Recommendation: request two formal academic letters of reference at least 6 weeks before deadline dates.`;
         citations = [
           { label: 'Scholly Verified Registry', url: 'https://www.daad.de', fact: 'Official registry facts' }
         ];
@@ -197,7 +195,7 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
       {
         id: 'welcome-reset',
         sender: 'assistant',
-        content: `Conversation reset! What can I help you research today?`,
+        content: `Conversation reset. Which institution or scholarship program would you like to explore?`,
         timestamp: 'Just now'
       }
     ]);
@@ -207,27 +205,27 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 flex flex-col h-[calc(100vh-8rem)]">
       
       {/* Header Bar */}
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#EDE4D3] flex-shrink-0">
+      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[rgba(119,141,169,0.25)] flex-shrink-0">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-[#FEF3C7] border border-[#FDE68A] flex items-center justify-center shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#D97706]" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[#1b263b] border border-[rgba(119,141,169,0.25)] flex items-center justify-center shadow-xs">
+              <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <h1 className="font-serif text-2xl font-bold text-zinc-900 tracking-tight">
-              AI College &amp; Scholarship Advisor
+            <h1 className="font-serif text-2xl font-bold text-[#0d1b2a] tracking-tight">
+              Collegiate AI Advisor
             </h1>
           </div>
-          <p className="text-xs text-zinc-500 mt-0.5">
-            Personalized answers grounded in official university portals and scholarship guidelines.
+          <p className="text-xs text-[#415a77] mt-0.5">
+            Verified guidance grounded in official university admissions bulletins and scholarship policies.
           </p>
         </div>
 
         <button
           onClick={handleResetChat}
-          className="text-xs font-semibold text-zinc-600 hover:text-zinc-900 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 bg-white hover:bg-[#FAF8F5] transition-colors"
+          className="text-xs font-bold text-[#415a77] hover:text-[#0d1b2a] flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[rgba(119,141,169,0.35)] bg-white hover:bg-[#f3f4f0] transition-colors cursor-pointer"
         >
-          <RotateCcw className="w-3.5 h-3.5 text-[#D97706]" />
-          <span>New Chat</span>
+          <RotateCcw className="w-3.5 h-3.5 text-[#1b263b]" />
+          <span>New Session</span>
         </button>
       </div>
 
@@ -241,26 +239,26 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
             }`}
           >
             {msg.sender === 'assistant' && (
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] text-[#92400E] border border-[#FDE68A] flex items-center justify-center flex-shrink-0 shadow-xs mt-0.5">
-                <Sparkles className="w-4 h-4 text-[#D97706]" />
+              <div className="w-8 h-8 rounded-full bg-[#1b263b] text-white border-2 border-[rgba(119,141,169,0.25)] flex items-center justify-center flex-shrink-0 shadow-xs mt-0.5">
+                <Sparkles className="w-4 h-4 text-white" />
               </div>
             )}
 
             <div
-              className={`max-w-xl p-5 sm:p-6 shadow-xs space-y-3 ${
+              className={`max-w-xl p-5 sm:p-6 space-y-3 ${
                 msg.sender === 'user'
-                  ? 'bg-[#B45309] text-amber-50 rounded-3xl rounded-tr-xs'
-                  : 'bg-[#FFFDF9] text-zinc-800 border border-[#EDE4D3] rounded-3xl rounded-tl-xs'
+                  ? 'bg-[#1b263b] text-white rounded-2xl rounded-tr-xs shadow-xs'
+                  : 'bg-white text-[#0d1b2a] border border-[rgba(119,141,169,0.3)] rounded-2xl rounded-tl-xs shadow-[0_10px_30px_-4px_rgba(13,27,42,0.06),0_2px_6px_-1px_rgba(13,27,42,0.03)]'
               }`}
             >
-              <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
+              <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-sans">
                 {msg.content}
               </div>
 
               {/* Inline Citations & Sources */}
               {msg.citations && msg.citations.length > 0 && (
-                <div className="pt-2 border-t border-zinc-100 flex flex-wrap items-center gap-2">
-                  <span className="text-[11px] font-bold text-zinc-400">Sources:</span>
+                <div className="pt-2 border-t border-[rgba(119,141,169,0.2)] flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77]">Sources:</span>
                   {msg.citations.map((cite, i) => (
                     <InlineCitation key={i} sourceName={cite.label} sourceUrl={cite.url} />
                   ))}
@@ -269,8 +267,8 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
 
               {/* Suggested Opportunity Cards */}
               {msg.suggestedOpportunities && msg.suggestedOpportunities.length > 0 && (
-                <div className="pt-3 border-t border-zinc-100 space-y-2">
-                  <span className="text-[11px] font-bold text-zinc-700 block">
+                <div className="pt-3 border-t border-[rgba(119,141,169,0.2)] space-y-2">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] block">
                     Recommended Opportunities:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -278,20 +276,20 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
                       <Link
                         key={opp.id}
                         href={opp.type === 'scholarship' ? `/scholarships/${opp.id}` : `/universities/${opp.id}`}
-                        className="p-3 bg-[#FAF8F5] hover:bg-[#FEF3C7]/60 border border-[#EDE4D3] hover:border-[#D97706] rounded-2xl transition-all text-xs group block"
+                        className="p-3 bg-[#f3f4f0] hover:bg-white border border-[rgba(119,141,169,0.3)] hover:border-[#1b263b] rounded-xl transition-all text-xs group block shadow-xs"
                       >
-                        <div className="flex items-center gap-1.5 text-[11px] text-[#D97706] font-bold mb-0.5">
+                        <div className="flex items-center gap-1.5 text-[11px] text-[#1b263b] font-bold mb-0.5">
                           {opp.type === 'scholarship' ? (
-                            <Award className="w-3.5 h-3.5 text-[#D97706]" />
+                            <Award className="w-3.5 h-3.5 text-[#415a77]" />
                           ) : (
-                            <GraduationCap className="w-3.5 h-3.5 text-[#D97706]" />
+                            <GraduationCap className="w-3.5 h-3.5 text-[#415a77]" />
                           )}
                           <span>{opp.coverageOrTuition}</span>
                         </div>
-                        <h4 className="font-serif font-bold text-zinc-900 group-hover:text-[#D97706] truncate">
+                        <h4 className="font-serif font-bold text-[#0d1b2a] group-hover:text-[#1b263b] truncate">
                           {opp.title}
                         </h4>
-                        <span className="text-[11px] text-zinc-500 truncate block">
+                        <span className="text-[11px] text-[#778da9] truncate block">
                           {opp.subtitle}
                         </span>
                       </Link>
@@ -300,14 +298,14 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
                 </div>
               )}
 
-              <div className={`text-[10px] text-right font-medium ${msg.sender === 'user' ? 'text-amber-200/80' : 'text-zinc-400'}`}>
+              <div className={`text-[10px] text-right font-medium ${msg.sender === 'user' ? 'text-[#e0e1dd]/80' : 'text-[#778da9]'}`}>
                 {msg.timestamp}
               </div>
             </div>
 
             {msg.sender === 'user' && (
-              <div className="w-8 h-8 rounded-full bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs font-bold text-xs">
-                <User className="w-4 h-4 text-[#D97706]" />
+              <div className="w-8 h-8 rounded-full bg-[rgba(65,90,119,0.12)] text-[#1b263b] border border-[rgba(119,141,169,0.35)] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs font-bold text-xs">
+                <User className="w-4 h-4 text-[#1b263b]" />
               </div>
             )}
           </div>
@@ -315,14 +313,14 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
 
         {isTyping && (
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] text-[#92400E] border border-[#FDE68A] flex items-center justify-center flex-shrink-0 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#D97706]" />
+            <div className="w-8 h-8 rounded-full bg-[#1b263b] text-white border-2 border-[rgba(119,141,169,0.25)] flex items-center justify-center flex-shrink-0 shadow-xs">
+              <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <div className="bg-[#FFFDF9] border border-[#EDE4D3] rounded-2xl rounded-tl-xs p-3.5 shadow-xs flex items-center gap-1.5 text-xs text-zinc-500">
-              <span className="w-2 h-2 rounded-full bg-[#D97706] animate-bounce" />
-              <span className="w-2 h-2 rounded-full bg-[#D97706] animate-bounce [animation-delay:0.2s]" />
-              <span className="w-2 h-2 rounded-full bg-[#D97706] animate-bounce [animation-delay:0.4s]" />
-              <span className="ml-2 font-medium text-zinc-500">Researching admissions guidelines...</span>
+            <div className="bg-white border border-[rgba(119,141,169,0.3)] rounded-2xl rounded-tl-xs p-3.5 shadow-xs flex items-center gap-1.5 text-xs text-[#415a77]">
+              <span className="w-2 h-2 rounded-full bg-[#1b263b] animate-bounce" />
+              <span className="w-2 h-2 rounded-full bg-[#1b263b] animate-bounce [animation-delay:0.2s]" />
+              <span className="w-2 h-2 rounded-full bg-[#1b263b] animate-bounce [animation-delay:0.4s]" />
+              <span className="ml-2 font-medium text-[#415a77]">Querying verified institutional guidelines...</span>
             </div>
           </div>
         )}
@@ -330,10 +328,10 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Suggested prompts (when clean) — 2×2 card grid */}
+      {/* Suggested prompts (when clean) */}
       {messages.length === 1 && (
         <div className="py-4 flex-shrink-0">
-          <p className="text-xs text-zinc-400 font-semibold mb-3">Try asking about…</p>
+          <p className="text-[11px] uppercase tracking-[0.05em] text-[#415a77] font-bold mb-3">Suggested Topics</p>
           <div className="grid grid-cols-2 gap-2">
             {starterPrompts.map((prompt, i) => {
               const Icon = prompt.icon;
@@ -341,15 +339,15 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
                 <button
                   key={i}
                   onClick={() => handleSend(prompt.description)}
-                  className="p-3.5 bg-white hover:bg-[#FFFBEB] border border-[#EDE4D3] hover:border-[#D97706] rounded-2xl transition-all text-left group shadow-xs"
+                  className="p-3.5 bg-white hover:bg-[#f3f4f0] border border-[rgba(119,141,169,0.3)] hover:border-[#1b263b] rounded-2xl transition-all text-left group shadow-xs cursor-pointer"
                 >
-                  <div className="w-8 h-8 rounded-xl bg-[#FEF3C7] flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                    <Icon className="w-4 h-4 text-[#D97706]" />
+                  <div className="w-8 h-8 rounded-xl bg-[rgba(65,90,119,0.08)] flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                    <Icon className="w-4 h-4 text-[#1b263b]" />
                   </div>
-                  <p className="text-xs font-bold text-zinc-900 group-hover:text-[#D97706] transition-colors mb-0.5">
+                  <p className="text-xs font-serif font-bold text-[#0d1b2a] group-hover:text-[#1b263b] transition-colors mb-0.5">
                     {prompt.label}
                   </p>
-                  <p className="text-[11px] text-zinc-500 leading-snug line-clamp-2">
+                  <p className="text-[11px] text-[#415a77] leading-snug line-clamp-2">
                     {prompt.description}
                   </p>
                 </button>
@@ -365,7 +363,7 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
           e.preventDefault();
           handleSend(input);
         }}
-        className="pt-3 border-t border-[#EDE4D3] flex items-center gap-2 flex-shrink-0"
+        className="pt-3 border-t border-[rgba(119,141,169,0.25)] flex items-center gap-2 flex-shrink-0"
       >
         <div className="relative flex-1">
           <input
@@ -373,14 +371,14 @@ Be sure to request your 2 academic recommendation letters at least 6 weeks befor
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about minimum GPA, IELTS waivers, application deadlines, living stipends..."
-            className="w-full px-5 py-3 bg-white border border-[#EDE4D3] rounded-full text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706] shadow-xs"
+            className="w-full px-5 py-3 bg-white border border-[rgba(119,141,169,0.35)] rounded-full text-xs sm:text-sm text-[#0d1b2a] placeholder:text-[#778da9] focus:outline-none focus:border-[#1b263b] focus:ring-1 focus:ring-[#1b263b] shadow-xs"
           />
         </div>
 
         <button
           type="submit"
           disabled={!input.trim() || isTyping}
-          className="p-3 sm:px-6 sm:py-3 bg-[#D97706] hover:bg-[#B45309] disabled:opacity-40 text-white font-bold text-xs sm:text-sm rounded-full shadow-sm transition-all flex items-center justify-center gap-1.5"
+          className="p-3 sm:px-6 sm:py-3 bg-[#1b263b] hover:bg-[#0d1b2a] disabled:opacity-40 text-white font-bold text-xs sm:text-sm rounded-full shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer"
         >
           <span className="hidden sm:inline">Ask Advisor</span>
           <Send className="w-4 h-4" />

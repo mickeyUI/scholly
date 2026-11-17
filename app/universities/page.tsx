@@ -2,19 +2,22 @@
 
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { GraduationCap, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { GraduationCap, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { University } from '../types';
 import { getUniversities } from '../lib/opportunities';
+import { getNormalizedPolicies } from '../lib/country-policies';
 import UniversityCard from '../components/UniversityCard';
-import FilterSidebar from '../components/FilterSidebar';
+import UniversityFilterBar from '../components/UniversityFilterBar';
+
+const PAGE_SIZE = 20;
 
 export default function UniversitiesPage() {
   return (
     <Suspense
       fallback={
         <div className="py-20 text-center">
-          <div className="w-8 h-8 border-2 border-[#D97706] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-xs font-mono text-zinc-500">Loading university discovery...</p>
+          <div className="w-8 h-8 border-2 border-[#1b263b] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-xs font-mono text-[#415a77]">Loading university discovery...</p>
         </div>
       }
     >
@@ -42,9 +45,26 @@ function UniversitiesContent() {
   const [selectedSatRequired, setSelectedSatRequired] = useState<'all' | 'test-optional' | 'sat-required' | ''>('');
   const [selectedDeadlineType, setSelectedDeadlineType] = useState<string>('');
   const [selectedPlatform, setSelectedPlatform] = useState<string>('');
+  const [selectedPolicyTag, setSelectedPolicyTag] = useState<string>('');
 
   const [sortBy, setSortBy] = useState<'name' | 'aid' | 'gpa'>('name');
-  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset to first page whenever filters or sorting change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    searchTerm,
+    selectedCountry,
+    selectedDegree,
+    minGpa,
+    selectedNeedBlind,
+    selectedSatRequired,
+    selectedDeadlineType,
+    selectedPlatform,
+    selectedPolicyTag,
+    sortBy
+  ]);
 
   useEffect(() => {
     getUniversities().then((data) => {
@@ -135,18 +155,68 @@ function UniversitiesContent() {
           }
         }
 
+        const pol = getNormalizedPolicies(uni);
+        const effectiveNeedBlind = pol.need_blind !== undefined ? pol.need_blind : uni.need_blind;
+        const effectiveSatRequired = pol.sat_required !== undefined ? pol.sat_required : uni.sat_required;
+
         // Need-Blind Filter
         if (selectedNeedBlind === 'need-blind') {
-          if (uni.need_blind !== true) return false;
+          if (effectiveNeedBlind !== true) return false;
         } else if (selectedNeedBlind === 'need-aware') {
-          if (uni.need_blind !== false) return false;
+          if (effectiveNeedBlind !== false) return false;
         }
 
         // SAT / Standardized Testing Requirement Filter
         if (selectedSatRequired === 'test-optional') {
-          if (uni.sat_required !== false) return false;
+          if (effectiveSatRequired !== false) return false;
         } else if (selectedSatRequired === 'sat-required') {
-          if (uni.sat_required !== true) return false;
+          if (effectiveSatRequired !== true) return false;
+        }
+
+        // Quick Country Policy Tag Filter
+        if (selectedPolicyTag === 'govt-scholarship') {
+          const hasGovtScholarship =
+            Boolean(pol.iccr_scholarship_eligible) ||
+            Boolean(pol.csc_scholarship_supported) ||
+            Boolean(pol.dsu_regional_scholarship_board) ||
+            Boolean(pol.isee_parificato_eligible) ||
+            Boolean(pol.mext_scholarship_recommendations) ||
+            Boolean(pol.jica_abe_initiative_partner) ||
+            Boolean(pol.royal_scholarship_stipend_monthly) ||
+            Boolean(pol.flight_tickets_provided) ||
+            Boolean(pol.campus_housing_provided) ||
+            Boolean(pol.gks_kgsp_eligible) ||
+            Boolean(pol.turkiye_burslari_ytb_eligible) ||
+            Boolean(pol.mae_romanian_mfa_scholarship_eligible) ||
+            Boolean(pol.mass_scholarship_eligible) ||
+            effectiveNeedBlind === true;
+          if (!hasGovtScholarship) return false;
+        } else if (selectedPolicyTag === 'english-medium') {
+          const hasEnglishMedium =
+            Boolean(pol.medium_of_instruction_certificate_accepted) ||
+            Boolean(pol.english_taught_degrees_offered) ||
+            Boolean(pol.sgu_top_global_status) ||
+            (typeof pol.language_of_instruction_ratio === 'string' &&
+              pol.language_of_instruction_ratio.toLowerCase().includes('english')) ||
+            (typeof pol.language_of_instruction === 'string' &&
+              pol.language_of_instruction.toLowerCase().includes('english')) ||
+            (Array.isArray(uni.accepted_english_proficiency_tests) &&
+              uni.accepted_english_proficiency_tests.length > 0) ||
+            uni.english_proficiency_required === false;
+          if (!hasEnglishMedium) return false;
+        } else if (selectedPolicyTag === 'stay-back') {
+          const hasStayBack =
+            (typeof pol.post_study_work_stay_back_months === 'number' &&
+              pol.post_study_work_stay_back_months > 0) ||
+            Boolean(pol.post_study_work_visa) ||
+            Boolean(pol.d10_job_seeker_stay_back_duration) ||
+            Boolean(pol.ypop_stay_back_eligible) ||
+            (typeof pol.post_study_stay_back_months === 'number' &&
+              pol.post_study_stay_back_months > 0) ||
+            Boolean(pol.work_rights_during_studies);
+          if (!hasStayBack) return false;
+        } else if (selectedPolicyTag === 'need-blind') {
+          if (effectiveNeedBlind !== true) return false;
         }
 
         // Deadlines Filter
@@ -237,6 +307,7 @@ function UniversitiesContent() {
     selectedSatRequired,
     selectedDeadlineType,
     selectedPlatform,
+    selectedPolicyTag,
     sortBy
   ]);
 
@@ -249,6 +320,24 @@ function UniversitiesContent() {
     setSelectedSatRequired('');
     setSelectedDeadlineType('');
     setSelectedPlatform('');
+    setSelectedPolicyTag('');
+    setCurrentPage(1);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(filteredUniversities.length / PAGE_SIZE));
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = Math.min(startIndex + PAGE_SIZE, filteredUniversities.length);
+  const paginatedUniversities = filteredUniversities.slice(startIndex, endIndex);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    setCurrentPage(newPage);
+    const element = document.getElementById('university-listings');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 350, behavior: 'smooth' });
+    }
   };
 
   const isFiltered = Boolean(
@@ -258,148 +347,192 @@ function UniversitiesContent() {
     (selectedNeedBlind && selectedNeedBlind !== 'all') ||
     (selectedSatRequired && selectedSatRequired !== 'all') ||
     selectedDeadlineType ||
-    selectedPlatform
+    selectedPlatform ||
+    selectedPolicyTag
   );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
       {/* Header Banner */}
-      <div className="mb-8 pb-6 border-b border-[#EDE4D3]">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-[#D97706] uppercase tracking-wider mb-1">
-          <GraduationCap className="w-4 h-4" />
-          <span>Colleges & Universities</span>
+      <div className="mb-8 pb-6 border-b border-[rgba(119,141,169,0.25)]">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-[#415a77] uppercase tracking-[0.05em] mb-1">
+          <GraduationCap className="w-4 h-4 text-[#415a77]" />
+          <span>Colleges &amp; Universities</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight">
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0d1b2a] tracking-tight">
           Explore Global Universities
         </h1>
-        <p className="text-xs sm:text-sm text-zinc-500 mt-1 max-w-2xl">
+        <p className="text-xs sm:text-sm text-[#415a77] mt-1 max-w-2xl">
           Search accredited colleges worldwide. Filter by need-blind policies, standardized testing rules, application deadlines, and platforms.
         </p>
       </div>
 
-      {/* Main Grid: Filter Sidebar + Listings */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Desktop Sidebar */}
-        <div className="hidden lg:block lg:col-span-1">
-          <FilterSidebar
-            type="universities"
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-            selectedCountry={selectedCountry}
-            onCountryChange={setSelectedCountry}
-            selectedDegree={selectedDegree}
-            onDegreeChange={setSelectedDegree}
-            minGpa={minGpa}
-            onMinGpaChange={setMinGpa}
-            selectedNeedBlind={selectedNeedBlind}
-            onNeedBlindChange={setSelectedNeedBlind}
-            selectedSatRequired={selectedSatRequired}
-            onSatRequiredChange={setSelectedSatRequired}
-            selectedDeadlineType={selectedDeadlineType}
-            onDeadlineTypeChange={setSelectedDeadlineType}
-            selectedPlatform={selectedPlatform}
-            onPlatformChange={setSelectedPlatform}
-            onReset={handleReset}
-          />
-        </div>
+      {/* Horizontal Filter Bar Component on Top of University List */}
+      <UniversityFilterBar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        selectedCountry={selectedCountry}
+        onCountryChange={setSelectedCountry}
+        selectedDegree={selectedDegree}
+        onDegreeChange={setSelectedDegree}
+        minGpa={minGpa}
+        onMinGpaChange={setMinGpa}
+        selectedNeedBlind={selectedNeedBlind}
+        onNeedBlindChange={setSelectedNeedBlind}
+        selectedSatRequired={selectedSatRequired}
+        onSatRequiredChange={setSelectedSatRequired}
+        selectedDeadlineType={selectedDeadlineType}
+        onDeadlineTypeChange={setSelectedDeadlineType}
+        selectedPlatform={selectedPlatform}
+        onPlatformChange={setSelectedPlatform}
+        selectedPolicyTag={selectedPolicyTag}
+        onPolicyTagChange={setSelectedPolicyTag}
+        onReset={handleReset}
+      />
 
-        {/* Mobile Filter Toggle */}
-        <div className="lg:hidden flex items-center justify-between mb-2">
-          <button
-            onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-            className="flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg bg-white border border-zinc-300 text-zinc-800 shadow-sm"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#D97706]" />
-            <span>{mobileFilterOpen ? 'Hide Filters' : 'Filter Universities'}</span>
-          </button>
-        </div>
-
-        {mobileFilterOpen && (
-          <div className="lg:hidden mb-6">
-            <FilterSidebar
-              type="universities"
-              searchTerm={searchTerm}
-              onSearchChange={setSearchTerm}
-              selectedCountry={selectedCountry}
-              onCountryChange={setSelectedCountry}
-              selectedDegree={selectedDegree}
-              onDegreeChange={setSelectedDegree}
-              minGpa={minGpa}
-              onMinGpaChange={setMinGpa}
-              selectedNeedBlind={selectedNeedBlind}
-              onNeedBlindChange={setSelectedNeedBlind}
-              selectedSatRequired={selectedSatRequired}
-              onSatRequiredChange={setSelectedSatRequired}
-              selectedDeadlineType={selectedDeadlineType}
-              onDeadlineTypeChange={setSelectedDeadlineType}
-              selectedPlatform={selectedPlatform}
-              onPlatformChange={setSelectedPlatform}
-              onReset={handleReset}
-            />
-          </div>
-        )}
-
-        {/* Results Column */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* Results Summary & Sorting Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-100 text-xs">
-            <div className="flex items-center gap-2 text-zinc-600 flex-wrap">
-              <span className="font-semibold text-zinc-900">{filteredUniversities.length}</span>
-              <span>colleges found</span>
-              {isFiltered && (
-                <span className="text-[#92400E] font-medium text-[11px] bg-[#FEF3C7] px-2 py-0.5 rounded-full border border-[#FDE68A]">
-                  Active Filters
-                </span>
-              )}
-            </div>
-
-            <div className="flex items-center gap-2 self-end sm:self-auto">
-              <ArrowUpDown className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="text-zinc-500">Sort:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-white border border-zinc-200 text-zinc-700 rounded-md px-2 py-1 focus:outline-none focus:border-[#D97706]"
-              >
-                <option value="name">Institution Name (A-Z)</option>
-                <option value="aid">Aid Coverage (Highest First)</option>
-                <option value="gpa">Minimum GPA (Lowest First)</option>
-              </select>
-            </div>
+      {/* University Listings Section */}
+      <div id="university-listings" className="space-y-6">
+        {/* Results Summary & Sorting Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[rgba(119,141,169,0.2)] text-xs">
+          <div className="flex items-center gap-2 text-[#415a77] flex-wrap">
+            <span className="font-bold text-[#0d1b2a]">{filteredUniversities.length}</span>
+            <span>colleges found</span>
+            {filteredUniversities.length > 0 && (
+              <span className="text-[#415a77] font-semibold text-[11px] bg-[rgba(65,90,119,0.08)] border border-[rgba(119,141,169,0.35)] px-2.5 py-0.5 rounded-full">
+                Showing {startIndex + 1}–{endIndex}
+              </span>
+            )}
+            {isFiltered && (
+              <span className="text-white font-bold text-[11px] bg-[#1b263b] px-2.5 py-0.5 rounded-full">
+                Active Filters
+              </span>
+            )}
           </div>
 
-          {/* Cards Grid or Loading */}
-          {isLoading ? (
-            <div className="py-20 text-center">
-              <div className="w-8 h-8 border-2 border-[#D97706] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-              <p className="text-xs font-mono text-zinc-500">Querying university registry...</p>
-            </div>
-          ) : filteredUniversities.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-xl border border-dashed border-zinc-300">
-              <p className="text-sm font-serif font-semibold text-zinc-800 mb-1">
-                No universities matched your selected filters.
-              </p>
-              <p className="text-xs text-zinc-500 mb-4">
-                Try clearing some criteria or resetting testing and deadline filters.
-              </p>
-              <button
-                onClick={handleReset}
-                className="px-5 py-2.5 bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold rounded-full transition-colors"
-              >
-                Reset All Filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredUniversities.map((uni) => (
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            <ArrowUpDown className="w-3.5 h-3.5 text-[#778da9]" />
+            <span className="text-[#415a77] font-medium">Sort:</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+              className="bg-white border border-[rgba(119,141,169,0.35)] text-[#0d1b2a] rounded-lg px-2.5 py-1 focus:outline-none focus:border-[#1b263b]"
+            >
+              <option value="name">Institution Name (A-Z)</option>
+              <option value="aid">Aid Coverage (Highest First)</option>
+              <option value="gpa">Minimum GPA (Lowest First)</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Cards Grid: 3 COLUMNS */}
+        {isLoading ? (
+          <div className="py-20 text-center">
+            <div className="w-8 h-8 border-2 border-[#1b263b] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-xs font-mono text-[#415a77]">Querying university registry...</p>
+          </div>
+        ) : filteredUniversities.length === 0 ? (
+          <div className="p-12 text-center bg-white rounded-2xl border border-[rgba(119,141,169,0.35)] shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08)]">
+            <p className="text-sm font-serif font-bold text-[#0d1b2a] mb-1">
+              No universities matched your selected filters.
+            </p>
+            <p className="text-xs text-[#415a77] mb-4">
+              Try clearing some criteria or resetting testing and deadline filters.
+            </p>
+            <button
+              onClick={handleReset}
+              className="px-5 py-2.5 bg-[#1b263b] hover:bg-[#0d1b2a] text-white text-xs font-bold rounded-full transition-colors cursor-pointer"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {paginatedUniversities.map((uni) => (
                 <UniversityCard
                   key={uni.id || uni.organization}
                   university={uni}
                 />
               ))}
             </div>
-          )}
-        </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 pb-2 border-t border-[rgba(119,141,169,0.25)]">
+                <div className="text-xs text-[#415a77] font-medium">
+                  Page <span className="font-bold text-[#0d1b2a]">{currentPage}</span> of{' '}
+                  <span className="font-bold text-[#0d1b2a]">{totalPages}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {/* Previous Button: Appears only after the first 20 have been passed */}
+                  {currentPage > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      className="px-3.5 py-2 bg-white border border-[rgba(119,141,169,0.35)] hover:border-[#1b263b] hover:bg-[rgba(224,225,221,0.3)] text-[#0d1b2a] text-xs font-bold rounded-xl shadow-2xs transition-all flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <ChevronLeft className="w-4 h-4 text-[#1b263b]" />
+                      <span>Previous</span>
+                    </button>
+                  )}
+
+                  {/* Page Numbers */}
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                      if (
+                        totalPages > 6 &&
+                        pageNum !== 1 &&
+                        pageNum !== totalPages &&
+                        Math.abs(pageNum - currentPage) > 1
+                      ) {
+                        if (pageNum === 2 || pageNum === totalPages - 1) {
+                          return (
+                            <span key={pageNum} className="px-1 text-[#778da9] text-xs">
+                              ...
+                            </span>
+                          );
+                        }
+                        return null;
+                      }
+
+                      const isActive = pageNum === currentPage;
+                      return (
+                        <button
+                          key={pageNum}
+                          type="button"
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`w-8 h-8 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-[#1b263b] text-white shadow-xs'
+                              : 'bg-white border border-[rgba(119,141,169,0.35)] text-[#415a77] hover:border-[#1b263b] hover:bg-[rgba(224,225,221,0.3)]'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Next Button: Disables when no more universities are left */}
+                  <button
+                    type="button"
+                    disabled={currentPage >= totalPages}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    className={`px-3.5 py-2 text-xs font-bold rounded-xl border transition-all flex items-center gap-1.5 ${
+                      currentPage >= totalPages
+                        ? 'bg-[#f3f4f0] border-[rgba(119,141,169,0.2)] text-[#778da9] cursor-not-allowed opacity-60'
+                        : 'bg-white border-[rgba(119,141,169,0.35)] hover:border-[#1b263b] hover:bg-[rgba(224,225,221,0.3)] text-[#0d1b2a] shadow-2xs cursor-pointer'
+                    }`}
+                  >
+                    <span>Next</span>
+                    <ChevronRight className={`w-4 h-4 ${currentPage >= totalPages ? 'text-[#778da9]' : 'text-[#1b263b]'}`} />
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

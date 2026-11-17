@@ -76,15 +76,15 @@ export default function FilterSidebar({
   onReset
 }: FilterSidebarProps) {
   return (
-    <aside className="bg-white border border-[#EDE4D3] rounded-2xl p-6 shadow-sm space-y-6">
-      <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
-        <div className="flex items-center gap-2 text-zinc-900 font-bold text-sm">
-          <Filter className="w-4 h-4 text-[#D97706]" />
+    <aside className="bg-white border border-[rgba(119,141,169,0.3)] rounded-2xl p-6 shadow-[0_10px_30px_-4px_rgba(13,27,42,0.08),0_2px_6px_-1px_rgba(13,27,42,0.04)] space-y-6">
+      <div className="flex items-center justify-between pb-3 border-b border-[rgba(119,141,169,0.2)]">
+        <div className="flex items-center gap-2 text-[#0d1b2a] font-bold text-sm">
+          <Filter className="w-4 h-4 text-[#415a77]" />
           <span>Filters</span>
         </div>
         <button
           onClick={onReset}
-          className="text-xs font-semibold text-[#D97706] hover:text-[#B45309] flex items-center gap-1 transition-colors"
+          className="text-xs font-bold text-[#1b263b] hover:text-[#0d1b2a] flex items-center gap-1 transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3 h-3" />
           <span>Reset All</span>
@@ -93,31 +93,31 @@ export default function FilterSidebar({
 
       {/* Keyword search input */}
       <div className="space-y-1.5">
-        <label className="text-xs font-bold text-zinc-800 block">
+        <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] block">
           Keyword Search
         </label>
         <div className="relative">
-          <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-400" />
+          <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-[#778da9]" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder={type === 'scholarships' ? 'Search by scholarship, field...' : 'Search by school name, major...'}
-            className="w-full pl-9 pr-3 py-2 text-xs bg-[#FAF8F5] border border-zinc-200 rounded-xl focus:outline-none focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706]"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-[#f3f4f0] border border-[rgba(119,141,169,0.35)] rounded-xl focus:outline-none focus:border-[#1b263b] focus:ring-1 focus:ring-[#1b263b] text-[#0d1b2a] placeholder:text-[#778da9]"
           />
         </div>
       </div>
 
       {/* Destination Country with styled custom select */}
       <div className="space-y-1.5">
-        <label className="text-xs font-bold text-zinc-800 block">
+        <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] block">
           Destination Country
         </label>
         <div className="relative">
           <select
             value={selectedCountry}
             onChange={(e) => onCountryChange(e.target.value)}
-            className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#FAF8F5] hover:bg-[#F5F0E6] text-zinc-800 font-medium border border-[#EDE4D3] rounded-2xl focus:outline-none focus:border-[#D97706] focus:ring-2 focus:ring-[#FEF3C7] transition-all cursor-pointer shadow-2xs"
+            className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] font-medium border border-[rgba(119,141,169,0.35)] rounded-xl focus:outline-none focus:border-[#1b263b] focus:ring-1 focus:ring-[#1b263b] transition-all cursor-pointer shadow-2xs"
           >
             {COUNTRIES.map((c) => (
               <option key={c} value={c === 'All Countries' ? '' : c}>
@@ -125,13 +125,13 @@ export default function FilterSidebar({
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-zinc-400 pointer-events-none" />
+          <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-[#778da9] pointer-events-none" />
         </div>
       </div>
 
-      {/* Target Degree Level - Cozy Segmented Pills */}
+      {/* Target Degree Level */}
       <div className="space-y-1.5">
-        <label className="text-xs font-bold text-zinc-800 block">
+        <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] block">
           Degree Level
         </label>
         <div className="grid grid-cols-2 gap-1.5">
@@ -142,10 +142,10 @@ export default function FilterSidebar({
                 key={deg}
                 type="button"
                 onClick={() => onDegreeChange(deg === 'All Degrees' ? '' : deg)}
-                className={`py-2 px-2.5 text-xs rounded-xl text-center font-bold transition-all ${
+                className={`py-2 px-2.5 text-xs rounded-xl text-center font-bold transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] shadow-xs'
-                    : 'bg-[#FAF8F5] text-zinc-600 hover:text-zinc-900 hover:bg-[#F5F0E6] border border-[#EDE4D3]'
+                    ? 'bg-[#1b263b] text-white border border-[#1b263b] shadow-xs'
+                    : 'bg-[#f3f4f0] text-[#415a77] hover:text-[#0d1b2a] hover:bg-[#e0e1dd]/40 border border-[rgba(119,141,169,0.35)]'
                 }`}
               >
                 {deg}
@@ -158,8 +158,8 @@ export default function FilterSidebar({
       {/* Need-Blind Policy Filter (Universities only) */}
       {type === 'universities' && onNeedBlindChange && (
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#D97706]" />
+          <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#415a77]" />
             <span>Need-Blind Policy</span>
           </label>
           <div className="grid grid-cols-3 gap-1">
@@ -176,10 +176,10 @@ export default function FilterSidebar({
                   key={opt.value}
                   type="button"
                   onClick={() => onNeedBlindChange(opt.value as any)}
-                  className={`py-2 px-1 text-[11px] rounded-xl text-center font-bold transition-all ${
+                  className={`py-2 px-1 text-[11px] rounded-xl text-center font-bold transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] shadow-xs'
-                      : 'bg-[#FAF8F5] text-zinc-600 hover:text-zinc-900 hover:bg-[#F5F0E6] border border-[#EDE4D3]'
+                      ? 'bg-[#1b263b] text-white border border-[#1b263b] shadow-xs'
+                      : 'bg-[#f3f4f0] text-[#415a77] hover:text-[#0d1b2a] hover:bg-[#e0e1dd]/40 border border-[rgba(119,141,169,0.35)]'
                   }`}
                 >
                   {opt.label}
@@ -193,8 +193,8 @@ export default function FilterSidebar({
       {/* SAT / Standardized Testing Requirement Filter (Universities only) */}
       {type === 'universities' && onSatRequiredChange && (
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#D97706]" />
+          <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] flex items-center gap-1.5">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#415a77]" />
             <span>Standardized Tests (SAT/ACT)</span>
           </label>
           <div className="grid grid-cols-3 gap-1">
@@ -211,10 +211,10 @@ export default function FilterSidebar({
                   key={opt.value}
                   type="button"
                   onClick={() => onSatRequiredChange(opt.value as any)}
-                  className={`py-2 px-1 text-[11px] rounded-xl text-center font-bold transition-all ${
+                  className={`py-2 px-1 text-[11px] rounded-xl text-center font-bold transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] shadow-xs'
-                      : 'bg-[#FAF8F5] text-zinc-600 hover:text-zinc-900 hover:bg-[#F5F0E6] border border-[#EDE4D3]'
+                      ? 'bg-[#1b263b] text-white border border-[#1b263b] shadow-xs'
+                      : 'bg-[#f3f4f0] text-[#415a77] hover:text-[#0d1b2a] hover:bg-[#e0e1dd]/40 border border-[rgba(119,141,169,0.35)]'
                   }`}
                 >
                   {opt.label}
@@ -228,15 +228,15 @@ export default function FilterSidebar({
       {/* Application Deadlines Filter (Universities only) */}
       {type === 'universities' && onDeadlineTypeChange && (
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-[#D97706]" />
+          <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5 text-[#415a77]" />
             <span>Deadlines Cycle</span>
           </label>
           <div className="relative">
             <select
               value={selectedDeadlineType || ''}
               onChange={(e) => onDeadlineTypeChange(e.target.value)}
-              className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#FAF8F5] hover:bg-[#F5F0E6] text-zinc-800 font-medium border border-[#EDE4D3] rounded-2xl focus:outline-none focus:border-[#D97706] focus:ring-2 focus:ring-[#FEF3C7] transition-all cursor-pointer shadow-2xs"
+              className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] font-medium border border-[rgba(119,141,169,0.35)] rounded-xl focus:outline-none focus:border-[#1b263b] focus:ring-1 focus:ring-[#1b263b] transition-all cursor-pointer shadow-2xs"
             >
               <option value="">All Deadlines</option>
               <option value="early">Early Action / Decision (EA/ED)</option>
@@ -244,7 +244,7 @@ export default function FilterSidebar({
               <option value="transfer">Transfer Application (TR)</option>
               <option value="has-deadline">Recorded Deadlines Only</option>
             </select>
-            <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-zinc-400 pointer-events-none" />
+            <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-[#778da9] pointer-events-none" />
           </div>
         </div>
       )}
@@ -252,15 +252,15 @@ export default function FilterSidebar({
       {/* Application Platform Filter (Universities only) */}
       {type === 'universities' && onPlatformChange && (
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-800 flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5 text-[#D97706]" />
+          <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] flex items-center gap-1.5">
+            <Layers className="w-3.5 h-3.5 text-[#415a77]" />
             <span>Application Platform</span>
           </label>
           <div className="relative">
             <select
               value={selectedPlatform || ''}
               onChange={(e) => onPlatformChange(e.target.value)}
-              className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#FAF8F5] hover:bg-[#F5F0E6] text-zinc-800 font-medium border border-[#EDE4D3] rounded-2xl focus:outline-none focus:border-[#D97706] focus:ring-2 focus:ring-[#FEF3C7] transition-all cursor-pointer shadow-2xs"
+              className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] font-medium border border-[rgba(119,141,169,0.35)] rounded-xl focus:outline-none focus:border-[#1b263b] focus:ring-1 focus:ring-[#1b263b] transition-all cursor-pointer shadow-2xs"
             >
               <option value="">All Platforms</option>
               <option value="common-app">Common App</option>
@@ -268,15 +268,15 @@ export default function FilterSidebar({
               <option value="questbridge">QuestBridge</option>
               <option value="direct">Direct Portal / Institutional</option>
             </select>
-            <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-zinc-400 pointer-events-none" />
+            <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-[#778da9] pointer-events-none" />
           </div>
         </div>
       )}
 
-      {/* Funding Type (Scholarship only) - Segmented pills */}
+      {/* Funding Type (Scholarship only) */}
       {type === 'scholarships' && onFundingChange && (
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-800 block">
+          <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77] block">
             Funding Type
           </label>
           <div className="space-y-1.5">
@@ -287,14 +287,14 @@ export default function FilterSidebar({
                   key={funding}
                   type="button"
                   onClick={() => onFundingChange(funding === 'All Funding' ? '' : funding)}
-                  className={`w-full flex items-center justify-between text-xs px-3 py-2 rounded-xl border text-left font-semibold transition-all ${
+                  className={`w-full flex items-center justify-between text-xs px-3 py-2 rounded-xl border text-left font-bold transition-all cursor-pointer ${
                     checked
-                      ? 'bg-[#FFFBEB] border-[#D97706] text-[#92400E] shadow-2xs'
-                      : 'bg-[#FAF8F5] border-[#EDE4D3] text-zinc-600 hover:bg-[#F5F0E6] hover:text-zinc-900'
+                      ? 'bg-[rgba(65,90,119,0.12)] border-[#1b263b] text-[#1b263b] shadow-2xs'
+                      : 'bg-[#f3f4f0] border-[rgba(119,141,169,0.35)] text-[#415a77] hover:bg-[#e0e1dd]/40 hover:text-[#0d1b2a]'
                   }`}
                 >
                   <span>{funding}</span>
-                  {checked && <Check className="w-3.5 h-3.5 text-[#D97706]" />}
+                  {checked && <Check className="w-3.5 h-3.5 text-[#1b263b]" />}
                 </button>
               );
             })}
@@ -302,11 +302,11 @@ export default function FilterSidebar({
         </div>
       )}
 
-      {/* Maximum Required Minimum GPA */}
+      {/* Target GPA */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between text-xs">
-          <label className="font-bold text-zinc-800">Your Target GPA</label>
-          <span className="text-zinc-500 font-medium">
+          <label className="text-[11px] font-bold uppercase tracking-[0.05em] text-[#415a77]">Your Target GPA</label>
+          <span className="text-[#778da9] font-medium text-xs">
             {minGpa ? `≤ ${minGpa}` : 'Any GPA'}
           </span>
         </div>
@@ -314,7 +314,7 @@ export default function FilterSidebar({
           <select
             value={minGpa}
             onChange={(e) => onMinGpaChange(e.target.value === '' ? '' : Number(e.target.value))}
-            className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#FAF8F5] hover:bg-[#F5F0E6] text-zinc-800 font-medium border border-[#EDE4D3] rounded-2xl focus:outline-none focus:border-[#D97706] focus:ring-2 focus:ring-[#FEF3C7] transition-all cursor-pointer shadow-2xs"
+            className="w-full appearance-none pl-3.5 pr-8 py-2.5 text-xs bg-[#f3f4f0] hover:bg-[#e0e1dd]/40 text-[#0d1b2a] font-medium border border-[rgba(119,141,169,0.35)] rounded-xl focus:outline-none focus:border-[#1b263b] focus:ring-1 focus:ring-[#1b263b] transition-all cursor-pointer shadow-2xs"
           >
             <option value="">Any GPA requirement</option>
             <option value="3.0">3.0 or below (Most Accessible)</option>
@@ -322,7 +322,7 @@ export default function FilterSidebar({
             <option value="3.5">3.5 or below</option>
             <option value="3.8">3.8 or below (Highly Selective)</option>
           </select>
-          <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-zinc-400 pointer-events-none" />
+          <ChevronDown className="absolute right-3 top-3 w-3.5 h-3.5 text-[#778da9] pointer-events-none" />
         </div>
       </div>
     </aside>

@@ -1,6 +1,6 @@
-import { getSupabase } from './supabase';
-import { SAMPLE_SCHOLARSHIPS, SAMPLE_UNIVERSITIES } from '../data/sampleData';
-import { Scholarship, University, StudentProfile } from '../types';
+import { getSupabase } from "./supabase";
+import { SAMPLE_SCHOLARSHIPS, SAMPLE_UNIVERSITIES } from "../data/sampleData";
+import { Scholarship, University, StudentProfile } from "../types";
 
 /**
  * Maps a raw Supabase database row from `scholarship_opportunities` to our unified Scholarship interface
@@ -8,46 +8,79 @@ import { Scholarship, University, StudentProfile } from '../types';
 function mapSupabaseToScholarship(row: any): Scholarship {
   const deadlines = Array.isArray(row.deadline)
     ? row.deadline.map((d: any) => {
-        if (typeof d === 'string') return { type: 'Submission Deadline', date: d };
-        return { type: d.deadline_type || 'Deadline', date: d.date || '' };
+        if (typeof d === "string")
+          return { type: "Submission Deadline", date: d };
+        return { type: d.deadline_type || "Deadline", date: d.date || "" };
       })
     : [];
 
   return {
-    id: String(row.id || row.organization?.toLowerCase().replace(/\s+/g, '-') || Math.random().toString(36).substring(7)),
-    title: row.organization ? `${row.organization} Fellowship` : 'International Scholarship',
-    organization: row.organization || 'Global Sponsor',
-    country_located: row.country_located || 'Multiple Locations',
-    eligible_countries: Array.isArray(row.eligible_countries) ? row.eligible_countries : [],
-    education_levels: Array.isArray(row.education_levels) ? row.education_levels : ['Bachelor', 'Master'],
-    fields: Array.isArray(row.fields) ? row.fields : ['All Fields'],
-    funding_type: row.funding_type || 'Full Tuition Support',
+    id: String(
+      row.id ||
+        row.organization?.toLowerCase().replace(/\s+/g, "-") ||
+        Math.random().toString(36).substring(7),
+    ),
+    title: row.organization
+      ? `${row.organization} Fellowship`
+      : "International Scholarship",
+    organization: row.organization || "Global Sponsor",
+    country_located: row.country_located || "Multiple Locations",
+    eligible_countries: Array.isArray(row.eligible_countries)
+      ? row.eligible_countries
+      : [],
+    education_levels: Array.isArray(row.education_levels)
+      ? row.education_levels
+      : ["Bachelor", "Master"],
+    fields: Array.isArray(row.fields) ? row.fields : ["All Fields"],
+    funding_type: row.funding_type || "Full Tuition Support",
     annual_coverage_cost: row.annual_tuitioin_coveratge_cost || 20000,
     award_details: {
       tuition_covered: true,
-      monthly_stipend: row.financial_aid_policy || 'Generous living allowance included',
+      monthly_stipend:
+        row.financial_aid_policy || "Generous living allowance included",
       travel_covered: true,
       health_insurance: true,
-      additional_allowances: row.tuition_waiver_threshold ? `Up to $${row.tuition_waiver_threshold} waiver` : undefined
+      additional_allowances: row.tuition_waiver_threshold
+        ? `Up to $${row.tuition_waiver_threshold} waiver`
+        : undefined,
     },
     minimum_gpa: row.minimum_gpa ?? null,
     max_age: row.max_age ?? null,
-    english_proficiency_required: Array.isArray(row.english_proficency_required) ? row.english_proficency_required : ['English test or waiver'],
-    deadlines: deadlines.length > 0 ? deadlines : [{ type: 'Upcoming Application Deadline', date: '2026-11-30' }],
-    required_documents: Array.isArray(row.required_documents) && row.required_documents.length > 0
-      ? row.required_documents
-      : ['Application Form', 'Transcripts', 'Statement of Purpose', 'Letters of Recommendation'],
-    application_url: row.application_url || 'https://scholly-portal.edu',
-    application_process: row.application_process || row['application process'] || 'Direct online submission via official sponsor portal.',
+    english_proficiency_required: Array.isArray(row.english_proficency_required)
+      ? row.english_proficency_required
+      : ["English test or waiver"],
+    deadlines:
+      deadlines.length > 0
+        ? deadlines
+        : [{ type: "Upcoming Application Deadline", date: "2026-11-30" }],
+    required_documents:
+      Array.isArray(row.required_documents) && row.required_documents.length > 0
+        ? row.required_documents
+        : [
+            "Application Form",
+            "Transcripts",
+            "Statement of Purpose",
+            "Letters of Recommendation",
+          ],
+    application_url: row.application_url || "https://scholly-portal.edu",
+    application_process:
+      row.application_process ||
+      row["application process"] ||
+      "Direct online submission via official sponsor portal.",
     application_fee: row.application_fee ?? 0,
-    notable_accolades: Array.isArray(row.notable_accolades) ? row.notable_accolades : ['Verified Opportunity', 'Direct Sponsor Backed'],
-    number_of_recommendation_letters_required: row.number_of_recommendation_letters_required ?? 2,
-    essays_required: row.essays_required || 'Motivation statement',
-    program_delivery_mode: row.program_delivery_mode || 'On Campus',
-    source_name: row.organization ? `${row.organization} Official Site` : 'Web Research Verification',
-    source_url: row.application_url || 'https://scholly-portal.edu',
-    verification_date: '2026-10-15',
-    is_verified: true
+    notable_accolades: Array.isArray(row.notable_accolades)
+      ? row.notable_accolades
+      : ["Verified Opportunity", "Direct Sponsor Backed"],
+    number_of_recommendation_letters_required:
+      row.number_of_recommendation_letters_required ?? 2,
+    essays_required: row.essays_required || "Motivation statement",
+    program_delivery_mode: row.program_delivery_mode || "On Campus",
+    source_name: row.organization
+      ? `${row.organization} Official Site`
+      : "Web Research Verification",
+    source_url: row.application_url || "https://scholly-portal.edu",
+    verification_date: "2026-10-15",
+    is_verified: true,
   };
 }
 
@@ -59,8 +92,8 @@ export async function getScholarships(): Promise<Scholarship[]> {
     const supabase = getSupabase();
     if (supabase) {
       const { data, error } = await supabase
-        .from('scholarship_opportunities')
-        .select('*');
+        .from("scholarship_opportunities")
+        .select("*");
 
       if (!error && data && data.length > 0) {
         const liveScholarships = data.map(mapSupabaseToScholarship);
@@ -69,7 +102,10 @@ export async function getScholarships(): Promise<Scholarship[]> {
       }
     }
   } catch (err) {
-    console.warn('Supabase fetch failed; falling back to sample scholarships.', err);
+    console.warn(
+      "Supabase fetch failed; falling back to sample scholarships.",
+      err,
+    );
   }
   return SAMPLE_SCHOLARSHIPS;
 }
@@ -77,7 +113,9 @@ export async function getScholarships(): Promise<Scholarship[]> {
 /**
  * Fetch a single scholarship by ID
  */
-export async function getScholarshipById(id: string): Promise<Scholarship | null> {
+export async function getScholarshipById(
+  id: string,
+): Promise<Scholarship | null> {
   const all = await getScholarships();
   return all.find((s) => s.id === id) || null;
 }
@@ -90,15 +128,19 @@ export async function getUniversities(): Promise<University[]> {
     const supabase = getSupabase();
     if (supabase) {
       const { data, error } = await supabase
-        .from('universities')
-        .select('*, university_deadlines(*)');
-
+        .from("universities")
+        .select("*, university_deadlines(*)");
+      const names = data?.map((uni) => uni.organization);
+      console.log(names);
       if (!error && data && data.length > 0) {
         return data as University[];
       }
     }
   } catch (err) {
-    console.warn('Supabase fetch failed; falling back to sample universities.', err);
+    console.warn(
+      "Supabase fetch failed; falling back to sample universities.",
+      err,
+    );
   }
   return SAMPLE_UNIVERSITIES;
 }
@@ -106,15 +148,17 @@ export async function getUniversities(): Promise<University[]> {
 /**
  * Fetch a single university by ID or organization name
  */
-export async function getUniversityById(id: string): Promise<University | null> {
+export async function getUniversityById(
+  id: string,
+): Promise<University | null> {
   const decodedId = decodeURIComponent(id);
   try {
     const supabase = getSupabase();
     if (supabase) {
       const { data, error } = await supabase
-        .from('universities')
-        .select('*, university_deadlines(*)')
-        .eq('id', decodedId)
+        .from("universities")
+        .select("*, university_deadlines(*)")
+        .eq("id", decodedId)
         .maybeSingle();
 
       if (!error && data) {
@@ -123,9 +167,9 @@ export async function getUniversityById(id: string): Promise<University | null> 
 
       // Also try matching by organization name
       const { data: dataByName } = await supabase
-        .from('universities')
-        .select('*, university_deadlines(*)')
-        .ilike('organization', decodedId)
+        .from("universities")
+        .select("*, university_deadlines(*)")
+        .ilike("organization", decodedId)
         .maybeSingle();
 
       if (dataByName) {
@@ -133,7 +177,7 @@ export async function getUniversityById(id: string): Promise<University | null> 
       }
     }
   } catch (err) {
-    console.warn('Supabase fetch failed; checking local set.', err);
+    console.warn("Supabase fetch failed; checking local set.", err);
   }
   const all = await getUniversities();
   const lower = decodedId.toLowerCase();
@@ -142,7 +186,7 @@ export async function getUniversityById(id: string): Promise<University | null> 
       (u) =>
         (u.id && u.id.toLowerCase() === lower) ||
         (u.organization && u.organization.toLowerCase() === lower) ||
-        (u.name && u.name.toLowerCase() === lower)
+        (u.name && u.name.toLowerCase() === lower),
     ) || null
   );
 }
@@ -152,20 +196,27 @@ export async function getUniversityById(id: string): Promise<University | null> 
  */
 export function calculateMatchScore(
   profile: Partial<StudentProfile> | null,
-  opportunity: Scholarship | University
+  opportunity: Scholarship | University,
 ): { score: number; reasons: string[] } {
-  if (!profile) return { score: 75, reasons: ['Standard international eligibility match'] };
+  if (!profile)
+    return { score: 75, reasons: ["Standard international eligibility match"] };
 
   let score = 50;
   const reasons: string[] = [];
 
   // Check nationality / destination
-  if (profile.preferred_destinations && profile.preferred_destinations.length > 0) {
-    const targetCountry = 'country_located' in opportunity
-      ? opportunity.country_located
-      : (opportunity as any).country || '';
+  if (
+    profile.preferred_destinations &&
+    profile.preferred_destinations.length > 0
+  ) {
+    const targetCountry =
+      "country_located" in opportunity
+        ? opportunity.country_located
+        : (opportunity as any).country || "";
     if (targetCountry) {
-      const match = profile.preferred_destinations.some((d) => targetCountry.toLowerCase().includes(d.toLowerCase()));
+      const match = profile.preferred_destinations.some((d) =>
+        targetCountry.toLowerCase().includes(d.toLowerCase()),
+      );
       if (match) {
         score += 15;
         reasons.push(`Matches your preferred destination: ${targetCountry}`);
@@ -177,30 +228,57 @@ export function calculateMatchScore(
   if (profile.gpa && opportunity.minimum_gpa) {
     if (profile.gpa >= opportunity.minimum_gpa) {
       score += 20;
-      reasons.push(`Your GPA (${profile.gpa}) exceeds the requirement (${opportunity.minimum_gpa})`);
+      reasons.push(
+        `Your GPA (${profile.gpa}) exceeds the requirement (${opportunity.minimum_gpa})`,
+      );
     } else {
       score -= 15;
-      reasons.push(`Minimum GPA is ${opportunity.minimum_gpa} (yours is ${profile.gpa})`);
+      reasons.push(
+        `Minimum GPA is ${opportunity.minimum_gpa} (yours is ${profile.gpa})`,
+      );
     }
   }
 
   // Check Degree Level
   if (profile.target_degree_level) {
-    if ('education_levels' in opportunity && Array.isArray(opportunity.education_levels)) {
-      if (opportunity.education_levels.some((l) => l.toLowerCase().includes(profile.target_degree_level!.toLowerCase()))) {
+    if (
+      "education_levels" in opportunity &&
+      Array.isArray(opportunity.education_levels)
+    ) {
+      if (
+        opportunity.education_levels.some((l) =>
+          l.toLowerCase().includes(profile.target_degree_level!.toLowerCase()),
+        )
+      ) {
         score += 15;
-        reasons.push(`Offers your target degree level: ${profile.target_degree_level}`);
+        reasons.push(
+          `Offers your target degree level: ${profile.target_degree_level}`,
+        );
       }
-    } else if ('programs' in opportunity && Array.isArray((opportunity as any).programs)) {
-      if ((opportunity as any).programs.some((p: any) => p.degree_level?.toLowerCase() === profile.target_degree_level?.toLowerCase())) {
+    } else if (
+      "programs" in opportunity &&
+      Array.isArray((opportunity as any).programs)
+    ) {
+      if (
+        (opportunity as any).programs.some(
+          (p: any) =>
+            p.degree_level?.toLowerCase() ===
+            profile.target_degree_level?.toLowerCase(),
+        )
+      ) {
         score += 15;
-        reasons.push(`Provides accredited ${profile.target_degree_level} programs`);
+        reasons.push(
+          `Provides accredited ${profile.target_degree_level} programs`,
+        );
       }
     }
   }
 
   return {
     score: Math.min(Math.max(score, 30), 98),
-    reasons: reasons.length > 0 ? reasons : ['General international applicant eligibility met']
+    reasons:
+      reasons.length > 0
+        ? reasons
+        : ["General international applicant eligibility met"],
   };
 }

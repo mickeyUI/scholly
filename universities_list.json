@@ -1,0 +1,402 @@
+[
+  {
+    "organization": "Politecnico di Milano (PoliMi)",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "University of Bologna (UNIBO)",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "Sapienza University of Rome",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "University of Padua (Padova)",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "Politecnico di Torino (PoliTo)",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "University of Milan (Statale di Milano / UniMi)",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "University of Pisa",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "University of Florence (UniFI)",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "Ca' Foscari University of Venice",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "University of Rome Tor Vergata",
+    "country_located": "Italy"
+  },
+  {
+    "organization": "Pohang University of Science and Technology (POSTECH)",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Hanyang University",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "King Abdullah University of Science and Technology (KAUST)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "King Fahd University of Petroleum and Minerals (KFUPM)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "King Saud University (KSU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "King Abdulaziz University (KAU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "Islamic University of Madinah (IU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "Ulsan National Institute of Science and Technology (UNIST)",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Kyung Hee University",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Ewha Womans University",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Umm Al-Qura University (UQU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "Princess Nourah bint Abdulrahman University (PNU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "Imam Abdulrahman Bin Faisal University (IAU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "Prince Mohammad Bin Fahd University (PMU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "King Khalid University (KKU)",
+    "country_located": "Saudi Arabia"
+  },
+  {
+    "organization": "Bilkent University",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Istanbul University (İstanbul Üniversitesi)",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Ankara University",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Hacettepe University",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Yıldız Technical University (YTU)",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Middle East Technical University (METU / ODTÜ)",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Boğaziçi University",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Istanbul Technical University (İTÜ)",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Koç University",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "Sabancı University",
+    "country_located": "Türkiye"
+  },
+  {
+    "organization": "University of Bucharest (Universitatea din București)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Babeș-Bolyai University (UBB)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "National University of Science and Technology POLITEHNICA Bucharest (UPB)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Iuliu Hațieganu University of Medicine and Pharmacy (UMF Cluj)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Carol Davila University of Medicine and Pharmacy (UMFCD)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Alexandru Ioan Cuza University (UAIC Iași)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "West University of Timișoara (UVT)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Gheorghe Asachi Technical University of Iași (TUIASI)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Grigore T. Popa University of Medicine and Pharmacy (UMF Iași)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "Politehnica University of Timișoara (UPT)",
+    "country_located": "Romania"
+  },
+  {
+    "organization": "University of Mississippi (Ole Miss)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "The University of Tokyo (UTokyo)",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Kyoto University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Osaka University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Tohoku University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Institute of Science Tokyo (formerly Tokyo Tech & TMDU)",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Nagoya University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Kyushu University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Hokkaido University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Waseda University",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Ritsumeikan Asia Pacific University (APU)",
+    "country_located": "Japan"
+  },
+  {
+    "organization": "Seoul National University (SNU)",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Korea Advanced Institute of Science and Technology (KAIST)",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Yonsei University",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Korea University (KU)",
+    "country_located": "South Korea"
+  },
+  {
+    "organization": "Amherst College",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Colgate University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Georgia Institute of Technology",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Yale University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Stanford University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Massachusetts Institute of Technology (MIT)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "California Institute of Technology (Caltech)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Johns Hopkins University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Emory University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Georgetown University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "George Washington University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Bucknell University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Mercer University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Morehouse College",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Howard University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Central Florida (UCF)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Connecticut (UConn)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Wisconsin-Madison",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of California, Santa Barbara (UCSB)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Michigan Technological University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Oregon",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Binghamton University (SUNY)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Kansas",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Kentucky",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Arizona State University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of South Florida",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Michigan State University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of New Hampshire",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Minnesota Twin Cities",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Houston",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Washington State University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Eckerd College",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of St. Thomas (Minnesota)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Boise State University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Maryland, Baltimore County (UMBC)",
+    "country_located": "United States"
+  },
+  {
+    "organization": "University of Cincinnati",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Iowa State University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Clarkson University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Duquesne University",
+    "country_located": "United States"
+  },
+  {
+    "organization": "Florida Atlantic University",
+    "country_located": "United States"
+  }
+]

@@ -1,0 +1,602 @@
+[
+  {
+    "organization": "Politecnico di Milano (PoliMi)",
+    "filename": "politecnico-di-milano-polimi.webp",
+    "slug": "politecnico-di-milano-polimi",
+    "size_bytes": 23168
+  },
+  {
+    "organization": "University of Bologna (UNIBO)",
+    "filename": "university-of-bologna-unibo.webp",
+    "slug": "university-of-bologna-unibo",
+    "size_bytes": 111676
+  },
+  {
+    "organization": "Sapienza University of Rome",
+    "filename": "sapienza-university-of-rome.webp",
+    "slug": "sapienza-university-of-rome",
+    "size_bytes": 10062
+  },
+  {
+    "organization": "University of Padua (Padova)",
+    "filename": "university-of-padua-padova.webp",
+    "slug": "university-of-padua-padova",
+    "size_bytes": 122104
+  },
+  {
+    "organization": "Politecnico di Torino (PoliTo)",
+    "filename": "politecnico-di-torino-polito.webp",
+    "slug": "politecnico-di-torino-polito",
+    "size_bytes": 37634
+  },
+  {
+    "organization": "University of Milan (Statale di Milano / UniMi)",
+    "filename": "university-of-milan-statale-di-milano-unimi.webp",
+    "slug": "university-of-milan-statale-di-milano-unimi",
+    "size_bytes": 43704
+  },
+  {
+    "organization": "University of Pisa",
+    "filename": "university-of-pisa.webp",
+    "slug": "university-of-pisa",
+    "size_bytes": 25954
+  },
+  {
+    "organization": "University of Florence (UniFI)",
+    "filename": "university-of-florence-unifi.webp",
+    "slug": "university-of-florence-unifi",
+    "size_bytes": 18106
+  },
+  {
+    "organization": "Ca' Foscari University of Venice",
+    "filename": "ca-foscari-university-of-venice.webp",
+    "slug": "ca-foscari-university-of-venice",
+    "size_bytes": 14312
+  },
+  {
+    "organization": "University of Rome Tor Vergata",
+    "filename": "university-of-rome-tor-vergata.webp",
+    "slug": "university-of-rome-tor-vergata",
+    "size_bytes": 17254
+  },
+  {
+    "organization": "Pohang University of Science and Technology (POSTECH)",
+    "filename": "pohang-university-of-science-and-technology-postech.webp",
+    "slug": "pohang-university-of-science-and-technology-postech",
+    "size_bytes": 64160
+  },
+  {
+    "organization": "Hanyang University",
+    "filename": "hanyang-university.webp",
+    "slug": "hanyang-university",
+    "size_bytes": 18626
+  },
+  {
+    "organization": "King Abdullah University of Science and Technology (KAUST)",
+    "filename": "king-abdullah-university-of-science-and-technology-kaust.webp",
+    "slug": "king-abdullah-university-of-science-and-technology-kaust",
+    "size_bytes": 31860
+  },
+  {
+    "organization": "King Fahd University of Petroleum and Minerals (KFUPM)",
+    "filename": "king-fahd-university-of-petroleum-and-minerals-kfupm.webp",
+    "slug": "king-fahd-university-of-petroleum-and-minerals-kfupm",
+    "size_bytes": 11154
+  },
+  {
+    "organization": "King Saud University (KSU)",
+    "filename": "king-saud-university-ksu.webp",
+    "slug": "king-saud-university-ksu",
+    "size_bytes": 24614
+  },
+  {
+    "organization": "King Abdulaziz University (KAU)",
+    "filename": "king-abdulaziz-university-kau.webp",
+    "slug": "king-abdulaziz-university-kau",
+    "size_bytes": 28324
+  },
+  {
+    "organization": "Islamic University of Madinah (IU)",
+    "filename": "islamic-university-of-madinah-iu.webp",
+    "slug": "islamic-university-of-madinah-iu",
+    "size_bytes": 80644
+  },
+  {
+    "organization": "Ulsan National Institute of Science and Technology (UNIST)",
+    "filename": "ulsan-national-institute-of-science-and-technology-unist.webp",
+    "slug": "ulsan-national-institute-of-science-and-technology-unist",
+    "size_bytes": 10196
+  },
+  {
+    "organization": "Kyung Hee University",
+    "filename": "kyung-hee-university.webp",
+    "slug": "kyung-hee-university",
+    "size_bytes": 44450
+  },
+  {
+    "organization": "Ewha Womans University",
+    "filename": "ewha-womans-university.webp",
+    "slug": "ewha-womans-university",
+    "size_bytes": 42334
+  },
+  {
+    "organization": "Umm Al-Qura University (UQU)",
+    "filename": "umm-al-qura-university-uqu.webp",
+    "slug": "umm-al-qura-university-uqu",
+    "size_bytes": 29700
+  },
+  {
+    "organization": "Princess Nourah bint Abdulrahman University (PNU)",
+    "filename": "princess-nourah-bint-abdulrahman-university-pnu.webp",
+    "slug": "princess-nourah-bint-abdulrahman-university-pnu",
+    "size_bytes": 22668
+  },
+  {
+    "organization": "Imam Abdulrahman Bin Faisal University (IAU)",
+    "filename": "imam-abdulrahman-bin-faisal-university-iau.webp",
+    "slug": "imam-abdulrahman-bin-faisal-university-iau",
+    "size_bytes": 14640
+  },
+  {
+    "organization": "Prince Mohammad Bin Fahd University (PMU)",
+    "filename": "prince-mohammad-bin-fahd-university-pmu.webp",
+    "slug": "prince-mohammad-bin-fahd-university-pmu",
+    "size_bytes": 19668
+  },
+  {
+    "organization": "King Khalid University (KKU)",
+    "filename": "king-khalid-university-kku.webp",
+    "slug": "king-khalid-university-kku",
+    "size_bytes": 31192
+  },
+  {
+    "organization": "Bilkent University",
+    "filename": "bilkent-university.webp",
+    "slug": "bilkent-university",
+    "size_bytes": 48010
+  },
+  {
+    "organization": "Istanbul University (İstanbul Üniversitesi)",
+    "filename": "istanbul-university-istanbul-universitesi.webp",
+    "slug": "istanbul-university-istanbul-universitesi",
+    "size_bytes": 46464
+  },
+  {
+    "organization": "Ankara University",
+    "filename": "ankara-university.webp",
+    "slug": "ankara-university",
+    "size_bytes": 21588
+  },
+  {
+    "organization": "Hacettepe University",
+    "filename": "hacettepe-university.webp",
+    "slug": "hacettepe-university",
+    "size_bytes": 23312
+  },
+  {
+    "organization": "Yıldız Technical University (YTU)",
+    "filename": "y-ld-z-technical-university-ytu.webp",
+    "slug": "y-ld-z-technical-university-ytu",
+    "size_bytes": 38520
+  },
+  {
+    "organization": "Middle East Technical University (METU / ODTÜ)",
+    "filename": "middle-east-technical-university-metu-odtu.webp",
+    "slug": "middle-east-technical-university-metu-odtu",
+    "size_bytes": 19136
+  },
+  {
+    "organization": "Boğaziçi University",
+    "filename": "bogazici-university.webp",
+    "slug": "bogazici-university",
+    "size_bytes": 29250
+  },
+  {
+    "organization": "Istanbul Technical University (İTÜ)",
+    "filename": "istanbul-technical-university-itu.webp",
+    "slug": "istanbul-technical-university-itu",
+    "size_bytes": 56030
+  },
+  {
+    "organization": "Koç University",
+    "filename": "koc-university.webp",
+    "slug": "koc-university",
+    "size_bytes": 15666
+  },
+  {
+    "organization": "Sabancı University",
+    "filename": "sabanc-university.webp",
+    "slug": "sabanc-university",
+    "size_bytes": 9908
+  },
+  {
+    "organization": "University of Bucharest (Universitatea din București)",
+    "filename": "university-of-bucharest-universitatea-din-bucuresti.webp",
+    "slug": "university-of-bucharest-universitatea-din-bucuresti",
+    "size_bytes": 16280
+  },
+  {
+    "organization": "Babeș-Bolyai University (UBB)",
+    "filename": "babes-bolyai-university-ubb.webp",
+    "slug": "babes-bolyai-university-ubb",
+    "size_bytes": 29068
+  },
+  {
+    "organization": "National University of Science and Technology POLITEHNICA Bucharest (UPB)",
+    "filename": "national-university-of-science-and-technology-politehnica-bucharest-upb.webp",
+    "slug": "national-university-of-science-and-technology-politehnica-bucharest-upb",
+    "size_bytes": 33694
+  },
+  {
+    "organization": "Iuliu Hațieganu University of Medicine and Pharmacy (UMF Cluj)",
+    "filename": "iuliu-hatieganu-university-of-medicine-and-pharmacy-umf-cluj.webp",
+    "slug": "iuliu-hatieganu-university-of-medicine-and-pharmacy-umf-cluj",
+    "size_bytes": 30158
+  },
+  {
+    "organization": "Carol Davila University of Medicine and Pharmacy (UMFCD)",
+    "filename": "carol-davila-university-of-medicine-and-pharmacy-umfcd.webp",
+    "slug": "carol-davila-university-of-medicine-and-pharmacy-umfcd",
+    "size_bytes": 11330
+  },
+  {
+    "organization": "Alexandru Ioan Cuza University (UAIC Iași)",
+    "filename": "alexandru-ioan-cuza-university-uaic-iasi.webp",
+    "slug": "alexandru-ioan-cuza-university-uaic-iasi",
+    "size_bytes": 10578
+  },
+  {
+    "organization": "West University of Timișoara (UVT)",
+    "filename": "west-university-of-timisoara-uvt.webp",
+    "slug": "west-university-of-timisoara-uvt",
+    "size_bytes": 5002
+  },
+  {
+    "organization": "Gheorghe Asachi Technical University of Iași (TUIASI)",
+    "filename": "gheorghe-asachi-technical-university-of-iasi-tuiasi.webp",
+    "slug": "gheorghe-asachi-technical-university-of-iasi-tuiasi",
+    "size_bytes": 9232
+  },
+  {
+    "organization": "Grigore T. Popa University of Medicine and Pharmacy (UMF Iași)",
+    "filename": "grigore-t-popa-university-of-medicine-and-pharmacy-umf-iasi.webp",
+    "slug": "grigore-t-popa-university-of-medicine-and-pharmacy-umf-iasi",
+    "size_bytes": 4498
+  },
+  {
+    "organization": "Politehnica University of Timișoara (UPT)",
+    "filename": "politehnica-university-of-timisoara-upt.webp",
+    "slug": "politehnica-university-of-timisoara-upt",
+    "size_bytes": 3174
+  },
+  {
+    "organization": "University of Mississippi (Ole Miss)",
+    "filename": "university-of-mississippi-ole-miss.webp",
+    "slug": "university-of-mississippi-ole-miss",
+    "size_bytes": 48266
+  },
+  {
+    "organization": "The University of Tokyo (UTokyo)",
+    "filename": "the-university-of-tokyo-utokyo.webp",
+    "slug": "the-university-of-tokyo-utokyo",
+    "size_bytes": 16782
+  },
+  {
+    "organization": "Kyoto University",
+    "filename": "kyoto-university.webp",
+    "slug": "kyoto-university",
+    "size_bytes": 93190
+  },
+  {
+    "organization": "Osaka University",
+    "filename": "osaka-university.webp",
+    "slug": "osaka-university",
+    "size_bytes": 19698
+  },
+  {
+    "organization": "Tohoku University",
+    "filename": "tohoku-university.webp",
+    "slug": "tohoku-university",
+    "size_bytes": 49100
+  },
+  {
+    "organization": "Institute of Science Tokyo (formerly Tokyo Tech & TMDU)",
+    "filename": "institute-of-science-tokyo-formerly-tokyo-tech-tmdu.webp",
+    "slug": "institute-of-science-tokyo-formerly-tokyo-tech-tmdu",
+    "size_bytes": 14032
+  },
+  {
+    "organization": "Nagoya University",
+    "filename": "nagoya-university.webp",
+    "slug": "nagoya-university",
+    "size_bytes": 17478
+  },
+  {
+    "organization": "Kyushu University",
+    "filename": "kyushu-university.webp",
+    "slug": "kyushu-university",
+    "size_bytes": 9628
+  },
+  {
+    "organization": "Hokkaido University",
+    "filename": "hokkaido-university.webp",
+    "slug": "hokkaido-university",
+    "size_bytes": 57338
+  },
+  {
+    "organization": "Waseda University",
+    "filename": "waseda-university.webp",
+    "slug": "waseda-university",
+    "size_bytes": 16666
+  },
+  {
+    "organization": "Ritsumeikan Asia Pacific University (APU)",
+    "filename": "ritsumeikan-asia-pacific-university-apu.webp",
+    "slug": "ritsumeikan-asia-pacific-university-apu",
+    "size_bytes": 28692
+  },
+  {
+    "organization": "Seoul National University (SNU)",
+    "filename": "seoul-national-university-snu.webp",
+    "slug": "seoul-national-university-snu",
+    "size_bytes": 63292
+  },
+  {
+    "organization": "Korea Advanced Institute of Science and Technology (KAIST)",
+    "filename": "korea-advanced-institute-of-science-and-technology-kaist.webp",
+    "slug": "korea-advanced-institute-of-science-and-technology-kaist",
+    "size_bytes": 63502
+  },
+  {
+    "organization": "Yonsei University",
+    "filename": "yonsei-university.webp",
+    "slug": "yonsei-university",
+    "size_bytes": 33396
+  },
+  {
+    "organization": "Korea University (KU)",
+    "filename": "korea-university-ku.webp",
+    "slug": "korea-university-ku",
+    "size_bytes": 15912
+  },
+  {
+    "organization": "Amherst College",
+    "filename": "amherst-college.webp",
+    "slug": "amherst-college",
+    "size_bytes": 105916
+  },
+  {
+    "organization": "Colgate University",
+    "filename": "colgate-university.webp",
+    "slug": "colgate-university",
+    "size_bytes": 13960
+  },
+  {
+    "organization": "Georgia Institute of Technology",
+    "filename": "georgia-institute-of-technology.webp",
+    "slug": "georgia-institute-of-technology",
+    "size_bytes": 83824
+  },
+  {
+    "organization": "Yale University",
+    "filename": "yale-university.webp",
+    "slug": "yale-university",
+    "size_bytes": 25760
+  },
+  {
+    "organization": "Stanford University",
+    "filename": "stanford-university.webp",
+    "slug": "stanford-university",
+    "size_bytes": 60688
+  },
+  {
+    "organization": "Massachusetts Institute of Technology (MIT)",
+    "filename": "massachusetts-institute-of-technology-mit.webp",
+    "slug": "massachusetts-institute-of-technology-mit",
+    "size_bytes": 56912
+  },
+  {
+    "organization": "California Institute of Technology (Caltech)",
+    "filename": "california-institute-of-technology-caltech.webp",
+    "slug": "california-institute-of-technology-caltech",
+    "size_bytes": 31336
+  },
+  {
+    "organization": "Johns Hopkins University",
+    "filename": "johns-hopkins-university.webp",
+    "slug": "johns-hopkins-university",
+    "size_bytes": 11646
+  },
+  {
+    "organization": "Emory University",
+    "filename": "emory-university.webp",
+    "slug": "emory-university",
+    "size_bytes": 44392
+  },
+  {
+    "organization": "Georgetown University",
+    "filename": "georgetown-university.webp",
+    "slug": "georgetown-university",
+    "size_bytes": 64756
+  },
+  {
+    "organization": "George Washington University",
+    "filename": "george-washington-university.webp",
+    "slug": "george-washington-university",
+    "size_bytes": 57200
+  },
+  {
+    "organization": "Bucknell University",
+    "filename": "bucknell-university.webp",
+    "slug": "bucknell-university",
+    "size_bytes": 38484
+  },
+  {
+    "organization": "Mercer University",
+    "filename": "mercer-university.webp",
+    "slug": "mercer-university",
+    "size_bytes": 47042
+  },
+  {
+    "organization": "Morehouse College",
+    "filename": "morehouse-college.webp",
+    "slug": "morehouse-college",
+    "size_bytes": 95282
+  },
+  {
+    "organization": "Howard University",
+    "filename": "howard-university.webp",
+    "slug": "howard-university",
+    "size_bytes": 103838
+  },
+  {
+    "organization": "University of Central Florida (UCF)",
+    "filename": "university-of-central-florida-ucf.webp",
+    "slug": "university-of-central-florida-ucf",
+    "size_bytes": 34180
+  },
+  {
+    "organization": "University of Connecticut (UConn)",
+    "filename": "university-of-connecticut-uconn.webp",
+    "slug": "university-of-connecticut-uconn",
+    "size_bytes": 45312
+  },
+  {
+    "organization": "University of Wisconsin-Madison",
+    "filename": "university-of-wisconsin-madison.webp",
+    "slug": "university-of-wisconsin-madison",
+    "size_bytes": 42630
+  },
+  {
+    "organization": "University of California, Santa Barbara (UCSB)",
+    "filename": "university-of-california-santa-barbara-ucsb.webp",
+    "slug": "university-of-california-santa-barbara-ucsb",
+    "size_bytes": 116670
+  },
+  {
+    "organization": "Michigan Technological University",
+    "filename": "michigan-technological-university.webp",
+    "slug": "michigan-technological-university",
+    "size_bytes": 49220
+  },
+  {
+    "organization": "University of Oregon",
+    "filename": "university-of-oregon.webp",
+    "slug": "university-of-oregon",
+    "size_bytes": 61132
+  },
+  {
+    "organization": "Binghamton University (SUNY)",
+    "filename": "binghamton-university-suny.webp",
+    "slug": "binghamton-university-suny",
+    "size_bytes": 74078
+  },
+  {
+    "organization": "University of Kansas",
+    "filename": "university-of-kansas.webp",
+    "slug": "university-of-kansas",
+    "size_bytes": 72916
+  },
+  {
+    "organization": "University of Kentucky",
+    "filename": "university-of-kentucky.webp",
+    "slug": "university-of-kentucky",
+    "size_bytes": 57490
+  },
+  {
+    "organization": "Arizona State University",
+    "filename": "arizona-state-university.webp",
+    "slug": "arizona-state-university",
+    "size_bytes": 62676
+  },
+  {
+    "organization": "University of South Florida",
+    "filename": "university-of-south-florida.webp",
+    "slug": "university-of-south-florida",
+    "size_bytes": 49394
+  },
+  {
+    "organization": "Michigan State University",
+    "filename": "michigan-state-university.webp",
+    "slug": "michigan-state-university",
+    "size_bytes": 51540
+  },
+  {
+    "organization": "University of New Hampshire",
+    "filename": "university-of-new-hampshire.webp",
+    "slug": "university-of-new-hampshire",
+    "size_bytes": 50260
+  },
+  {
+    "organization": "University of Minnesota Twin Cities",
+    "filename": "university-of-minnesota-twin-cities.webp",
+    "slug": "university-of-minnesota-twin-cities",
+    "size_bytes": 51174
+  },
+  {
+    "organization": "University of Houston",
+    "filename": "university-of-houston.webp",
+    "slug": "university-of-houston",
+    "size_bytes": 59630
+  },
+  {
+    "organization": "Washington State University",
+    "filename": "washington-state-university.webp",
+    "slug": "washington-state-university",
+    "size_bytes": 35532
+  },
+  {
+    "organization": "Eckerd College",
+    "filename": "eckerd-college.webp",
+    "slug": "eckerd-college",
+    "size_bytes": 13564
+  },
+  {
+    "organization": "University of St. Thomas (Minnesota)",
+    "filename": "university-of-st-thomas-minnesota.webp",
+    "slug": "university-of-st-thomas-minnesota",
+    "size_bytes": 61170
+  },
+  {
+    "organization": "Boise State University",
+    "filename": "boise-state-university.webp",
+    "slug": "boise-state-university",
+    "size_bytes": 42956
+  },
+  {
+    "organization": "University of Maryland, Baltimore County (UMBC)",
+    "filename": "university-of-maryland-baltimore-county-umbc.webp",
+    "slug": "university-of-maryland-baltimore-county-umbc",
+    "size_bytes": 19206
+  },
+  {
+    "organization": "University of Cincinnati",
+    "filename": "university-of-cincinnati.webp",
+    "slug": "university-of-cincinnati",
+    "size_bytes": 41062
+  },
+  {
+    "organization": "Iowa State University",
+    "filename": "iowa-state-university.webp",
+    "slug": "iowa-state-university",
+    "size_bytes": 50650
+  },
+  {
+    "organization": "Clarkson University",
+    "filename": "clarkson-university.webp",
+    "slug": "clarkson-university",
+    "size_bytes": 64684
+  },
+  {
+    "organization": "Duquesne University",
+    "filename": "duquesne-university.webp",
+    "slug": "duquesne-university",
+    "size_bytes": 46748
+  },
+  {
+    "organization": "Florida Atlantic University",
+    "filename": "florida-atlantic-university.webp",
+    "slug": "florida-atlantic-university",
+    "size_bytes": 37810
+  }
+]

@@ -51,25 +51,25 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#EDE4D3] text-zinc-800 shadow-xs transition-colors">
+    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#e0e1dd] text-[#0d1b2a] shadow-xs transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Friendly Niche-style Logo */}
+          {/* Academic Crest Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A] flex items-center justify-center font-bold shadow-xs group-hover:scale-105 transition-transform">
-              <span className="font-serif text-lg font-black">S</span>
+            <div className="w-9 h-9 rounded-xl bg-[#1b263b] text-white border border-[rgba(119,141,169,0.25)] flex items-center justify-center font-bold shadow-xs group-hover:scale-105 transition-transform">
+              <span className="font-serif text-lg font-bold">S</span>
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="text-xl font-bold tracking-tight text-zinc-900 group-hover:text-[#D97706] transition-colors">
+                <span className="text-xl font-bold tracking-tight text-[#0d1b2a] font-serif group-hover:text-[#1b263b] transition-colors">
                   scholly
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">
+                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-[rgba(65,90,119,0.08)] text-[#1b263b] border border-[rgba(119,141,169,0.35)]">
                   Global
                 </span>
               </div>
-              <p className="text-[10px] text-zinc-400 font-medium hidden sm:block">
-                Find where you belong
+              <p className="text-[10px] text-[#415a77] font-medium hidden sm:block">
+                Collegiate Discovery &amp; Scholarships
               </p>
             </div>
           </Link>
@@ -85,18 +85,22 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-3.5 py-2 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all ${
                     active
-                      ? "bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]"
-                      : "text-zinc-600 hover:text-zinc-900 hover:bg-[#FAF8F5]"
+                      ? "bg-[#1b263b] text-white shadow-2xs"
+                      : "text-[#415a77] hover:text-[#0d1b2a] hover:bg-[#e0e1dd]/40"
                   }`}
                 >
                   <Icon
-                    className={`w-3.5 h-3.5 ${active ? "text-[#D97706]" : "text-zinc-400"}`}
+                    className={`w-3.5 h-3.5 ${active ? "text-white" : "text-[#778da9]"}`}
                   />
                   <span>{link.label}</span>
                   {link.href === "/dashboard" &&
                     hasMounted &&
                     savedCount > 0 && (
-                      <span className="ml-0.5 px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-[#D97706] text-white">
+                      <span
+                        className={`ml-0.5 px-1.5 py-0.2 text-[10px] font-bold rounded-full ${
+                          active ? "bg-white text-[#1b263b]" : "bg-[#1b263b] text-white"
+                        }`}
+                      >
                         {savedCount}
                       </span>
                     )}
@@ -111,9 +115,9 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/profile"
-                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] border border-[#EDE4D3] hover:border-[#D97706] text-xs font-medium text-zinc-800 transition-colors"
+                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f3f4f0] border border-[rgba(119,141,169,0.35)] hover:border-[#1b263b] text-xs font-medium text-[#0d1b2a] transition-colors"
                 >
-                  <div className="w-5 h-5 rounded-full bg-[#FEF3C7] text-[#92400E] flex items-center justify-center text-[10px] font-bold">
+                  <div className="w-5 h-5 rounded-full bg-[#1b263b] text-white flex items-center justify-center text-[10px] font-serif font-bold">
                     {(profile?.full_name || user?.email || "U")
                       .charAt(0)
                       .toUpperCase()}
@@ -127,7 +131,7 @@ export default function Navbar() {
                 <button
                   onClick={() => signOut()}
                   title="Sign out"
-                  className="p-2 rounded-full text-zinc-400 hover:text-red-500 hover:bg-zinc-50 transition-colors"
+                  className="p-2 rounded-full text-[#778da9] hover:text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="w-3.5 h-3.5" />
                 </button>
@@ -140,7 +144,7 @@ export default function Navbar() {
                       "Log in to save colleges and chat with your advisor",
                     )
                   }
-                  className="px-3.5 py-2 text-xs font-bold text-zinc-700 hover:text-[#D97706] transition-colors"
+                  className="px-3.5 py-2 text-xs font-bold text-[#415a77] hover:text-[#0d1b2a] transition-colors"
                 >
                   Log In
                 </button>
@@ -148,7 +152,7 @@ export default function Navbar() {
                   onClick={() =>
                     openAuthModal("Create your free student account")
                   }
-                  className="px-4 py-2 bg-[#D97706] hover:bg-[#B45309] text-white font-bold text-xs rounded-full shadow-sm hover:shadow transition-all"
+                  className="px-4 py-2 bg-[#1b263b] hover:bg-[#0d1b2a] text-white font-bold text-xs rounded-full shadow-sm hover:shadow transition-all"
                 >
                   Sign Up Free
                 </button>
@@ -159,18 +163,18 @@ export default function Navbar() {
           {/* Mobile menu trigger */}
           <div className="md:hidden flex items-center gap-2">
             {hasMounted && isAuthenticated && savedCount > 0 && (
-              <Link href="/dashboard" className="p-1.5 text-[#D97706]">
+              <Link href="/dashboard" className="p-1.5 text-[#1b263b]">
                 <Bookmark className="w-5 h-5 fill-current" />
               </Link>
             )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-zinc-600 hover:text-zinc-900 focus:outline-none"
+              className="p-2 text-[#415a77] hover:text-[#0d1b2a] focus:outline-none"
             >
               {mobileMenuOpen ? (
                 <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-6 h-6 text-[#D97706]" />
+                <Menu className="w-6 h-6 text-[#1b263b]" />
               )}
             </button>
           </div>
@@ -179,7 +183,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#EDE4D3] bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
+        <div className="md:hidden border-t border-[#e0e1dd] bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const active = isActive(link.href);
@@ -190,16 +194,20 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold ${
                   active
-                    ? "bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]"
-                    : "text-zinc-700 hover:bg-[#FAF8F5]"
+                    ? "bg-[#1b263b] text-white"
+                    : "text-[#415a77] hover:bg-[#e0e1dd]/40 hover:text-[#0d1b2a]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <Icon className="w-4 h-4 text-[#D97706]" />
+                  <Icon className={`w-4 h-4 ${active ? "text-white" : "text-[#778da9]"}`} />
                   <span>{link.label}</span>
                 </div>
                 {link.href === "/dashboard" && hasMounted && savedCount > 0 && (
-                  <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-[#D97706] text-white">
+                  <span
+                    className={`px-2 py-0.5 text-xs font-bold rounded-full ${
+                      active ? "bg-white text-[#1b263b]" : "bg-[#1b263b] text-white"
+                    }`}
+                  >
                     {savedCount}
                   </span>
                 )}
@@ -207,16 +215,16 @@ export default function Navbar() {
             );
           })}
 
-          <div className="pt-3 border-t border-[#EDE4D3] flex flex-col gap-2">
+          <div className="pt-3 border-t border-[#e0e1dd] flex flex-col gap-2">
             {hasMounted && isAuthenticated ? (
               <>
                 <Link
                   href="/profile"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-zinc-700 hover:bg-[#FAF8F5] rounded-xl"
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#0d1b2a] hover:bg-[#e0e1dd]/40 rounded-xl"
                 >
-                  <User className="w-4 h-4 text-[#D97706]" />
-                  <span>Profile & Preferences</span>
+                  <User className="w-4 h-4 text-[#415a77]" />
+                  <span>Profile &amp; Preferences</span>
                 </Link>
                 <button
                   onClick={() => {
@@ -236,7 +244,7 @@ export default function Navbar() {
                     openAuthModal("Log in to continue");
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full py-2.5 text-center text-xs font-bold text-zinc-700 bg-zinc-100 rounded-full"
+                  className="w-full py-2.5 text-center text-xs font-bold text-[#415a77] bg-[#f3f4f0] rounded-full hover:text-[#0d1b2a]"
                 >
                   Log In
                 </button>
@@ -245,7 +253,7 @@ export default function Navbar() {
                     openAuthModal("Create free account");
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full py-2.5 text-center text-xs font-bold text-white bg-[#D97706] rounded-full shadow-sm"
+                  className="w-full py-2.5 text-center text-xs font-bold text-white bg-[#1b263b] hover:bg-[#0d1b2a] rounded-full shadow-sm"
                 >
                   Sign Up Free
                 </button>

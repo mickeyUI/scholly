@@ -20,7 +20,7 @@ export default function InlineCitation({
     return (
       <span
         title={verificationDate ? `Source: ${sourceName} • Verified: ${verificationDate}` : `Source: ${sourceName}`}
-        className={`text-[11px] font-medium text-[#92400E] bg-[#FEF3C7]/90 px-1.5 py-0.5 rounded-md border border-[#FDE68A] inline-flex items-center gap-1 select-none ${className}`}
+        className={`text-[11px] font-semibold text-[#1b263b] bg-[rgba(65,90,119,0.08)] px-2.5 py-0.5 rounded-full border border-[rgba(119,141,169,0.35)] inline-flex items-center gap-1 select-none ${className}`}
       >
         <span>[src: {sourceName}]</span>
       </span>
@@ -33,11 +33,11 @@ export default function InlineCitation({
       target="_blank"
       rel="noopener noreferrer"
       title={verificationDate ? `Source: ${sourceName} • Verified: ${verificationDate}` : `Source: ${sourceName}`}
-      className={`text-[11px] font-medium text-[#92400E] hover:text-[#78350F] bg-[#FFFBEB] hover:bg-[#FEF3C7] px-1.5 py-0.5 rounded-md border border-[#FDE68A] inline-flex items-center gap-1 transition-colors no-underline ${className}`}
+      className={`text-[11px] font-semibold text-[#1b263b] hover:text-white bg-[rgba(65,90,119,0.08)] hover:bg-[#1b263b] hover:border-[#1b263b] px-2.5 py-0.5 rounded-full border border-[rgba(119,141,169,0.35)] inline-flex items-center gap-1 transition-all no-underline cursor-pointer group shadow-2xs ${className}`}
       onClick={(e) => e.stopPropagation()}
     >
       <span>[src: {sourceName}]</span>
-      <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+      <ExternalLink className="w-2.5 h-2.5 opacity-70 group-hover:opacity-100" />
     </a>
   );
 }
